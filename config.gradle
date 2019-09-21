@@ -1,0 +1,62 @@
+ext {
+    android = [
+            "applicationId"    : "com.example.flower",
+            "compileSdkVersion": 29,
+            "buildToolsVersion": "29.0.1",
+            "minSdkVersion"    : 21,
+            "targetSdkVersion" : 29,
+            "versionCode"      : 1,
+            "versionName"      : "1.0.0"
+    ]
+
+    dependencies = [
+            "RecyclerView"                   : "androidx.recyclerview:recyclerview:1.1.0-beta03",
+            //RecyclerAdapter框架
+            "BaseRecyclerViewAdapterHelper"  : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45-androidx",
+            //Fragment框架
+            //自己定制Support
+            "fragmentation-core"             : "me.yokeyword:fragmentationx-core:1.0.1",
+            //运行时权限请求框架
+            "permissionsdispatcher"          : "com.github.hotchemi:permissionsdispatcher:3.3.1",
+            "permissionsdispatcher-processor": "com.github.hotchemi:permissionsdispatcher-processor:3.3.1",
+            //multidex
+            "multidex"                       : "androidx.multidex:multidex:2.0.1",
+            //logger
+            "logger"                         : "com.orhanobut:logger:2.2.0",
+            //Glide
+            "glide"                          : "com.github.bumptech.glide:glide:4.9.0",
+            "glide-compiler"                 : "com.github.bumptech.glide:compiler:4.9.0",
+            //Arouter
+            "arouter"                        : "com.alibaba:arouter-api:1.4.1",
+            "arouter-compiler"               : "com.alibaba:arouter-compiler:1.2.2",
+            //retrofit2
+            "retrofit2"                      : "com.squareup.retrofit2:retrofit:2.5.0",
+            "retrofit2-gson"                 : "com.squareup.retrofit2:converter-gson:2.5.0",
+            "adapter-rxjava2"                : "com.squareup.retrofit2:adapter-rxjava2:2.5.0",
+            //rxjava2
+            "rxjava2"                        : "io.reactivex.rxjava2:rxjava:2.2.8",
+            //rxandroid
+            "rxandroid"                      : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            //出现异常仍然可以处理
+            "rxrelay"                        : "com.jakewharton.rxrelay2:rxrelay:2.1.0",
+            //网络请求拦截器
+            "logging-interceptor"            : "com.squareup.okhttp3:logging-interceptor:3.12.0",
+            //rxlifecycle
+            "rxlifecycle-components"         : "com.trello.rxlifecycle3:rxlifecycle-components:3.0.0",
+//            //Google AAC
+            "lifecycle-extensions"           : "android.arch.lifecycle:extensions:1.1.1",
+            "lifecycle-compiler"             : "android.arch.lifecycle:compiler:1.1.1",
+            //rxbinding
+            "rxbinding"                      : "com.jakewharton.rxbinding3:rxbinding:3.0.0",
+            "rxbinding-recyclerview"         : "com.jakewharton.rxbinding3:rxbinding-recyclerview:3.0.0",
+            //leakcanary
+            "debug-leakcanary"               : "com.squareup.leakcanary:leakcanary-android:1.6.3",
+            "release-leakcanary"             : "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3",
+            //EasyThread
+            "EasyThread"                     : "com.github.yjfnypeu:EasyThread:0.6.0",
+            //databinding
+            "databinding-compiler"           : "com.android.databinding:compiler:3.2.0-alpha10",
+            //Bmob云SDK
+            "bmob-sdk"                       : "cn.bmob.android:bmob-sdk:3.7.3-rc1",
+    ]
+}
