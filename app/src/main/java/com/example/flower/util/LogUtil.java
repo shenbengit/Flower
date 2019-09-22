@@ -10,7 +10,7 @@ import com.orhanobut.logger.Logger;
 /**
  * Logger 工具类封装
  *
- * @author Ben
+ * @author ShenBen
  * @date 2018/9/12
  * Email: 714081644@qq.com
  */

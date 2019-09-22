@@ -1,9 +1,9 @@
 package com.example.flower.base;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProviders;
@@ -28,12 +28,12 @@ public abstract class BaseActivity<VDB extends ViewDataBinding, VM extends BaseV
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //竖屏
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         beforeSetContentView();
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         init();
         initView();
-        initData();
+        initData(savedInstanceState);
     }
 
     @Override
@@ -94,5 +94,5 @@ public abstract class BaseActivity<VDB extends ViewDataBinding, VM extends BaseV
     /**
      * 初始化数据
      */
-    protected abstract void initData();
+    protected abstract void initData(@Nullable Bundle savedInstanceState);
 }

@@ -206,12 +206,12 @@ public class DataBindingAdapter {
      */
     @SuppressLint("CheckResult")
     @BindingAdapter(value = "onRadioGroupCheckedChangeCommand")
-    public static void onRadioGroupCheckedChangeCommand(RadioGroup group, BindingCommand<String> command) {
+    public static void onRadioGroupCheckedChangeCommand(RadioGroup group, BindingCommand<RadioButton> command) {
         RxRadioGroup.checkedChanges(group)
                 .subscribe(integer -> {
                     if (command != null) {
                         RadioButton button = group.findViewById(integer);
-                        command.execute(button.getText().toString().trim());
+                        command.execute(button);
                     }
                 });
     }

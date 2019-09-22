@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 
 import com.trello.rxlifecycle3.LifecycleProvider;
 
@@ -19,6 +20,7 @@ public class BaseViewModel<M extends IBaseModel> extends AndroidViewModel implem
 
     protected M mModel;
     protected LifecycleProvider mLifecycleProvider;
+    public final MutableLiveData<String> mBaseLiveData = new MutableLiveData<>();
 
     public BaseViewModel(@NonNull Application application) {
         this(application, null);

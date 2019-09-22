@@ -24,11 +24,11 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @email 714081644@qq.com
  */
 public abstract class AbstractSupportActivity extends RxAppCompatActivity implements ISupportActivity {
-    private final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
+    private final SupportActivityDelegate mSupportActivityDelegate = new SupportActivityDelegate(this);
 
     @Override
     public SupportActivityDelegate getSupportDelegate() {
-        return mDelegate;
+        return mSupportActivityDelegate;
     }
 
     /**
@@ -37,33 +37,33 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     public ExtraTransaction extraTransaction() {
-        return mDelegate.extraTransaction();
+        return mSupportActivityDelegate.extraTransaction();
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDelegate.onCreate(savedInstanceState);
+        mSupportActivityDelegate.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDelegate.onPostCreate(savedInstanceState);
+        mSupportActivityDelegate.onPostCreate(savedInstanceState);
     }
 
     @Override
     protected void onDestroy() {
-        mDelegate.onDestroy();
+        mSupportActivityDelegate.onDestroy();
         super.onDestroy();
     }
 
     /**
-     * Note： return mDelegate.dispatchTouchEvent(ev) || super.dispatchTouchEvent(ev);
+     * Note： return mSupportActivityDelegate.dispatchTouchEvent(ev) || super.dispatchTouchEvent(ev);
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        return mDelegate.dispatchTouchEvent(ev) || super.dispatchTouchEvent(ev);
+        return mSupportActivityDelegate.dispatchTouchEvent(ev) || super.dispatchTouchEvent(ev);
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     final public void onBackPressed() {
-        mDelegate.onBackPressed();
+        mSupportActivityDelegate.onBackPressed();
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     public void onBackPressedSupport() {
-        mDelegate.onBackPressedSupport();
+        mSupportActivityDelegate.onBackPressedSupport();
     }
 
     /**
@@ -90,7 +90,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     public FragmentAnimator getFragmentAnimator() {
-        return mDelegate.getFragmentAnimator();
+        return mSupportActivityDelegate.getFragmentAnimator();
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
-        mDelegate.setFragmentAnimator(fragmentAnimator);
+        mSupportActivityDelegate.setFragmentAnimator(fragmentAnimator);
     }
 
     /**
@@ -113,12 +113,12 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      */
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
-        return mDelegate.onCreateFragmentAnimator();
+        return mSupportActivityDelegate.onCreateFragmentAnimator();
     }
 
     @Override
     public void post(Runnable runnable) {
-        mDelegate.post(runnable);
+        mSupportActivityDelegate.post(runnable);
     }
 
     /****************************************以下为可选方法(Optional methods)******************************************************/
@@ -130,18 +130,18 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * @param toFragment  目标Fragment
      */
     public void loadRootFragment(int containerId, @NonNull ISupportFragment toFragment) {
-        mDelegate.loadRootFragment(containerId, toFragment);
+        mSupportActivityDelegate.loadRootFragment(containerId, toFragment);
     }
 
     public void loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack, boolean allowAnimation) {
-        mDelegate.loadRootFragment(containerId, toFragment, addToBackStack, allowAnimation);
+        mSupportActivityDelegate.loadRootFragment(containerId, toFragment, addToBackStack, allowAnimation);
     }
 
     /**
      * 加载多个同级根Fragment,类似Wechat, QQ主页的场景
      */
     public void loadMultipleRootFragment(int containerId, int showPosition, ISupportFragment... toFragments) {
-        mDelegate.loadMultipleRootFragment(containerId, showPosition, toFragments);
+        mSupportActivityDelegate.loadMultipleRootFragment(containerId, showPosition, toFragments);
     }
 
     /**
@@ -153,21 +153,21 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * @param showFragment 需要show的Fragment
      */
     public void showHideFragment(ISupportFragment showFragment) {
-        mDelegate.showHideFragment(showFragment);
+        mSupportActivityDelegate.showHideFragment(showFragment);
     }
 
     /**
      * show一个Fragment,hide一个Fragment ; 主要用于类似微信主页那种 切换tab的情况
      */
     public void showHideFragment(ISupportFragment showFragment, ISupportFragment hideFragment) {
-        mDelegate.showHideFragment(showFragment, hideFragment);
+        mSupportActivityDelegate.showHideFragment(showFragment, hideFragment);
     }
 
     /**
      * It is recommended to use {@link (ISupportFragment)}.
      */
     public void start(ISupportFragment toFragment) {
-        mDelegate.start(toFragment);
+        mSupportActivityDelegate.start(toFragment);
     }
 
     /**
@@ -176,7 +176,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * @param launchMode Similar to Activity's LaunchMode.
      */
     public void start(ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode) {
-        mDelegate.start(toFragment, launchMode);
+        mSupportActivityDelegate.start(toFragment, launchMode);
     }
 
     /**
@@ -184,7 +184,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * Launch an fragment for which you would like a result when it poped.
      */
     public void startForResult(ISupportFragment toFragment, int requestCode) {
-        mDelegate.startForResult(toFragment, requestCode);
+        mSupportActivityDelegate.startForResult(toFragment, requestCode);
     }
 
     /**
@@ -192,7 +192,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
-        mDelegate.startWithPop(toFragment);
+        mSupportActivityDelegate.startWithPop(toFragment);
     }
 
     /**
@@ -203,21 +203,21 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * @see #start(ISupportFragment)
      */
     public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
-        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
+        mSupportActivityDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
     }
 
     /**
      * It is recommended to use {@link (ISupportFragment, boolean)}.
      */
     public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
-        mDelegate.replaceFragment(toFragment, addToBackStack);
+        mSupportActivityDelegate.replaceFragment(toFragment, addToBackStack);
     }
 
     /**
      * Pop the fragment.
      */
     public void pop() {
-        mDelegate.pop();
+        mSupportActivityDelegate.pop();
     }
 
     /**
@@ -230,7 +230,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * @param includeTargetFragment 是否包含该fragment
      */
     public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment) {
-        mDelegate.popTo(targetFragmentClass, includeTargetFragment);
+        mSupportActivityDelegate.popTo(targetFragmentClass, includeTargetFragment);
     }
 
     /**
@@ -238,11 +238,11 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * 如果你想在出栈后, 立刻进行FragmentTransaction操作，请使用该方法
      */
     public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
-        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+        mSupportActivityDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
     }
 
     public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
-        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+        mSupportActivityDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
     }
 
     /**
@@ -251,7 +251,7 @@ public abstract class AbstractSupportActivity extends RxAppCompatActivity implem
      * 可以通过该方法改变其内所有Fragment的默认背景。
      */
     public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
-        mDelegate.setDefaultFragmentBackground(backgroundRes);
+        mSupportActivityDelegate.setDefaultFragmentBackground(backgroundRes);
     }
 
     /**

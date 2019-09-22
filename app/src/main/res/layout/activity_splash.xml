@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:context=".mvvm.view.activity.SplashActivity">
+
+        <TextView
+            fontPath="fonts/FZLTHJW.TTF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定义自己的美好生活"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_28"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.flower.mvvm.viewmodel.SplashViewModel" />
+    </data>
+</layout>

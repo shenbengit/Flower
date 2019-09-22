@@ -27,7 +27,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public abstract class AbstractSupportFragment extends RxFragment implements ISupportFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
-    protected FragmentActivity _mActivity;
+    protected FragmentActivity mActivity;
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -47,7 +47,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mDelegate.onAttach(activity);
-        _mActivity = mDelegate.getActivity();
+        mActivity = mDelegate.getActivity();
     }
 
     @Override

@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.flower.App;
-import com.example.flower.R;
 import com.example.flower.base.support.AbstractSupportFragment;
 
 
@@ -47,7 +45,7 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
+        initData(savedInstanceState);
     }
 
     @Override
@@ -60,7 +58,7 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ((App) _mActivity.getApplicationContext()).getRefWatcher().watch(this);
+        ((App) mActivity.getApplicationContext()).getRefWatcher().watch(this);
     }
 
     /**
@@ -106,6 +104,6 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
     /**
      * 初始化数据
      */
-    protected abstract void initData();
+    protected abstract void initData(@Nullable Bundle savedInstanceState);
 
 }

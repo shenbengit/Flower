@@ -54,15 +54,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation rootProject.ext.dependencies["RecyclerView"]
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
-    implementation rootProject.ext.dependencies["fragmentation-core"]
+    implementation rootProject.ext.dependencies["fragmentationx-core"]
     implementation rootProject.ext.dependencies["permissionsdispatcher"]
-    annotationProcessor  rootProject.ext.dependencies["permissionsdispatcher-processor"]
+    annotationProcessor rootProject.ext.dependencies["permissionsdispatcher-processor"]
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["logger"]
     implementation rootProject.ext.dependencies["glide"]
-    annotationProcessor  rootProject.ext.dependencies["glide-compiler"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation rootProject.ext.dependencies["arouter"]
-    annotationProcessor  rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["retrofit2"]
     implementation rootProject.ext.dependencies["retrofit2-gson"]
     implementation rootProject.ext.dependencies["adapter-rxjava2"]
@@ -72,7 +72,7 @@ dependencies {
     implementation rootProject.ext.dependencies["logging-interceptor"]
     implementation rootProject.ext.dependencies["rxlifecycle-components"]
     implementation rootProject.ext.dependencies["lifecycle-extensions"]
-    annotationProcessor  rootProject.ext.dependencies["lifecycle-compiler"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
     implementation rootProject.ext.dependencies["rxbinding"]
     implementation rootProject.ext.dependencies["rxbinding-recyclerview"]
     debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
@@ -80,4 +80,8 @@ dependencies {
     implementation rootProject.ext.dependencies["EasyThread"]
     implementation rootProject.ext.dependencies["databinding-compiler"]
     implementation rootProject.ext.dependencies["bmob-sdk"]
+    implementation rootProject.ext.dependencies["inflationx-calligraphy3"]
+    implementation rootProject.ext.dependencies["inflationx-viewpump"]
+    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
 }
