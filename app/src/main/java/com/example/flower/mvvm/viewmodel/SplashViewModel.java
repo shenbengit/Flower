@@ -36,28 +36,28 @@ public class SplashViewModel extends BaseViewModel<SplashModel> {
     @Override
     public void onCreate() {
         super.onCreate();
-        mModel.getCoverPage(mLifecycleProvider, new Consumer<CoverPageBean>() {
+        mModel.getCoverPage(new Consumer<CoverPageBean>() {
             @Override
             public void accept(CoverPageBean coverPageBean) throws Exception {
 
             }
         }, throwable -> LogUtil.e("getCoverPage-onError: " + throwable.getMessage()));
 
-        mModel.getWallpaperVersion(mLifecycleProvider, new Consumer<WallpaperVersionBean>() {
+        mModel.getWallpaperVersion(new Consumer<WallpaperVersionBean>() {
             @Override
             public void accept(WallpaperVersionBean coverPageBean) throws Exception {
 
             }
         }, throwable -> LogUtil.e("getWallpaperVersion-onError: " + throwable.getMessage()));
 
-        mModel.getPaidArticleEveryDayNews(mLifecycleProvider, new Consumer<PaidArticleEveryDayNewsBean>() {
+        mModel.getPaidArticleEveryDayNews(new Consumer<PaidArticleEveryDayNewsBean>() {
             @Override
             public void accept(PaidArticleEveryDayNewsBean coverPageBean) throws Exception {
 
             }
         }, throwable -> LogUtil.e("getPaidArticleEveryDayNews-onError: " + throwable.getMessage()));
 
-        mModel.getNewestVideoRemind(mLifecycleProvider, new Consumer<NewestVideoRemindBean>() {
+        mModel.getNewestVideoRemind(new Consumer<NewestVideoRemindBean>() {
             @Override
             public void accept(NewestVideoRemindBean coverPageBean) throws Exception {
 

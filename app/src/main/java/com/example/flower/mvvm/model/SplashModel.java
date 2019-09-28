@@ -7,7 +7,6 @@ import com.example.flower.http.bean.NewestVideoRemindBean;
 import com.example.flower.http.bean.PaidArticleEveryDayNewsBean;
 import com.example.flower.http.bean.WallpaperVersionBean;
 import com.example.flower.util.RxUtil;
-import com.trello.rxlifecycle3.LifecycleProvider;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -20,12 +19,12 @@ import io.reactivex.functions.Consumer;
  */
 public class SplashModel extends BaseModel {
 
-    public void getCoverPage(LifecycleProvider lifecycleProvider, Consumer<CoverPageBean> onNext, Consumer<Throwable> onError) {
+    public void getCoverPage( Consumer<CoverPageBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient
                 .getInstance()
                 .getApiService()
                 .getCoverPage()
-                .compose(RxUtil.bindToLifecycle(lifecycleProvider))
+                .compose(RxUtil.bindToLifecycle(mLifecycleProvider))
                 .compose(RxUtil.io_main())
                 .subscribe(new Observer<CoverPageBean>() {
                     @Override
@@ -63,12 +62,12 @@ public class SplashModel extends BaseModel {
     }
 
 
-    public void getWallpaperVersion(LifecycleProvider lifecycleProvider, Consumer<WallpaperVersionBean> onNext, Consumer<Throwable> onError) {
+    public void getWallpaperVersion(Consumer<WallpaperVersionBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient
                 .getInstance()
                 .getApiService()
                 .getWallpaperVersion()
-                .compose(RxUtil.bindToLifecycle(lifecycleProvider))
+                .compose(RxUtil.bindToLifecycle(mLifecycleProvider))
                 .compose(RxUtil.io_main())
                 .subscribe(new Observer<WallpaperVersionBean>() {
                     @Override
@@ -105,12 +104,12 @@ public class SplashModel extends BaseModel {
                 });
     }
 
-    public void getPaidArticleEveryDayNews(LifecycleProvider lifecycleProvider, Consumer<PaidArticleEveryDayNewsBean> onNext, Consumer<Throwable> onError) {
+    public void getPaidArticleEveryDayNews(Consumer<PaidArticleEveryDayNewsBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient
                 .getInstance()
                 .getApiService()
                 .getPaidArticleEveryDayNews()
-                .compose(RxUtil.bindToLifecycle(lifecycleProvider))
+                .compose(RxUtil.bindToLifecycle(mLifecycleProvider))
                 .compose(RxUtil.io_main())
                 .subscribe(new Observer<PaidArticleEveryDayNewsBean>() {
                     @Override
@@ -147,12 +146,12 @@ public class SplashModel extends BaseModel {
                 });
     }
 
-    public void getNewestVideoRemind(LifecycleProvider lifecycleProvider, Consumer<NewestVideoRemindBean> onNext, Consumer<Throwable> onError) {
+    public void getNewestVideoRemind( Consumer<NewestVideoRemindBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient
                 .getInstance()
                 .getApiService()
                 .getNewestVideoRemind()
-                .compose(RxUtil.bindToLifecycle(lifecycleProvider))
+                .compose(RxUtil.bindToLifecycle(mLifecycleProvider))
                 .compose(RxUtil.io_main())
                 .subscribe(new Observer<NewestVideoRemindBean>() {
                     @Override

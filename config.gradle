@@ -60,6 +60,12 @@ ext {
             "bmob-sdk"                       : "cn.bmob.android:bmob-sdk:3.7.3-rc1",
             //字体inflationx
             "inflationx-calligraphy3"        : "io.github.inflationx:calligraphy3:3.1.1",
-            "inflationx-viewpump"            : "io.github.inflationx:viewpump:2.0.3"
+            "inflationx-viewpump"            : "io.github.inflationx:viewpump:2.0.3",
+            //下拉刷新库
+            "refresh-layout-kernel"          : "com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1",
+            //下拉刷新Header
+            "refresh-header-classics"        : "com.scwang.smart:refresh-header-classics:2.0.0-alpha-1",
+            //下拉刷新Footer
+            "refresh-footer-classic"         : "com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1",
     ]
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.flower.http.bean.HomePageBean.DataBean.CommunityHomePageFirstPlateViewBean.ArticleForFirstPlateViewsBean" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/dp_240"
+        android:layout_height="@dimen/dp_200">
+
+        <ImageView
+            android:id="@+id/iv"
+            imageUrl="@{item.imgUrl}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_135"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvEnName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@{item.enName}"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv" />
+
+        <TextView
+            android:id="@+id/tvCnName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@{item.cnName}"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tvEnName"
+            app:layout_constraintTop_toBottomOf="@id/tvEnName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

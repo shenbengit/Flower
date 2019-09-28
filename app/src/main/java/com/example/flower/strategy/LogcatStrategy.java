@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * @date 2018/9/12
  * Email: 714081644@qq.com
  */
-public class LogCatStrategy implements LogStrategy {
+public class LogcatStrategy implements LogStrategy {
     private int last;
     private static final String DEFAULT_TAG = "NO_TAG";
 

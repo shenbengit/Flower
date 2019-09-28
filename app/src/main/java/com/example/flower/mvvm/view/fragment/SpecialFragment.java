@@ -39,6 +39,11 @@ public class SpecialFragment extends BaseFragment<FragmentSpecialBinding, Specia
     }
 
     @Override
+    protected void initView() {
+        mBinding.rvRecommended.setItemAnimator(null);
+    }
+
+    @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
 
     }

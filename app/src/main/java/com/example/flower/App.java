@@ -1,15 +1,12 @@
 package com.example.flower;
 
 
-import android.app.Activity;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.constant.Constant;
+import com.example.flower.strategy.LogcatStrategy;
 import com.example.flower.util.LogUtil;
 import com.example.flower.util.SharedPreferencesUtil;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -42,43 +39,6 @@ public class App extends MultiDexApplication {
         initARouter();
         initBmob();
         SharedPreferencesUtil.getInstance().init(this);
-
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-                System.out.println(activity.getComponentName() + "onActivityCreated");
-            }
-
-            @Override
-            public void onActivityStarted(@NonNull Activity activity) {
-                System.out.println(activity.getComponentName() + "onActivityStarted");
-            }
-
-            @Override
-            public void onActivityResumed(@NonNull Activity activity) {
-                System.out.println(activity.getComponentName() + "onActivityResumed");
-            }
-
-            @Override
-            public void onActivityPaused(@NonNull Activity activity) {
-                System.out.println(activity.getComponentName() + "onActivityPaused");
-            }
-
-            @Override
-            public void onActivityStopped(@NonNull Activity activity) {
-                System.out.println(activity.getComponentName() + "onActivityStopped");
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
-                System.out.println(activity.getComponentName() + "onActivitySaveInstanceState");
-            }
-
-            @Override
-            public void onActivityDestroyed(@NonNull Activity activity) {
-                System.out.println(activity.getComponentName() + "onActivityDestroyed");
-            }
-        });
     }
 
     /**
@@ -102,7 +62,7 @@ public class App extends MultiDexApplication {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)
                 .methodCount(2)
-//                .logStrategy(new LogCatStrategy())
+                .logStrategy(new LogcatStrategy())
                 .tag(Constant.TAG)
                 .build();
 

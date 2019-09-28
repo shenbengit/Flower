@@ -2,7 +2,6 @@ package com.example.flower.binding.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +15,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.flower.GlideApp;
 import com.example.flower.binding.command.BindingCommand;
@@ -167,26 +167,31 @@ public class DataBindingAdapter {
      * Glide 加载图片url
      *
      * @param imageView           要加载的图片控件
-     * @param url                 图片url地址
+     * @param o                   图片资源
      * @param placeholderImageRes 图片加载中显示展位图
      * @param errorImageRes       图片加载失败显示占位图
      * @param noLoadCache         加载图片是否使用缓存,默认使用缓存
      */
     @SuppressLint("CheckResult")
-    @BindingAdapter(value = {"imageUrl", "placeholderImageRes", "errorImageRes", "noLoadCache"}, requireAll = false)
-    public static void setImageUrl(ImageView imageView, String url, Drawable placeholderImageRes, Drawable errorImageRes, boolean noLoadCache) {
-        if (!TextUtils.isEmpty(url)) {
+    @BindingAdapter(value = {"imageUrl", "placeholderImageRes", "errorImageRes", "noLoadCache", "roundingRadius"}, requireAll = false)
+    public static void setImageUrl(ImageView imageView, Object o, Drawable placeholderImageRes, Drawable errorImageRes, boolean noLoadCache, int roundingRadius) {
+        if (o != null) {
             RequestOptions options = new RequestOptions()
                     .placeholder(placeholderImageRes)
                     .error(errorImageRes);
+            //圆角大于0，则加入圆角，四个角都是圆角
+            if (roundingRadius > 0) {
+                RoundedCorners roundedCorners = new RoundedCorners(roundingRadius);
+                options.transform(roundedCorners);
+            }
             if (!noLoadCache) {
                 GlideApp.with(imageView)
-                        .load(url)
+                        .load(o)
                         .apply(options)
                         .into(imageView);
             } else {
                 GlideApp.with(imageView)
-                        .load(url)
+                        .load(o)
                         .skipMemoryCache(true)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .apply(options)
@@ -236,8 +241,9 @@ public class DataBindingAdapter {
             recyclerView.addItemDecoration(itemDecoration);
         }
     }
+
     @BindingAdapter(value = {"recyclerViewSmoothScrollToPosition"})
-    public static void recyclerViewSmoothScrollToPosition(RecyclerView recyclerView,int position){
+    public static void recyclerViewSmoothScrollToPosition(RecyclerView recyclerView, int position) {
         recyclerView.smoothScrollToPosition(position);
     }
 

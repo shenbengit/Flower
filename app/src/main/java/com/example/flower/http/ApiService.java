@@ -1,14 +1,17 @@
 package com.example.flower.http;
 
 import com.example.flower.http.bean.CoverPageBean;
+import com.example.flower.http.bean.HomePageBean;
 import com.example.flower.http.bean.NewestVideoRemindBean;
 import com.example.flower.http.bean.PaidArticleEveryDayNewsBean;
+import com.example.flower.http.bean.RecommendedTodayBean;
 import com.example.flower.http.bean.WallpaperVersionBean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -38,6 +41,19 @@ public interface ApiService {
 
     @GET(value = "cactus/researchCommunity/newestVideoRemind")
     Observable<NewestVideoRemindBean> getNewestVideoRemind();
+
+    /**
+     * 获取主页数据
+     *
+     * @param city 当前定位的城市
+     * @return
+     */
+    @GET(value = "cactus/communityHomePage/getHomePageForNewVersion")
+    Observable<HomePageBean> getHomePageForNewVersion(@Query("city") String city);
+
+
+    @GET(value = "cactus/sysArticle/getRecommendArticleListV2")
+    Observable<RecommendedTodayBean> getRecommendedToday(@Query("pageIndex") int pageIndex, @Query("customerId") String customerId, @Query("token") String token);
 
 
 }
