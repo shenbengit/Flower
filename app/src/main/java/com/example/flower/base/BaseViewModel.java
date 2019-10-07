@@ -16,7 +16,7 @@ import com.trello.rxlifecycle3.LifecycleProvider;
  * @date 2018/11/8 15:26
  * @email 714081644@qq.com
  */
-public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel {
+public class BaseViewModel<M extends IBaseModel> extends AndroidViewModel implements IBaseViewModel {
 
     protected M mModel;
     protected LifecycleProvider mLifecycleProvider;

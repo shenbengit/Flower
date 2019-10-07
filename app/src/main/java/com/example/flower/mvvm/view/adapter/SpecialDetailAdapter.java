@@ -11,24 +11,25 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.flower.GlideApp;
 import com.example.flower.R;
-import com.example.flower.databinding.ItemRecommendedTodayBinding;
-import com.example.flower.http.bean.RecommendedTodayBean;
+import com.example.flower.databinding.ItemSpecialDetailBinding;
+import com.example.flower.http.bean.SpecialDetailBean;
 import com.example.flower.mvvm.view.adapter.base.BaseBindingAdapter;
 import com.example.flower.mvvm.view.adapter.base.BaseBindingViewHolder;
 
 /**
  * @author ShenBen
- * @date 2019/9/28 12:54
+ * @date 2019/10/7 16:44
  * @email 714081644@qq.com
  */
-public class RecommendedTodayAdapter extends BaseBindingAdapter<RecommendedTodayBean.DataBean> {
-    public RecommendedTodayAdapter() {
-        super(R.layout.item_recommended_today);
+public class SpecialDetailAdapter extends BaseBindingAdapter<SpecialDetailBean.DataBean> {
+
+    public SpecialDetailAdapter() {
+        super(R.layout.item_special_detail);
     }
 
     @Override
-    protected void convert(BaseBindingViewHolder helper, RecommendedTodayBean.DataBean item) {
-        ItemRecommendedTodayBinding binding = helper.getBinding();
+    protected void convert(BaseBindingViewHolder helper, SpecialDetailBean.DataBean item) {
+        ItemSpecialDetailBinding binding = helper.getBinding();
         binding.setBean(item);
         //如果有宽高，直接设置
         if (item.getImageWidth() > 0 && item.getImageHeight() > 0) {
@@ -64,16 +65,4 @@ public class RecommendedTodayAdapter extends BaseBindingAdapter<RecommendedToday
         }
 
     }
-
-//    /**
-//     * 会解决多次滑动上方留白问题
-//     *
-//     * @param position
-//     * @return
-//     */
-//    @Override
-//    public int getItemViewType(int position) {
-//        int type = super.getItemViewType(position);
-//        return type == 0 ? position : type;
-//    }
 }

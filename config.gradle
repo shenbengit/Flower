@@ -26,6 +26,7 @@ ext {
             //Glide
             "glide"                          : "com.github.bumptech.glide:glide:4.9.0",
             "glide-compiler"                 : "com.github.bumptech.glide:compiler:4.9.0",
+            "glide-transformations"          : "jp.wasabeef:glide-transformations:4.1.0",
             //Arouter
             "arouter"                        : "com.alibaba:arouter-api:1.4.1",
             "arouter-compiler"               : "com.alibaba:arouter-compiler:1.2.2",
@@ -67,5 +68,8 @@ ext {
             "refresh-header-classics"        : "com.scwang.smart:refresh-header-classics:2.0.0-alpha-1",
             //下拉刷新Footer
             "refresh-footer-classic"         : "com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1",
+            //透明状态栏基础依赖包，必须要依赖
+            "immersionbar"                   : "com.gyf.immersionbar:immersionbar:3.0.0",
+            "immersionbar-components"        : "com.gyf.immersionbar:immersionbar-components:3.0.0"
     ]
 }

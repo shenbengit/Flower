@@ -11,5 +11,7 @@ public class ARouterPath {
     private static final String BASE_FRAGMENT_PATH = "/ui/fragment/";
 
     public static final String MAIN_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "MainActivity";
-
+    public static final String TODAY_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "TodayActivity";
+    public static final String ARTICLE_DETAIL_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "ArticleDetailActivity";
+    public static final String SPECIAL_DETAIL_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "SpecialDetailActivity";
 }

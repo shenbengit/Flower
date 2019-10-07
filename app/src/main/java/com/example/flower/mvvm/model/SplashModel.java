@@ -33,10 +33,10 @@ public class SplashModel extends BaseModel {
                     }
 
                     @Override
-                    public void onNext(CoverPageBean coverPageBean) {
+                    public void onNext(CoverPageBean bean) {
                         if (onNext != null) {
                             try {
-                                onNext.accept(coverPageBean);
+                                onNext.accept(bean);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -76,10 +76,10 @@ public class SplashModel extends BaseModel {
                     }
 
                     @Override
-                    public void onNext(WallpaperVersionBean coverPageBean) {
+                    public void onNext(WallpaperVersionBean bean) {
                         if (onNext != null) {
                             try {
-                                onNext.accept(coverPageBean);
+                                onNext.accept(bean);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -118,10 +118,10 @@ public class SplashModel extends BaseModel {
                     }
 
                     @Override
-                    public void onNext(PaidArticleEveryDayNewsBean coverPageBean) {
+                    public void onNext(PaidArticleEveryDayNewsBean bean) {
                         if (onNext != null) {
                             try {
-                                onNext.accept(coverPageBean);
+                                onNext.accept(bean);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -160,10 +160,10 @@ public class SplashModel extends BaseModel {
                     }
 
                     @Override
-                    public void onNext(NewestVideoRemindBean coverPageBean) {
+                    public void onNext(NewestVideoRemindBean bean) {
                         if (onNext != null) {
                             try {
-                                onNext.accept(coverPageBean);
+                                onNext.accept(bean);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

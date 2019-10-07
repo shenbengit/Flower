@@ -27,6 +27,8 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 
 import java.util.concurrent.TimeUnit;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
 
 /**
  * 封装DataBinding适配器
@@ -171,10 +173,12 @@ public class DataBindingAdapter {
      * @param placeholderImageRes 图片加载中显示展位图
      * @param errorImageRes       图片加载失败显示占位图
      * @param noLoadCache         加载图片是否使用缓存,默认使用缓存
+     * @param roundingRadius      圆角
+     * @param isBlur              是否高斯模糊
      */
     @SuppressLint("CheckResult")
-    @BindingAdapter(value = {"imageUrl", "placeholderImageRes", "errorImageRes", "noLoadCache", "roundingRadius"}, requireAll = false)
-    public static void setImageUrl(ImageView imageView, Object o, Drawable placeholderImageRes, Drawable errorImageRes, boolean noLoadCache, int roundingRadius) {
+    @BindingAdapter(value = {"imageObject", "placeholderImageRes", "errorImageRes", "noLoadCache", "roundingRadius", "isBlur"}, requireAll = false)
+    public static void setImageUrl(ImageView imageView, Object o, Drawable placeholderImageRes, Drawable errorImageRes, boolean noLoadCache, int roundingRadius, boolean isBlur) {
         if (o != null) {
             RequestOptions options = new RequestOptions()
                     .placeholder(placeholderImageRes)
@@ -184,6 +188,10 @@ public class DataBindingAdapter {
                 RoundedCorners roundedCorners = new RoundedCorners(roundingRadius);
                 options.transform(roundedCorners);
             }
+            if (isBlur) {
+                options.transform(new BlurTransformation(25, 3));
+            }
+
             if (!noLoadCache) {
                 GlideApp.with(imageView)
                         .load(o)

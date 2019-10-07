@@ -26,4 +26,8 @@ public class Constant {
      * Bmob云Application ID
      */
     public static final String BMOB_APPLICATION_ID = "945d0c586b07ad3df4d022af5186a3f5";
+    /**
+     * 花田APP 用户id
+     */
+    public static final String USER_ID = "55977b26-8acd-494c-acf0-6f9b948e4095";
 }

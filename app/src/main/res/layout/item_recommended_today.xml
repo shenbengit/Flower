@@ -9,10 +9,11 @@
             type="com.example.flower.http.bean.RecommendedTodayBean.DataBean" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
+        android:orientation="vertical"
         android:padding="@dimen/dp_5">
 
         <ImageView
@@ -20,10 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/tvName"
@@ -33,17 +31,13 @@
             android:text="@{bean.name}"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/sp_13"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/iv"
-            app:layout_constraintTop_toBottomOf="@id/iv" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             android:text="@{bean.cateName}"
-            android:textSize="@dimen/sp_11"
-            app:layout_constraintStart_toStartOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textSize="@dimen/sp_11" />
+    </LinearLayout>
 </layout>

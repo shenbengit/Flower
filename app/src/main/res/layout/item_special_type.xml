@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.flower.http.bean.SpecialTypeBean.DataBean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvSpecialType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@{bean.checked ? @drawable/bg_special_type_checked : null}"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_3"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_3"
+            android:text="@{bean.name}"
+            android:textColor="@{bean.checked ? @color/colorWhite : @color/colorGrey}" />
+    </FrameLayout>
+</layout>

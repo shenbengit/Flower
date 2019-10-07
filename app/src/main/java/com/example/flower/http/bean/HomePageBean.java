@@ -1,5 +1,8 @@
 package com.example.flower.http.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -113,7 +116,7 @@ public class HomePageBean {
                 this.articleForFirstPlateViews = articleForFirstPlateViews;
             }
 
-            public static class ArticleForFirstPlateViewsBean {
+            public static class ArticleForFirstPlateViewsBean implements Parcelable {
                 /**
                  * id : 231
                  * enName : Rose Varieties
@@ -130,7 +133,6 @@ public class HomePageBean {
                 private String imgUrl;
                 private int type;
                 private String detailUrl;
-                private Object articleId;
 
                 public int getId() {
                     return id;
@@ -180,13 +182,44 @@ public class HomePageBean {
                     this.detailUrl = detailUrl;
                 }
 
-                public Object getArticleId() {
-                    return articleId;
+                @Override
+                public int describeContents() {
+                    return 0;
                 }
 
-                public void setArticleId(Object articleId) {
-                    this.articleId = articleId;
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeInt(this.id);
+                    dest.writeString(this.enName);
+                    dest.writeString(this.cnName);
+                    dest.writeString(this.imgUrl);
+                    dest.writeInt(this.type);
+                    dest.writeString(this.detailUrl);
                 }
+
+                public ArticleForFirstPlateViewsBean() {
+                }
+
+                protected ArticleForFirstPlateViewsBean(Parcel in) {
+                    this.id = in.readInt();
+                    this.enName = in.readString();
+                    this.cnName = in.readString();
+                    this.imgUrl = in.readString();
+                    this.type = in.readInt();
+                    this.detailUrl = in.readString();
+                }
+
+                public static final Parcelable.Creator<ArticleForFirstPlateViewsBean> CREATOR = new Parcelable.Creator<ArticleForFirstPlateViewsBean>() {
+                    @Override
+                    public ArticleForFirstPlateViewsBean createFromParcel(Parcel source) {
+                        return new ArticleForFirstPlateViewsBean(source);
+                    }
+
+                    @Override
+                    public ArticleForFirstPlateViewsBean[] newArray(int size) {
+                        return new ArticleForFirstPlateViewsBean[size];
+                    }
+                };
             }
         }
 
@@ -215,7 +248,7 @@ public class HomePageBean {
                 this.categoryForSecondPlateViews = categoryForSecondPlateViews;
             }
 
-            public static class CategoryForSecondPlateViewsBean {
+            public static class CategoryForSecondPlateViewsBean implements Parcelable {
                 /**
                  * id : 8dba5958-7da0-4ce9-b1e9-5b92343519a7
                  * name : 花艺学堂
@@ -249,6 +282,39 @@ public class HomePageBean {
                 public void setImg(String img) {
                     this.img = img;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.id);
+                    dest.writeString(this.name);
+                    dest.writeString(this.img);
+                }
+
+                public CategoryForSecondPlateViewsBean() {
+                }
+
+                protected CategoryForSecondPlateViewsBean(Parcel in) {
+                    this.id = in.readString();
+                    this.name = in.readString();
+                    this.img = in.readString();
+                }
+
+                public static final Parcelable.Creator<CategoryForSecondPlateViewsBean> CREATOR = new Parcelable.Creator<CategoryForSecondPlateViewsBean>() {
+                    @Override
+                    public CategoryForSecondPlateViewsBean createFromParcel(Parcel source) {
+                        return new CategoryForSecondPlateViewsBean(source);
+                    }
+
+                    @Override
+                    public CategoryForSecondPlateViewsBean[] newArray(int size) {
+                        return new CategoryForSecondPlateViewsBean[size];
+                    }
+                };
             }
         }
 

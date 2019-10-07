@@ -2,33 +2,70 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.flower.mvvm.viewmodel.SpecialViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
+        <View
+            android:id="@+id/viewSearch"
+            onClickCommand="@{viewModel.searchCommand}"
+            android:layout_width="@dimen/dp_260"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/bg_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/tvCalendar"
-            onClickCommand="@{viewModel.calendarCommand}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:drawableStart="@drawable/iv_search"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center_vertical"
+            android:text="搜索"
+            android:textColor="#707070"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/viewSearch"
+            app:layout_constraintStart_toStartOf="@id/viewSearch"
+            app:layout_constraintTop_toTopOf="@id/viewSearch" />
+
+        <TextView
+            android:id="@+id/tvToday"
+            onClickCommand="@{viewModel.todayCommand}"
             android:layout_width="@dimen/dp_25"
             android:layout_height="@dimen/dp_25"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/iv_calendar"
             android:gravity="center"
             android:text="@{viewModel.calendarString}"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewSearch" />
+
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/srlRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_weight="1"
-            android:orientation="vertical">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewSearch">
 
             <com.scwang.smart.refresh.header.ClassicsHeader
                 android:layout_width="match_parent"
@@ -37,92 +74,79 @@
                 app:srlClassicsSpinnerStyle="FixedBehind"
                 app:srlPrimaryColor="@color/colorDarkGrey" />
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.google.android.material.appbar.AppBarLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:elevation="0dp">
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvArticle"
+                        addRecyclerViewItemDecoration="@{viewModel.mArticleItemDecoration}"
+                        bindRecyclerViewAdapter="@{viewModel.mArticleAdapter}"
+                        bindRecyclerViewLayoutManager="@{viewModel.mArticleLayoutManager}"
                         android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_200"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:scrollbars="none" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_0_1"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginEnd="@dimen/dp_20"
+                        android:background="@color/colorGrey" />
+
+                    <TextView
+                        android:id="@+id/tvSpecial"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_scrollFlags="scroll">
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:text="专题分类"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvArticle"
-                            addRecyclerViewItemDecoration="@{viewModel.mArticleItemDecoration}"
-                            bindRecyclerViewAdapter="@{viewModel.mArticleAdapter}"
-                            bindRecyclerViewLayoutManager="@{viewModel.mArticleLayoutManager}"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_200"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:scrollbars="none" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/dp_0_1"
-                            android:layout_marginStart="@dimen/dp_20"
-                            android:layout_marginTop="@dimen/dp_15"
-                            android:layout_marginEnd="@dimen/dp_20"
-                            android:background="@color/colorGrey"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/rvArticle" />
-
-                        <TextView
-                            android:id="@+id/tvSpecial"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_15"
-                            android:text="专题分类"
-                            android:textColor="@color/colorBlack" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            addRecyclerViewItemDecoration="@{viewModel.mSpecialItemDecoration}"
-                            bindRecyclerViewAdapter="@{viewModel.mSpecialAdapter}"
-                            bindRecyclerViewLayoutManager="@{viewModel.mSpecialLayoutManager}"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_90"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:scrollbars="none" />
-                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        addRecyclerViewItemDecoration="@{viewModel.mSpecialItemDecoration}"
+                        bindRecyclerViewAdapter="@{viewModel.mSpecialAdapter}"
+                        bindRecyclerViewLayoutManager="@{viewModel.mSpecialLayoutManager}"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_90"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:scrollbars="none" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
                         android:layout_marginTop="@dimen/dp_15"
-                        android:background="@color/colorDarkGrey"
-                        android:paddingTop="@dimen/dp_5"
-                        android:paddingBottom="@dimen/dp_5"
-                        android:text="今日推荐"
+                        android:text="每日发现"
                         android:textColor="@color/colorBlack"
-                        app:layout_collapseMode="pin"
-                        app:layout_scrollFlags="exitUntilCollapsed|enterAlways|enterAlwaysCollapsed" />
-                </com.google.android.material.appbar.AppBarLayout>
+                        android:textSize="@dimen/sp_15"
+                        android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRecommended"
-                    addRecyclerViewItemDecoration="@{viewModel.mRecommendedDecoration}"
-                    bindRecyclerViewAdapter="@{viewModel.mRecommendedAdapter}"
-                    bindRecyclerViewLayoutManager="@{viewModel.mRecommendedLayoutManager}"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorDarkGrey"
-                    android:paddingTop="@dimen/dp_10"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecommended"
+                        addRecyclerViewItemDecoration="@{viewModel.mDiscoveryDecoration}"
+                        bindRecyclerViewAdapter="@{viewModel.mDiscoveryAdapter}"
+                        bindRecyclerViewLayoutManager="@{viewModel.mDiscoveryLayoutManager}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/dp_10" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlClassicsSpinnerStyle="FixedBehind" />
 
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-    </LinearLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.flower.mvvm.viewmodel.SpecialViewModel" />
-    </data>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

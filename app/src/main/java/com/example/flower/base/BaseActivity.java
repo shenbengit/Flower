@@ -3,11 +3,14 @@ package com.example.flower.base;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.flower.R;
 import com.example.flower.base.support.AbstractSupportActivity;
 
 
@@ -95,4 +98,23 @@ public abstract class BaseActivity<VDB extends ViewDataBinding, VM extends BaseV
      * 初始化数据
      */
     protected abstract void initData(@Nullable Bundle savedInstanceState);
+
+
+    /**
+     * 设置ToolBar
+     *
+     * @param toolbar 传入子类中的ToolBar
+     */
+    protected void initToolbar(@NonNull Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.iv_back);
+        toolbar.setNavigationOnClickListener(v -> onBackClick());
+    }
+
+    /**
+     * 点击了ToolBar的返回按钮，一般来说不用重写
+     */
+    protected void onBackClick() {
+        onBackPressedSupport();
+    }
 }

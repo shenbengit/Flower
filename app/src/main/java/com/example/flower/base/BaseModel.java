@@ -11,6 +11,7 @@ public class BaseModel implements IBaseModel {
 
     protected LifecycleProvider mLifecycleProvider;
 
+    @Override
     public void setLifecycleProvider(LifecycleProvider provider) {
         mLifecycleProvider = provider;
     }
