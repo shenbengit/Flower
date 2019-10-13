@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/iv_no_data"
+        android:gravity="center"
+        android:text="暂无数据\n下拉刷新哦"
+        android:textColor="#bfbfbf"
+        android:drawablePadding="@dimen/dp_8"
+        android:textSize="@dimen/sp_20" />
+</FrameLayout>

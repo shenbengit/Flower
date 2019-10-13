@@ -12,7 +12,7 @@ import java.io.File;
 public class Constant {
     public static final String TAG = "Flower";
 
-    public static final String BASE_URL = "http://api.htxq.net/";
+    public static final String BASE_URL = "http://api.htxq.net";
     /**
      * 文件路径,基础路径
      */

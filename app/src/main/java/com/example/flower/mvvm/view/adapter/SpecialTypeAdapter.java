@@ -1,13 +1,16 @@
 package com.example.flower.mvvm.view.adapter;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.flower.R;
-import com.example.flower.databinding.ItemSpecialTypeBinding;
 import com.example.flower.http.bean.SpecialTypeBean;
-import com.example.flower.mvvm.view.adapter.base.BaseBindingAdapter;
-import com.example.flower.mvvm.view.adapter.base.BaseBindingViewHolder;
+import com.example.flower.mvvm.view.fragment.SpecialListFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,26 +18,41 @@ import java.util.List;
  * @date 2019/10/7 15:12
  * @email 714081644@qq.com
  */
-public class SpecialTypeAdapter extends BaseBindingAdapter<SpecialTypeBean.DataBean> {
-    public SpecialTypeAdapter() {
-        super(R.layout.item_special_type);
+public class SpecialTypeAdapter extends FragmentStateAdapter {
+    private final List<SpecialTypeBean.DataBean> mList = new ArrayList<>();
+
+    public SpecialTypeAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull BaseBindingViewHolder holder, int position, @NonNull List<Object> payloads) {
-        if (payloads.isEmpty()) {
-            onBindViewHolder(holder, position);
-        } else {
-            ItemSpecialTypeBinding binding = holder.getBinding();
-            binding.setBean(getItem(position));
+    public SpecialTypeAdapter(@NonNull Fragment fragment) {
+        super(fragment);
+    }
+
+    public SpecialTypeAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
+    }
+
+    public void setNewData(List<SpecialTypeBean.DataBean> list) {
+        mList.clear();
+        if (list != null && !list.isEmpty()) {
+            mList.addAll(list);
         }
+        notifyDataSetChanged();
+    }
+
+    public List<SpecialTypeBean.DataBean> getData() {
+        return mList;
+    }
+
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return SpecialListFragment.newInstance(mList.get(position).getId());
     }
 
     @Override
-    protected void convert(BaseBindingViewHolder helper, SpecialTypeBean.DataBean item) {
-        //itemView 里子控件添加点击事件监听
-        helper.addOnClickListener(R.id.tvSpecialType);
-        ItemSpecialTypeBinding binding = helper.getBinding();
-        binding.setBean(item);
+    public int getItemCount() {
+        return mList.size();
     }
 }

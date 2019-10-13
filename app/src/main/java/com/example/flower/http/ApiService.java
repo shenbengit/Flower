@@ -1,5 +1,6 @@
 package com.example.flower.http;
 
+import com.example.flower.http.bean.ArticleInfoBean;
 import com.example.flower.http.bean.CoverPageBean;
 import com.example.flower.http.bean.DailyDiscoveryBean;
 import com.example.flower.http.bean.HomePageBean;
@@ -38,16 +39,16 @@ public interface ApiService {
     @GET
     Observable<ResponseBody> downloadFile(@Header("Range") String range, @Url String url);
 
-    @GET(value = "cactus/link/getCoverPage")
+    @GET(value = "/cactus/link/getCoverPage")
     Observable<CoverPageBean> getCoverPage();
 
-    @GET(value = "cactus/msg/wallpaper/version")
+    @GET(value = "/cactus/msg/wallpaper/version")
     Observable<WallpaperVersionBean> getWallpaperVersion();
 
-    @GET(value = "cactus/paidArticle/getPaidArticleEveryDayNews")
+    @GET(value = "/cactus/paidArticle/getPaidArticleEveryDayNews")
     Observable<PaidArticleEveryDayNewsBean> getPaidArticleEveryDayNews();
 
-    @GET(value = "cactus/researchCommunity/newestVideoRemind")
+    @GET(value = "/cactus/researchCommunity/newestVideoRemind")
     Observable<NewestVideoRemindBean> getNewestVideoRemind();
 
     /**
@@ -56,7 +57,7 @@ public interface ApiService {
      * @param city 当前定位的城市
      * @return
      */
-    @GET(value = "cactus/communityHomePage/getHomePageForNewVersion")
+    @GET(value = "/cactus/communityHomePage/getHomePageForNewVersion")
     Observable<HomePageBean> getHomePageForNewVersion(@Query("city") String city);
 
     /**
@@ -67,7 +68,7 @@ public interface ApiService {
      * @param token
      * @return
      */
-    @GET(value = "cactus/sysArticle/getRecommendArticleListV2")
+    @GET(value = "/cactus/sysArticle/getRecommendArticleListV2")
     Observable<RecommendedTodayBean> getRecommendedToday(@Query("pageIndex") int pageIndex, @Query("customerId") String customerId, @Query("token") String token);
 
     /**
@@ -78,7 +79,7 @@ public interface ApiService {
      * @param token
      * @return
      */
-    @GET(value = "cactus/article/v2/list")
+    @GET(value = "/cactus/article/v2/list")
     Observable<DailyDiscoveryBean> getDailyDiscovery(@Query("index") int index, @Query("customerId") String customerId, @Query("token") String token);
 
     /**
@@ -88,7 +89,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST(value = "cactus/checkin/today")
+    @POST(value = "/cactus/checkin/today")
     @Headers({"Content-Type:application/x-www-form-urlencoded;charset=UTF-8"})
     Observable<TodayBean> getToday(@Field("customerId") String customerId);
 
@@ -99,17 +100,27 @@ public interface ApiService {
      * @return
      */
 
-    @GET(value = "cactus/sysArticle/getArticleCartList")
+    @GET(value = "/cactus/sysArticle/getArticleCartList")
     Observable<SpecialTypeBean> getSpecialTypeList(@Query("id") String id);
 
     /**
      * 获取专题分类里面的列表
+     *
      * @param id
      * @param pageIndex
      * @param type
      * @return
      */
-    @GET(value = "cactus/sysArticle/getCartArticleList")
+    @GET(value = "/cactus/sysArticle/getCartArticleList")
     Observable<SpecialDetailBean> getSpecialDetail(@Query("id") String id, @Query("pageIndex") int pageIndex, @Query("type") String type);
 
+    /**
+     * 获取详情
+     *
+     * @param uId
+     * @param aId id
+     * @return
+     */
+    @GET(value = "/cactus/sysArticle/getArticleInfo")
+    Observable<ArticleInfoBean> getArticleInfo(@Query("uId") String uId, @Query("aId") String aId);
 }

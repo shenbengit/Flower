@@ -20,9 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.view.activity.SpecialDetailActivity"></activity>
-        <activity android:name=".mvvm.view.activity.ArticleDetailActivity" />
-        <activity android:name=".mvvm.view.activity.TodayActivity" /> <!-- 全面屏 -->
+        <activity
+            android:name=".mvvm.view.activity.VideoActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"/>
+        <!-- 全面屏 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
@@ -46,10 +49,21 @@
         <activity
             android:name=".mvvm.view.activity.MainActivity"
             android:launchMode="singleTask" />
+        <activity android:name=".mvvm.view.activity.SpecialTypeActivity" />
+        <activity
+            android:name=".mvvm.view.activity.ArticleDetailWebActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.TodayActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.DetailWebActivity"
+            android:launchMode="singleTop" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="${applicationId}.BmobContentProvider" />
+            android:authorities="${applicationId}.BmobContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,5 +1,8 @@
 package com.example.flower.http.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -43,7 +46,7 @@ public class SpecialDetailBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
         /**
          * id : 01e30f33-c143-41e9-8255-d228ba8d18a7
          * coverImg : http://static.htxq.net/UploadFiles/2017/11/14/test/20171114223114839.jpg
@@ -135,5 +138,50 @@ public class SpecialDetailBean {
         public void setImageHeight(int imageHeight) {
             this.imageHeight = imageHeight;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.id);
+            dest.writeString(this.coverImg);
+            dest.writeString(this.name);
+            dest.writeInt(this.readCount);
+            dest.writeString(this.cateName);
+            dest.writeString(this.detailUrl);
+            dest.writeByte(this.isVideo ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.imageWidth);
+            dest.writeInt(this.imageHeight);
+        }
+
+        public DataBean() {
+        }
+
+        protected DataBean(Parcel in) {
+            this.id = in.readString();
+            this.coverImg = in.readString();
+            this.name = in.readString();
+            this.readCount = in.readInt();
+            this.cateName = in.readString();
+            this.detailUrl = in.readString();
+            this.isVideo = in.readByte() != 0;
+            this.imageWidth = in.readInt();
+            this.imageHeight = in.readInt();
+        }
+
+        public static final Parcelable.Creator<DataBean> CREATOR = new Parcelable.Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel source) {
+                return new DataBean(source);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
     }
 }

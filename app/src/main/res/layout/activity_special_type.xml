@@ -5,12 +5,15 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.flower.mvvm.viewmodel.SpecialTypeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mvvm.view.activity.ArticleDetailActivity">
+        tools:context=".mvvm.view.activity.SpecialTypeActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,9 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextAppearance="@style/article_detail_toolbar">
-
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextAppearance="@style/article_detail_toolbar" />
 
         <View
             android:id="@+id/view"
@@ -33,14 +34,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <WebView
-            android:id="@+id/webView"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_0"
+            android:layout_height="@dimen/dp_50"
+            android:background="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            app:tabGravity="center"
+            app:tabIndicatorColor="#323232"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="#323232"
+            app:tabTextColor="@color/colorGrey" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view" />
-
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

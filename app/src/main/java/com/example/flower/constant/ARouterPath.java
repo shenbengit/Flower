@@ -12,6 +12,8 @@ public class ARouterPath {
 
     public static final String MAIN_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "MainActivity";
     public static final String TODAY_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "TodayActivity";
-    public static final String ARTICLE_DETAIL_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "ArticleDetailActivity";
-    public static final String SPECIAL_DETAIL_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "SpecialDetailActivity";
+    public static final String ARTICLE_DETAIL_WEB_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "ArticleDetailWebActivity";
+    public static final String SPECIAL_TYPE_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "SpecialTypeActivity";
+    public static final String DETAIL_WEB_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "DetailWebActivity";
+    public static final String VIDEO_ACTIVITY_PATH = BASE_ACTIVITY_PATH + "VideoActivity";
 }

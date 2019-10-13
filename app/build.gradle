@@ -89,4 +89,6 @@ dependencies {
     implementation rootProject.ext.dependencies["refresh-footer-classic"]
     implementation rootProject.ext.dependencies["immersionbar"]
     implementation rootProject.ext.dependencies["immersionbar-components"]
+    implementation rootProject.ext.dependencies["gsyVideoPlayer-java"]
+    implementation rootProject.ext.dependencies["GSYVideoPlayer-exo2"]
 }

@@ -24,6 +24,7 @@ import com.example.flower.base.support.AbstractSupportFragment;
  */
 
 public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseViewModel> extends AbstractSupportFragment {
+    protected final String TAG = getClass().getSimpleName();
 
     protected VDB mBinding;
 

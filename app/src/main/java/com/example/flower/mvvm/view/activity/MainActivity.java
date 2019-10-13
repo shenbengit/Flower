@@ -19,8 +19,13 @@ import com.example.flower.mvvm.view.fragment.SpecialFragment;
 import com.example.flower.mvvm.view.fragment.WallpaperFragment;
 import com.example.flower.mvvm.viewmodel.MainViewModel;
 import com.jakewharton.rxbinding3.widget.RxRadioGroup;
+import com.shuyu.gsyvideoplayer.cache.CacheFactory;
+import com.shuyu.gsyvideoplayer.cache.ProxyCacheManager;
+import com.shuyu.gsyvideoplayer.player.PlayerFactory;
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 
 import me.yokeyword.fragmentation.ISupportFragment;
+import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
 
 @Route(path = ARouterPath.MAIN_ACTIVITY_PATH)
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
@@ -78,5 +83,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                     mFragmentArray.get(R.id.rb04),
                     mFragmentArray.get(R.id.rb05));
         }
+
+        //EXOPlayer内核，支持格式更多
+        PlayerFactory.setPlayManager(Exo2PlayerManager.class);
+        //exo缓存模式，支持m3u8，只支持exo
+        CacheFactory.setCacheManager(ProxyCacheManager.class);
+        //切换渲染模式
+        GSYVideoType.setShowType(GSYVideoType.SCREEN_MATCH_FULL);
+        //切换绘制模式
+        GSYVideoType.setRenderType(GSYVideoType.TEXTURE);
     }
 }

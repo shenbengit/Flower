@@ -1,39 +1,46 @@
-package com.example.flower.mvvm.view.activity;
+package com.example.flower.mvvm.view.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.flower.BR;
 import com.example.flower.R;
-import com.example.flower.base.BaseActivity;
-import com.example.flower.constant.ARouterPath;
-import com.example.flower.databinding.ActivitySpecialDetailBinding;
-import com.example.flower.http.bean.HomePageBean;
-import com.example.flower.mvvm.viewmodel.SpecialDetailViewModel;
+import com.example.flower.base.BaseFragment;
+import com.example.flower.databinding.FragmentSpecialListBinding;
+import com.example.flower.mvvm.viewmodel.SpecialListViewModel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 /**
- * 专题分类详情
+ * 专题列表Fragment
+ *
+ * @author ShenBen
+ * @date 2019/10/13 10:32
+ * @email 714081644@qq.com
  */
-@Route(path = ARouterPath.SPECIAL_DETAIL_ACTIVITY_PATH)
-public class SpecialDetailActivity extends BaseActivity<ActivitySpecialDetailBinding, SpecialDetailViewModel> {
-    public static final String SPECIAL_DETAIL = "SPECIAL_DETAIL";
+public class SpecialListFragment extends BaseFragment<FragmentSpecialListBinding, SpecialListViewModel> {
 
-    private HomePageBean.DataBean.CommunityHomePageSecondPlateViewBean.CategoryForSecondPlateViewsBean mBean;
+    private static final String TYPE_ID = "TYPE_ID";
+    private String mTypeId;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_special_detail;
+    public static SpecialListFragment newInstance(String typeId) {
+        SpecialListFragment fragment = new SpecialListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TYPE_ID, typeId);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
-    protected Class<SpecialDetailViewModel> getModelClass() {
-        return SpecialDetailViewModel.class;
+    protected int getLayoutId() {
+        return R.layout.fragment_special_list;
+    }
+
+    @Override
+    protected Class<SpecialListViewModel> getModelClass() {
+        return SpecialListViewModel.class;
     }
 
     @Override
@@ -44,15 +51,10 @@ public class SpecialDetailActivity extends BaseActivity<ActivitySpecialDetailBin
     @Override
     protected void initView() {
         super.initView();
-        Intent intent = getIntent();
-        if (intent != null) {
-            mBean = intent.getParcelableExtra(SPECIAL_DETAIL);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            mTypeId = bundle.getString(TYPE_ID);
         }
-        if (mBean != null) {
-            mBinding.toolbar.setTitle(mBean.getName());
-        }
-        initToolbar(mBinding.toolbar);
-
         mBinding.srlRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -64,37 +66,38 @@ public class SpecialDetailActivity extends BaseActivity<ActivitySpecialDetailBin
                 mViewModel.getSpecialDetail(false);
             }
         });
+
+        mBinding.rvDetail.setItemAnimator(null);
     }
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         mViewModel.mBaseLiveData.observe(this, s -> {
             switch (s) {
-                case SpecialDetailViewModel.REFRESH_SUCCESS:
+                case SpecialListViewModel.REFRESH_SUCCESS:
                     mBinding.srlRefresh.finishRefresh(true);
                     break;
-                case SpecialDetailViewModel.REFRESH_FAIL:
+                case SpecialListViewModel.REFRESH_FAIL:
                     mBinding.srlRefresh.finishRefresh(false);
                     break;
-                case SpecialDetailViewModel.LOAD_MORE_SUCCESS:
+                case SpecialListViewModel.LOAD_MORE_SUCCESS:
                     mBinding.srlRefresh.finishLoadMore(true);
                     break;
-                case SpecialDetailViewModel.LOAD_MORE_FAIL:
+                case SpecialListViewModel.LOAD_MORE_FAIL:
                     mBinding.srlRefresh.finishLoadMore(false);
                     break;
-                case SpecialDetailViewModel.LOAD_MORE_COMPLETE:
+                case SpecialListViewModel.LOAD_MORE_COMPLETE:
                     mBinding.srlRefresh.finishLoadMoreWithNoMoreData();
                     break;
-                case SpecialDetailViewModel.RESET_NO_MORE_DATA:
+                case SpecialListViewModel.RESET_NO_MORE_DATA:
                     mBinding.srlRefresh.resetNoMoreData();
                     break;
                 default:
                     break;
             }
         });
-        if (mBean != null) {
-            mViewModel.getSpecialTypeList(mBean.getId());
-        }
 
+        mViewModel.setSpecialTypeId(mTypeId);
+        mViewModel.getSpecialDetail(false);
     }
 }

@@ -12,19 +12,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingConversion;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.flower.GlideApp;
 import com.example.flower.binding.command.BindingCommand;
-import com.example.flower.mvvm.view.adapter.base.BaseBindingAdapter;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.jakewharton.rxbinding3.widget.RxCompoundButton;
 import com.jakewharton.rxbinding3.widget.RxRadioGroup;
 import com.jakewharton.rxbinding3.widget.RxTextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -238,7 +243,7 @@ public class DataBindingAdapter {
      * @param itemDecoration ItemDecoration
      */
     @BindingAdapter(value = {"bindRecyclerViewLayoutManager", "bindRecyclerViewAdapter", "addRecyclerViewItemDecoration"}, requireAll = false)
-    public static void bindRecyclerView(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, BaseBindingAdapter adapter, RecyclerView.ItemDecoration itemDecoration) {
+    public static void bindRecyclerView(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, BaseQuickAdapter adapter, RecyclerView.ItemDecoration itemDecoration) {
         if (layoutManager != null) {
             recyclerView.setLayoutManager(layoutManager);
         }
@@ -255,4 +260,19 @@ public class DataBindingAdapter {
         recyclerView.smoothScrollToPosition(position);
     }
 
+    @BindingAdapter(value = {"bindViewPager2Adapter"})
+    public static void bindViewPager2(ViewPager2 viewPager2, RecyclerView.Adapter adapter) {
+        if (adapter != null) {
+            viewPager2.setAdapter(adapter);
+        }
+    }
+
+    @BindingConversion
+    public static String convertDate(long date) {
+        if (date <= 0) {
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        return sdf.format(new Date(date));
+    }
 }

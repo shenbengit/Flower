@@ -70,6 +70,9 @@ ext {
             "refresh-footer-classic"         : "com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1",
             //透明状态栏基础依赖包，必须要依赖
             "immersionbar"                   : "com.gyf.immersionbar:immersionbar:3.0.0",
-            "immersionbar-components"        : "com.gyf.immersionbar:immersionbar-components:3.0.0"
+            "immersionbar-components"        : "com.gyf.immersionbar:immersionbar-components:3.0.0",
+            //gsyVideoPlayer 播放器
+            "gsyVideoPlayer-java"            : "com.shuyu:gsyVideoPlayer-java:7.1.1",
+            "GSYVideoPlayer-exo2"            : "com.shuyu:GSYVideoPlayer-exo2:7.1.1",
     ]
 }

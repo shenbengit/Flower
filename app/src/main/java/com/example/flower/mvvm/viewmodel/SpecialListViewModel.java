@@ -6,28 +6,26 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.R;
 import com.example.flower.base.BaseViewModel;
+import com.example.flower.constant.ARouterPath;
 import com.example.flower.http.bean.SpecialDetailBean;
 import com.example.flower.mvvm.model.SpecialDetailModel;
+import com.example.flower.mvvm.view.activity.DetailWebActivity;
 import com.example.flower.mvvm.view.adapter.SpecialDetailAdapter;
-import com.example.flower.mvvm.view.adapter.SpecialTypeAdapter;
-import com.example.flower.util.ToastUtil;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author ShenBen
  * @date 2019/10/7 14:46
  * @email 714081644@qq.com
  */
-public class SpecialDetailViewModel extends BaseViewModel<SpecialDetailModel> {
+public class SpecialListViewModel extends BaseViewModel<SpecialDetailModel> {
 
     /**
      * 下拉刷新成功
@@ -37,6 +35,10 @@ public class SpecialDetailViewModel extends BaseViewModel<SpecialDetailModel> {
      * 下拉刷新失败
      */
     public static final String REFRESH_FAIL = "REFRESH_FAIL";
+    /**
+     * 下拉刷新 无数据
+     */
+    public static final String REFRESH_NO_DATA = "REFRESH__NO_DATA";
     /**
      * 上拉加载成功
      */
@@ -53,57 +55,22 @@ public class SpecialDetailViewModel extends BaseViewModel<SpecialDetailModel> {
      * 重置没有更多数据的状态
      */
     public static final String RESET_NO_MORE_DATA = "RESET_NO_MORE_DATA";
-
     /**
-     * 分类相关
+     * 专题类型的ID
      */
-    public SpecialTypeAdapter mSpecialTypeAdapter;
-    public LinearLayoutManager mSpecialTypeLayoutManager;
-    public RecyclerView.ItemDecoration mSpecialTypeItemDecoration;
-    private int mSpecialTypeCheckedPosition = 0;
     private String mSpecialTypeId;
+
 
     private int mSpecialDetailPageIndex = -1;
     public SpecialDetailAdapter mSpecialDetailAdapter;
     public StaggeredGridLayoutManager mSpecialDetailLayoutManager;
     public RecyclerView.ItemDecoration mSpecialDetailItemDecoration;
 
-    public SpecialDetailViewModel(@NonNull Application application) {
+    public SpecialListViewModel(@NonNull Application application) {
         super(application, new SpecialDetailModel());
-        mSpecialTypeAdapter = new SpecialTypeAdapter();
-        mSpecialTypeLayoutManager = new LinearLayoutManager(application, LinearLayoutManager.HORIZONTAL, false);
-        mSpecialTypeItemDecoration = new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                int left;
-                int right;
-                left = right = (int) getApplication().getResources().getDimension(R.dimen.dp_15);
-                outRect.set(left, 0, right, 0);
-            }
-        };
-        mSpecialTypeAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            switch (view.getId()) {
-                case R.id.tvSpecialType:
-                    if (mSpecialTypeCheckedPosition == position) {
-                        return;
-                    }
-                    Objects.requireNonNull(mSpecialTypeAdapter.getItem(mSpecialTypeCheckedPosition)).setChecked(false);
-                    mSpecialTypeAdapter.notifyItemChanged(mSpecialTypeCheckedPosition, "unchecked");
-                    Objects.requireNonNull(mSpecialTypeAdapter.getItem(position)).setChecked(true);
-                    mSpecialTypeAdapter.notifyItemChanged(position, "checked");
-                    mSpecialTypeCheckedPosition = position;
-
-                    mSpecialTypeId = mSpecialTypeAdapter.getItem(mSpecialTypeCheckedPosition).getId();
-                    getSpecialDetail(false);
-                    break;
-                default:
-                    break;
-            }
-        });
-
-
         mSpecialDetailAdapter = new SpecialDetailAdapter();
         mSpecialDetailLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mSpecialDetailLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mSpecialDetailItemDecoration = new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -112,26 +79,14 @@ public class SpecialDetailViewModel extends BaseViewModel<SpecialDetailModel> {
             }
         };
 
-        mSpecialDetailAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtil.show(getApplication(), "点击详情列表，position：" + position);
-            }
-        });
+        mSpecialDetailAdapter.setOnItemClickListener((adapter, view, position) -> ARouter.getInstance()
+                .build(ARouterPath.DETAIL_WEB_ACTIVITY_PATH)
+                .withParcelable(DetailWebActivity.DETAIL_BEAN, mSpecialDetailAdapter.getItem(position))
+                .navigation());
     }
 
-    public void getSpecialTypeList(String id) {
-        mSpecialTypeCheckedPosition = 0;
-
-        mModel.getSpecialTypeList(id, bean -> {
-            if (bean.getData() != null && !bean.getData().isEmpty()) {
-                bean.getData().get(mSpecialTypeCheckedPosition).setChecked(true);
-                mSpecialTypeAdapter.setNewData(bean.getData());
-
-                mSpecialTypeId = bean.getData().get(mSpecialTypeCheckedPosition).getId();
-                getSpecialDetail(false);
-            }
-        }, null);
+    public void setSpecialTypeId(String specialTypeId) {
+        mSpecialTypeId = specialTypeId;
     }
 
     public void getSpecialDetail(boolean isLoadMore) {
@@ -155,8 +110,8 @@ public class SpecialDetailViewModel extends BaseViewModel<SpecialDetailModel> {
                     //如果是下拉刷新
                     //则说明没有数据
                     mBaseLiveData.setValue(REFRESH_SUCCESS);
-                    mSpecialDetailAdapter.setNewData(null);
-                    ToastUtil.show(getApplication(), "没有数据");
+                    //RecyclerView设置空布局
+                    mSpecialDetailAdapter.setEmptyView(R.layout.layout_no_data);
                 }
                 return;
             }

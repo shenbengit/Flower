@@ -18,8 +18,8 @@ import com.example.flower.constant.ARouterPath;
 import com.example.flower.http.bean.DailyDiscoveryBean;
 import com.example.flower.http.bean.HomePageBean;
 import com.example.flower.mvvm.model.SpecialModel;
-import com.example.flower.mvvm.view.activity.ArticleDetailActivity;
-import com.example.flower.mvvm.view.activity.SpecialDetailActivity;
+import com.example.flower.mvvm.view.activity.ArticleDetailWebActivity;
+import com.example.flower.mvvm.view.activity.SpecialTypeActivity;
 import com.example.flower.mvvm.view.adapter.ArticleAdapter;
 import com.example.flower.mvvm.view.adapter.DailyDiscoveryAdapter;
 import com.example.flower.mvvm.view.adapter.SpecialAdapter;
@@ -97,8 +97,8 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
         mArticleAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomePageBean.DataBean.CommunityHomePageFirstPlateViewBean.ArticleForFirstPlateViewsBean bean = mArticleAdapter.getItem(position);
             ARouter.getInstance()
-                    .build(ARouterPath.ARTICLE_DETAIL_ACTIVITY_PATH)
-                    .withParcelable(ArticleDetailActivity.ARTICLE_DETAIL, bean)
+                    .build(ARouterPath.ARTICLE_DETAIL_WEB_ACTIVITY_PATH)
+                    .withParcelable(ArticleDetailWebActivity.ARTICLE_DETAIL, bean)
                     .navigation();
         });
         mArticleItemDecoration = new RecyclerView.ItemDecoration() {
@@ -114,8 +114,8 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
         mSpecialAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomePageBean.DataBean.CommunityHomePageSecondPlateViewBean.CategoryForSecondPlateViewsBean item = mSpecialAdapter.getItem(position);
             ARouter.getInstance()
-                    .build(ARouterPath.SPECIAL_DETAIL_ACTIVITY_PATH)
-                    .withParcelable(SpecialDetailActivity.SPECIAL_DETAIL, item)
+                    .build(ARouterPath.SPECIAL_TYPE_ACTIVITY_PATH)
+                    .withParcelable(SpecialTypeActivity.SPECIAL_DETAIL, item)
                     .navigation();
         });
         mSpecialItemDecoration = new RecyclerView.ItemDecoration() {

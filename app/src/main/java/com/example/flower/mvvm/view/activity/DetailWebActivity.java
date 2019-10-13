@@ -1,6 +1,5 @@
 package com.example.flower.mvvm.view.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -10,53 +9,54 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.library.baseAdapters.BR;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.flower.R;
 import com.example.flower.base.BaseActivity;
-import com.example.flower.base.BaseViewModel;
 import com.example.flower.constant.ARouterPath;
 import com.example.flower.constant.Constant;
-import com.example.flower.databinding.ActivityArticleDetailBinding;
-import com.example.flower.http.bean.HomePageBean;
-import com.example.flower.util.LogUtil;
+import com.example.flower.databinding.ActivityDetailWebBinding;
+import com.example.flower.http.bean.SpecialDetailBean;
+import com.example.flower.mvvm.viewmodel.DetailWebViewModel;
 
-@Route(path = ARouterPath.ARTICLE_DETAIL_ACTIVITY_PATH)
-public class ArticleDetailActivity extends BaseActivity<ActivityArticleDetailBinding, BaseViewModel> {
+/**
+ * 网页详情Activity，包括专题详情，推荐详情
+ */
+@Route(path = ARouterPath.DETAIL_WEB_ACTIVITY_PATH)
+public class DetailWebActivity extends BaseActivity<ActivityDetailWebBinding, DetailWebViewModel> {
 
-    public static final String ARTICLE_DETAIL = "ARTICLE_DETAIL";
-    private HomePageBean.DataBean.CommunityHomePageFirstPlateViewBean.ArticleForFirstPlateViewsBean mBean;
-
+    public static final String DETAIL_BEAN = "DETAIL_BEAN";
+    private SpecialDetailBean.DataBean mBean;
     private WebView webView;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_article_detail;
+        return R.layout.activity_detail_web;
     }
 
     @Override
-    protected Class<BaseViewModel> getModelClass() {
-        return BaseViewModel.class;
+    protected Class<DetailWebViewModel> getModelClass() {
+        return DetailWebViewModel.class;
     }
 
     @Override
     protected int getVariableId() {
-        return 0;
+        return BR.viewModel;
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void initView() {
         super.initView();
-        webView = mBinding.webView;
         Intent intent = getIntent();
         if (intent != null) {
-            mBean = intent.getParcelableExtra(ARTICLE_DETAIL);
+            mBean = intent.getParcelableExtra(DETAIL_BEAN);
         }
         if (mBean != null) {
-            mBinding.toolbar.setTitle(mBean.getCnName());
+            mBinding.toolbar.setTitle(mBean.getName());
         }
         initToolbar(mBinding.toolbar);
+        webView=mBinding.webView;
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置自适应屏幕，两者合用
@@ -85,11 +85,10 @@ public class ArticleDetailActivity extends BaseActivity<ActivityArticleDetailBin
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         if (mBean != null) {
-            LogUtil.i("网址: " + Constant.BASE_URL + mBean.getDetailUrl());
+            mViewModel.getArticleInfo("", mBean.getId());
             webView.loadUrl(Constant.BASE_URL + mBean.getDetailUrl());
         }
     }
-
 
     @Override
     protected void onResume() {
