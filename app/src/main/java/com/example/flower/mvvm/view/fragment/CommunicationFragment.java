@@ -19,7 +19,7 @@ import com.example.flower.mvvm.viewmodel.CommunicationViewModel;
  */
 public class CommunicationFragment extends BaseFragment<FragmentCommunicationBinding, CommunicationViewModel> {
 
-    public static CommunicationFragment getInstance() {
+    public static CommunicationFragment newInstance() {
         return new CommunicationFragment();
     }
 

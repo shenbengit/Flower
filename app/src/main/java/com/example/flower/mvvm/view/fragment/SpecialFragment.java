@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.example.flower.BR;
 import com.example.flower.R;
 import com.example.flower.base.BaseFragment;
+import com.example.flower.constant.Constant;
 import com.example.flower.databinding.FragmentSpecialBinding;
 import com.example.flower.mvvm.viewmodel.SpecialViewModel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -22,7 +23,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
  */
 public class SpecialFragment extends BaseFragment<FragmentSpecialBinding, SpecialViewModel> {
 
-    public static SpecialFragment getInstance() {
+    public static SpecialFragment newInstance() {
         return new SpecialFragment();
     }
 
@@ -47,7 +48,7 @@ public class SpecialFragment extends BaseFragment<FragmentSpecialBinding, Specia
         mBinding.srlRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mViewModel.getRecommendedToday(true);
+                mViewModel.getDailyDiscovery(true);
             }
 
             @Override
@@ -62,20 +63,23 @@ public class SpecialFragment extends BaseFragment<FragmentSpecialBinding, Specia
     protected void initData(@Nullable Bundle savedInstanceState) {
         mViewModel.mBaseLiveData.observe(this, s -> {
             switch (s) {
-                case SpecialViewModel.REFRESH_SUCCESS:
+                case Constant.REFRESH_SUCCESS:
                     mBinding.srlRefresh.finishRefresh(true);
                     break;
-                case SpecialViewModel.REFRESH_FAIL:
+                case Constant.REFRESH_FAIL:
                     mBinding.srlRefresh.finishRefresh(false);
                     break;
-                case SpecialViewModel.LOAD_MORE_SUCCESS:
+                case Constant.LOAD_MORE_SUCCESS:
                     mBinding.srlRefresh.finishLoadMore(true);
                     break;
-                case SpecialViewModel.LOAD_MORE_FAIL:
+                case Constant.LOAD_MORE_FAIL:
                     mBinding.srlRefresh.finishLoadMore(false);
                     break;
-                case SpecialViewModel.LOAD_MORE_COMPLETE:
+                case Constant.LOAD_MORE_COMPLETE:
                     mBinding.srlRefresh.finishLoadMoreWithNoMoreData();
+                    break;
+                case Constant.RESET_NO_MORE_DATA:
+                    mBinding.srlRefresh.resetNoMoreData();
                     break;
                 default:
                     break;

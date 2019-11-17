@@ -13,33 +13,28 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.flower.R;
 import com.example.flower.base.BaseViewModel;
 import com.example.flower.constant.Constant;
-import com.example.flower.http.bean.WallpaperBean;
-import com.example.flower.mvvm.model.WallpaperModel;
-import com.example.flower.mvvm.view.adapter.WallpaperAdapter;
+import com.example.flower.http.bean.PlantsTypeBean;
+import com.example.flower.mvvm.model.KnowPlantsModel;
+import com.example.flower.mvvm.view.adapter.PlantsTypeAdapter;
 
 import java.util.List;
 
-/**
- * @author ShenBen
- * @date 2019/9/22 13:46
- * @email 714081644@qq.com
- */
-public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
+public class KnowPlantsViewModel extends BaseViewModel<KnowPlantsModel> {
 
-    public WallpaperAdapter mWallpaperAdapter;
-    public RecyclerView.ItemDecoration mWallpaperItemDecoration;
+    public PlantsTypeAdapter mPlantsTypeAdapter;
+    public RecyclerView.ItemDecoration mPlantsTypeItemDecoration;
     private int mPageIndex = -1;
 
-    public WallpaperViewModel(@NonNull Application application) {
-        super(application, new WallpaperModel());
-        mWallpaperAdapter = new WallpaperAdapter();
-        mWallpaperAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+    public KnowPlantsViewModel(@NonNull Application application) {
+        super(application, new KnowPlantsModel());
+        mPlantsTypeAdapter = new PlantsTypeAdapter();
+        mPlantsTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
             }
         });
-        mWallpaperItemDecoration = new RecyclerView.ItemDecoration() {
+        mPlantsTypeItemDecoration = new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
@@ -52,9 +47,9 @@ public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
                     int spanCount = gridLayoutManager.getSpanCount();
                     //当前view的position
                     int position = parent.getChildLayoutPosition(view);
+
                     //实际位置+1，position是下标
                     ++position;
-
                     int column = (position) % spanCount;
                     if (column == 1) {
                         //在第一列
@@ -67,24 +62,25 @@ public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
                         outRect.set(dimension_5, dimension_5, dimension_5, dimension_5);
                     }
                 }
+
             }
         };
     }
 
-    public void getWallpaper(boolean isLoadMore) {
+    public void getPlantsType(boolean isLoadMore) {
         if (!isLoadMore) {
             mBaseLiveData.setValue(Constant.RESET_NO_MORE_DATA);
             mPageIndex = -1;
         }
         ++mPageIndex;
-        mModel.getWallpaper(mPageIndex, wallpaperBean -> {
-            if (TextUtils.equals(Constant.RESULT_OK, wallpaperBean.getCode())) {
-                List<WallpaperBean.DataBean> data = wallpaperBean.getData();
+        mModel.getPlantsType(mPageIndex, plantsTypeBean -> {
+            if (TextUtils.equals(Constant.RESULT_OK, plantsTypeBean.getCode())) {
+                List<PlantsTypeBean.DataBean> data = plantsTypeBean.getData();
                 //如果数据为空
                 if (data == null || data.isEmpty()) {
                     if (!isLoadMore) {
                         //RecyclerView设置空布局
-                        mWallpaperAdapter.setEmptyView(R.layout.layout_no_data);
+                        mPlantsTypeAdapter.setEmptyView(R.layout.layout_no_data);
                         //如果是下拉刷新
                         //则说明没有数据
                         mBaseLiveData.setValue(Constant.REFRESH_SUCCESS);
@@ -96,11 +92,11 @@ public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
                 //数据不为空的情况
                 if (isLoadMore) {
                     //上拉加载数据成功
-                    mWallpaperAdapter.addData(data);
+                    mPlantsTypeAdapter.addData(data);
                     mBaseLiveData.setValue(Constant.LOAD_MORE_SUCCESS);
                 } else {
                     //下拉刷新数据成功
-                    mWallpaperAdapter.setNewData(data);
+                    mPlantsTypeAdapter.setNewData(data);
                     mBaseLiveData.setValue(Constant.REFRESH_SUCCESS);
                 }
             } else {

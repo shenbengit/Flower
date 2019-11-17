@@ -15,7 +15,9 @@
 
         <ImageView
             android:id="@+id/iv"
+            errorImageRes="@{@drawable/grey_bg}"
             imageObject="@{bean.coverImage}"
+            placeholderImageRes="@{@drawable/grey_bg}"
             roundingRadius="@{(int)@dimen/dp_15}"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -92,8 +94,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginEnd="@dimen/dp_20"
-            android:maxLines="3"
             android:ellipsize="end"
+            android:maxLines="3"
             android:text="@{bean.intro}"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"

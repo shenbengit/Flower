@@ -3,6 +3,7 @@ package com.example.flower.mvvm.view.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Window;
 
 import androidx.annotation.Nullable;
 
@@ -14,9 +15,9 @@ import com.example.flower.constant.ARouterPath;
 import com.example.flower.databinding.ActivityMainBinding;
 import com.example.flower.mvvm.view.fragment.CollegeFragment;
 import com.example.flower.mvvm.view.fragment.CommunicationFragment;
+import com.example.flower.mvvm.view.fragment.FindFragment;
 import com.example.flower.mvvm.view.fragment.MineFragment;
 import com.example.flower.mvvm.view.fragment.SpecialFragment;
-import com.example.flower.mvvm.view.fragment.WallpaperFragment;
 import com.example.flower.mvvm.viewmodel.MainViewModel;
 import com.jakewharton.rxbinding3.widget.RxRadioGroup;
 import com.shuyu.gsyvideoplayer.cache.CacheFactory;
@@ -32,6 +33,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     private final SparseArray<ISupportFragment> mFragmentArray = new SparseArray<>(5);
     private int mLastCheckId;
+
+    @Override
+    protected void beforeSetContentView() {
+        super.beforeSetContentView();
+        requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -67,11 +74,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-        mFragmentArray.put(R.id.rb01, SpecialFragment.getInstance());
-        mFragmentArray.put(R.id.rb02, WallpaperFragment.getInstance());
-        mFragmentArray.put(R.id.rb03, CommunicationFragment.getInstance());
-        mFragmentArray.put(R.id.rb04, CollegeFragment.getInstance());
-        mFragmentArray.put(R.id.rb05, MineFragment.getInstance());
+        mFragmentArray.put(R.id.rb01, SpecialFragment.newInstance());
+        mFragmentArray.put(R.id.rb02, FindFragment.newInstance());
+        mFragmentArray.put(R.id.rb03, CommunicationFragment.newInstance());
+        mFragmentArray.put(R.id.rb04, CollegeFragment.newInstance());
+        mFragmentArray.put(R.id.rb05, MineFragment.newInstance());
 
         ISupportFragment firstFragment = findFragment(SpecialFragment.class);
         if (firstFragment == null) {

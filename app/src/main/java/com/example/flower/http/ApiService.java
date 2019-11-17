@@ -3,13 +3,16 @@ package com.example.flower.http;
 import com.example.flower.http.bean.ArticleInfoBean;
 import com.example.flower.http.bean.CoverPageBean;
 import com.example.flower.http.bean.DailyDiscoveryBean;
+import com.example.flower.http.bean.DailyDiscoveryDetailBean;
 import com.example.flower.http.bean.HomePageBean;
+import com.example.flower.http.bean.PlantsTypeBean;
 import com.example.flower.http.bean.NewestVideoRemindBean;
 import com.example.flower.http.bean.PaidArticleEveryDayNewsBean;
 import com.example.flower.http.bean.RecommendedTodayBean;
 import com.example.flower.http.bean.SpecialDetailBean;
 import com.example.flower.http.bean.SpecialTypeBean;
 import com.example.flower.http.bean.TodayBean;
+import com.example.flower.http.bean.WallpaperBean;
 import com.example.flower.http.bean.WallpaperVersionBean;
 
 import io.reactivex.Observable;
@@ -112,7 +115,7 @@ public interface ApiService {
      * @return
      */
     @GET(value = "/cactus/sysArticle/getCartArticleList")
-    Observable<SpecialDetailBean> getSpecialDetail(@Query("id") String id, @Query("pageIndex") int pageIndex, @Query("type") String type);
+    Observable<SpecialDetailBean> getSpecialList(@Query("id") String id, @Query("pageIndex") int pageIndex, @Query("type") String type);
 
     /**
      * 获取详情
@@ -123,4 +126,39 @@ public interface ApiService {
      */
     @GET(value = "/cactus/sysArticle/getArticleInfo")
     Observable<ArticleInfoBean> getArticleInfo(@Query("uId") String uId, @Query("aId") String aId);
+
+    /**
+     * 每日发现详情
+     *
+     * @param id
+     * @param customerId
+     * @param token
+     * @return
+     */
+    @GET(value = "/cactus/article/v2/detail")
+    Observable<DailyDiscoveryDetailBean> getDailyDiscoveryDetail(@Query("id") String id, @Query("customerId") String customerId, @Query("token") String token);
+
+    /**
+     * 认识植物
+     *
+     * @param index      分页标志
+     * @param customerId
+     * @param token
+     * @return
+     */
+    @GET(value = "/cactus/flower/index")
+    Observable<PlantsTypeBean> getPlantsType(@Query("index") int index, @Query("customerId") String customerId, @Query("token") String token);
+
+    /**
+     * 获取壁纸信息
+     *
+     * @param index      分页标志
+     * @param type
+     * @param scale
+     * @param customerId
+     * @param token
+     * @return
+     */
+    @GET(value = "/cactus/wallpaper/v2/index")
+    Observable<WallpaperBean> getWallpaper(@Query("index") int index, @Query("type") String type, @Query("scale") String scale, @Query("customerId") String customerId, @Query("token") String token);
 }

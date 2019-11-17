@@ -15,7 +15,7 @@ import io.reactivex.functions.Consumer;
  * @date 2019/10/7 14:46
  * @email 714081644@qq.com
  */
-public class SpecialDetailModel extends BaseModel {
+public class SpecialListModel extends BaseModel {
 
     public void getSpecialTypeList(String id, Consumer<SpecialTypeBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient.getInstance()
@@ -59,10 +59,10 @@ public class SpecialDetailModel extends BaseModel {
     }
 
 
-    public void getSpecialDetail(String id, int pageIndex, String type, Consumer<SpecialDetailBean> onNext, Consumer<Throwable> onError) {
+    public void getSpecialList(String id, int pageIndex, String type, Consumer<SpecialDetailBean> onNext, Consumer<Throwable> onError) {
         RetrofitClient.getInstance()
                 .getApiService()
-                .getSpecialDetail(id, pageIndex, type)
+                .getSpecialList(id, pageIndex, type)
                 .compose(RxUtil.io_main())
                 .compose(RxUtil.bindToLifecycle(mLifecycleProvider))
                 .subscribe(new Observer<SpecialDetailBean>() {

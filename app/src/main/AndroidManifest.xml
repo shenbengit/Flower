@@ -20,12 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".mvvm.view.activity.DailyDiscoveryDetailActivity" />
         <activity
             android:name=".mvvm.view.activity.VideoActivity"
-            android:hardwareAccelerated="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="landscape"/>
-        <!-- 全面屏 -->
+            android:hardwareAccelerated="true"
+            android:screenOrientation="landscape" /> <!-- 全面屏 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->

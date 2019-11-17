@@ -19,7 +19,7 @@ import com.example.flower.mvvm.viewmodel.MineViewModel;
  */
 public class MineFragment extends BaseFragment<FragmentMineBinding, MineViewModel> {
 
-    public static MineFragment getInstance() {
+    public static MineFragment newInstance() {
         return new MineFragment();
     }
 

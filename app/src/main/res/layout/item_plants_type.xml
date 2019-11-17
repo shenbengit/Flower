@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.flower.http.bean.PlantsTypeBean.DataBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_185"
+        android:background="@drawable/round_white_bg">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{bean.title}"
+            android:textColor="#3D3D3D"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/ivPicture1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <ImageView
+            android:id="@+id/ivPicture1"
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{bean.picture1Url}"
+            placeholderImageRes="@{@drawable/grey_bg}"
+            roundingRadius="@{(int)@dimen/dp_5}"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_140"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivPicture2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <ImageView
+            android:id="@+id/ivPicture2"
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{bean.picture2Url}"
+            placeholderImageRes="@{@drawable/grey_bg}"
+            roundingRadius="@{(int)@dimen/dp_5}"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_65"
+            android:layout_marginStart="@dimen/dp_5"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/ivPicture3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPicture1"
+            app:layout_constraintTop_toTopOf="@id/ivPicture1"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <ImageView
+            android:id="@+id/ivPicture3"
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{bean.picture3Url}"
+            placeholderImageRes="@{@drawable/grey_bg}"
+            roundingRadius="@{(int)@dimen/dp_5}"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_65"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/ivPicture1"
+            app:layout_constraintStart_toStartOf="@id/ivPicture2"
+            app:layout_constraintTop_toBottomOf="@id/ivPicture2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,6 +3,7 @@ package com.example.flower.mvvm.view.adapter.base;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -26,11 +27,11 @@ public abstract class BaseBindingAdapter<T> extends BaseQuickAdapter<T, BaseBind
         this(0, data);
     }
 
-    public BaseBindingAdapter(int layoutResId) {
+    public BaseBindingAdapter(@LayoutRes int layoutResId) {
         this(layoutResId, null);
     }
 
-    public BaseBindingAdapter(int layoutResId, @Nullable List<T> data) {
+    public BaseBindingAdapter(@LayoutRes int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);
     }
 

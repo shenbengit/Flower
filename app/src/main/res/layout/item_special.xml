@@ -14,7 +14,9 @@
         android:layout_height="@dimen/dp_90">
 
         <ImageView
+            errorImageRes="@{@drawable/grey_bg}"
             imageObject="@{bean.img}"
+            placeholderImageRes="@{@drawable/grey_bg}"
             roundingRadius="@{(int)@dimen/dp_10}"
             android:layout_width="0dp"
             android:layout_height="0dp"

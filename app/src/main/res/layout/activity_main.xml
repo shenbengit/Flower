@@ -59,7 +59,7 @@
                 android:drawableTop="@drawable/bottom_menu_02"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
-                android:text="壁纸"
+                android:text="发现"
                 android:textColor="@drawable/bottom_menu_text"
                 android:textSize="@dimen/sp_12" />
 

@@ -44,8 +44,7 @@
                         onClickCommand="@{viewModel.playVideoCommand}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:visibility="@{viewModel.articleInfo.video ? View.VISIBLE : View.INVISIBLE}" />
+                        android:scaleType="fitXY"/>
 
                     <ImageView
                         android:layout_width="wrap_content"

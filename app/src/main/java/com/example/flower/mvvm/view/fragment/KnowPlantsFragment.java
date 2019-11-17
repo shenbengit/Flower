@@ -9,39 +9,28 @@ import com.example.flower.BR;
 import com.example.flower.R;
 import com.example.flower.base.BaseFragment;
 import com.example.flower.constant.Constant;
-import com.example.flower.databinding.FragmentSpecialListBinding;
-import com.example.flower.mvvm.viewmodel.SpecialListViewModel;
+import com.example.flower.databinding.FragmentKnowPlantsBinding;
+import com.example.flower.mvvm.viewmodel.KnowPlantsViewModel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 /**
- * 专题列表Fragment
- *
- * @author ShenBen
- * @date 2019/10/13 10:32
- * @email 714081644@qq.com
+ * 认识植物Fragment
  */
-public class SpecialListFragment extends BaseFragment<FragmentSpecialListBinding, SpecialListViewModel> {
+public class KnowPlantsFragment extends BaseFragment<FragmentKnowPlantsBinding, KnowPlantsViewModel> {
 
-    private static final String TYPE_ID = "TYPE_ID";
-    private String mTypeId;
-
-    public static SpecialListFragment newInstance(String typeId) {
-        SpecialListFragment fragment = new SpecialListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(TYPE_ID, typeId);
-        fragment.setArguments(bundle);
-        return fragment;
+    public static KnowPlantsFragment newInstance() {
+        return new KnowPlantsFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_special_list;
+        return R.layout.fragment_know_plants;
     }
 
     @Override
-    protected Class<SpecialListViewModel> getModelClass() {
-        return SpecialListViewModel.class;
+    protected Class<KnowPlantsViewModel> getModelClass() {
+        return KnowPlantsViewModel.class;
     }
 
     @Override
@@ -52,27 +41,22 @@ public class SpecialListFragment extends BaseFragment<FragmentSpecialListBinding
     @Override
     protected void initView() {
         super.initView();
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            mTypeId = bundle.getString(TYPE_ID);
-        }
         mBinding.srlRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mViewModel.getSpecialList(true);
+                mViewModel.getPlantsType(true);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mViewModel.getSpecialList(false);
+                mViewModel.getPlantsType(false);
             }
         });
-
-        mBinding.rvDetail.setItemAnimator(null);
     }
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
+        mViewModel.getPlantsType(false);
         mViewModel.mBaseLiveData.observe(this, s -> {
             switch (s) {
                 case Constant.REFRESH_SUCCESS:
@@ -97,8 +81,6 @@ public class SpecialListFragment extends BaseFragment<FragmentSpecialListBinding
                     break;
             }
         });
-
-        mViewModel.setSpecialTypeId(mTypeId);
-        mViewModel.getSpecialList(false);
     }
+
 }

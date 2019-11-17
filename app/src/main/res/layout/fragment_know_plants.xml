@@ -7,13 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.flower.mvvm.viewmodel.WallpaperViewModel" />
+            type="com.example.flower.mvvm.viewmodel.KnowPlantsViewModel" />
     </data>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/srlRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".mvvm.view.fragment.KnowPlantsFragment">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
@@ -23,13 +24,13 @@
             app:srlPrimaryColor="@color/colorDarkGrey" />
 
         <androidx.recyclerview.widget.RecyclerView
-            addRecyclerViewItemDecoration="@{viewModel.mWallpaperItemDecoration}"
-            bindRecyclerViewAdapter="@{viewModel.mWallpaperAdapter}"
+            addRecyclerViewItemDecoration="@{viewModel.mPlantsTypeItemDecoration}"
+            bindRecyclerViewAdapter="@{viewModel.mPlantsTypeAdapter}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3" />
+            app:spanCount="2" />
 
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"

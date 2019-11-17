@@ -19,7 +19,9 @@ public class DailyDiscoveryAdapter extends BaseBindingAdapter<DailyDiscoveryBean
 
     @Override
     protected void convert(BaseBindingViewHolder helper, DailyDiscoveryBean.DataBean item) {
+        helper.addOnClickListener(R.id.iv);
         ItemDailyDiscoveryBinding binding = helper.getBinding();
         binding.setBean(item);
     }
+
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.flower.http.bean.WallpaperBean.DataBean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150">
+
+        <ImageView
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{bean.snapImg}"
+            placeholderImageRes="@{@drawable/grey_bg}"
+            roundingRadius="@{(int)@dimen/dp_5}"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="fitXY">
+
+        </ImageView>
+    </FrameLayout>
+</layout>

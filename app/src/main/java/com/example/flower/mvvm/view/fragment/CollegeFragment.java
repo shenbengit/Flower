@@ -19,7 +19,7 @@ import com.example.flower.mvvm.viewmodel.CollegeViewModel;
  */
 public class CollegeFragment extends BaseFragment<FragmentCollegeBinding, CollegeViewModel> {
 
-    public static CollegeFragment getInstance() {
+    public static CollegeFragment newInstance() {
         return new CollegeFragment();
     }
 

@@ -41,13 +41,13 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init();
         initView();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        init();
         initData(savedInstanceState);
     }
 

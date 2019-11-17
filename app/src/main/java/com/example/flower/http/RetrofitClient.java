@@ -50,7 +50,7 @@ public class RetrofitClient {
                     .addHeader("client-platform", SystemUtil.getSystemVersion())
                     .addHeader("client-terminal", SystemUtil.getSystemModel())
                     .addHeader("client-unique", "")
-                    .addHeader("client-version", "7.1.2")
+                    .addHeader("client-version", "7.5.2")
                     .build();
             return chain.proceed(request);
         });
