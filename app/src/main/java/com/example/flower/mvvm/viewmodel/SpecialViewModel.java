@@ -127,7 +127,7 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
                     return;
                 }
                 ARouter.getInstance()
-                        .build(ARouterPath.Daily_DISCOVERY_DETAIL_PATH)
+                        .build(ARouterPath.DAILY_DISCOVERY_DETAIL_PATH)
                         .withString(DailyDiscoveryDetailActivity.DISCOVERY_DETAIL, item.getId())
                         .navigation();
             }

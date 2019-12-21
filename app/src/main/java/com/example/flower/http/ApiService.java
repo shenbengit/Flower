@@ -5,9 +5,10 @@ import com.example.flower.http.bean.CoverPageBean;
 import com.example.flower.http.bean.DailyDiscoveryBean;
 import com.example.flower.http.bean.DailyDiscoveryDetailBean;
 import com.example.flower.http.bean.HomePageBean;
-import com.example.flower.http.bean.PlantsTypeBean;
 import com.example.flower.http.bean.NewestVideoRemindBean;
 import com.example.flower.http.bean.PaidArticleEveryDayNewsBean;
+import com.example.flower.http.bean.PlantsDetailBean;
+import com.example.flower.http.bean.PlantsTypeBean;
 import com.example.flower.http.bean.RecommendedTodayBean;
 import com.example.flower.http.bean.SpecialDetailBean;
 import com.example.flower.http.bean.SpecialTypeBean;
@@ -161,4 +162,8 @@ public interface ApiService {
      */
     @GET(value = "/cactus/wallpaper/v2/index")
     Observable<WallpaperBean> getWallpaper(@Query("index") int index, @Query("type") String type, @Query("scale") String scale, @Query("customerId") String customerId, @Query("token") String token);
+
+
+    @GET(value = "/cactus/flower/list")
+    Observable<PlantsDetailBean> getPlantsDetail(@Query("cid") String cid, @Query("index") int index, @Query("customerId") String customerId, @Query("token") String token);
 }

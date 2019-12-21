@@ -28,7 +28,7 @@ public abstract class BaseActivity<VDB extends ViewDataBinding, VM extends BaseV
     protected VM mViewModel;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

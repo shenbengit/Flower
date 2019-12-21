@@ -65,6 +65,23 @@ public class RxUtil {
     /**
      * 线程相关
      * <p>
+     * I/O线程：磁盘操作，查询数据库，网络访问，具有线程缓存机制
+     * I/O线程
+     * </p>
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> ObservableTransformer<T, T> io_io() {
+        return upstream -> upstream.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map((Function<T, T>) t -> t);
+    }
+
+    /**
+     * 线程相关
+     * <p>
      * newThread线程---->虽然使用Schedulers.io()的地方都可以使用Schedulers.newThread(),但是总体上的Schedulers.newThread()的效率没有Schedulers.io()的高。
      * Android主线程
      * </p>

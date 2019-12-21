@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.R;
 import com.example.flower.base.BaseViewModel;
+import com.example.flower.constant.ARouterPath;
 import com.example.flower.constant.Constant;
 import com.example.flower.http.bean.WallpaperBean;
 import com.example.flower.mvvm.model.WallpaperModel;
+import com.example.flower.mvvm.view.activity.WallpaperDetailActivity;
 import com.example.flower.mvvm.view.adapter.WallpaperAdapter;
 
 import java.util.List;
@@ -33,10 +35,13 @@ public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
     public WallpaperViewModel(@NonNull Application application) {
         super(application, new WallpaperModel());
         mWallpaperAdapter = new WallpaperAdapter();
-        mWallpaperAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        mWallpaperAdapter.setOnItemClickListener((adapter, view, position) -> {
+            WallpaperBean.DataBean item = mWallpaperAdapter.getItem(position);
+            if (item != null) {
+                ARouter.getInstance()
+                        .build(ARouterPath.WALLPAPER_DETAIL_PATH)
+                        .withString(WallpaperDetailActivity.DETAIL_URL, item.getBigImg())
+                        .navigation();
             }
         });
         mWallpaperItemDecoration = new RecyclerView.ItemDecoration() {

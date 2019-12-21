@@ -20,6 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".mvvm.view.activity.WallpaperDetailActivity"></activity>
+        <activity android:name=".mvvm.view.activity.KnowPlantsDetailActivity" />
         <activity android:name=".mvvm.view.activity.DailyDiscoveryDetailActivity" />
         <activity
             android:name=".mvvm.view.activity.VideoActivity"

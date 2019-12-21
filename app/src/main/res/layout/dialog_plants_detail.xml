@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dp_300"
+    android:layout_height="@dimen/dp_500"
+    android:background="@drawable/round_white_bg">
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:src="@drawable/iv_pop_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="植物图鉴"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPicture"
+        android:layout_width="@dimen/dp_270"
+        android:layout_height="@dimen/dp_270"
+        android:layout_marginTop="@dimen/dp_10"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHint" />
+
+    <TextView
+        android:id="@+id/tvPlantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="绿地"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPicture" />
+
+    <View
+        android:id="@+id/viewLine1"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0_1"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#C9C7C7"
+        app:layout_constraintEnd_toEndOf="@id/ivPicture"
+        app:layout_constraintStart_toStartOf="@id/ivPicture"
+        app:layout_constraintTop_toBottomOf="@id/tvPlantName" />
+
+    <TextView
+        android:id="@+id/tvSmell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@id/tvHumidity"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@id/viewLine1"
+        app:layout_constraintTop_toBottomOf="@id/viewLine1" />
+
+    <TextView
+        android:id="@+id/tvHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toStartOf="@id/tvMaintain"
+        app:layout_constraintStart_toEndOf="@id/tvSmell"
+        app:layout_constraintTop_toTopOf="@id/tvSmell" />
+
+    <TextView
+        android:id="@+id/tvMaintain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@id/viewLine1"
+        app:layout_constraintStart_toEndOf="@id/tvHumidity"
+        app:layout_constraintTop_toTopOf="@id/tvSmell" />
+
+    <TextView
+        android:id="@+id/tvSmellHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="气味浓度"
+        app:layout_constraintEnd_toEndOf="@id/tvSmell"
+        app:layout_constraintStart_toStartOf="@id/tvSmell"
+        app:layout_constraintTop_toBottomOf="@id/tvSmell" />
+
+    <TextView
+        android:id="@+id/tvHumidityHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="湿度需求"
+        app:layout_constraintEnd_toEndOf="@id/tvHumidity"
+        app:layout_constraintStart_toStartOf="@id/tvHumidity"
+        app:layout_constraintTop_toBottomOf="@id/tvHumidity" />
+
+    <TextView
+        android:id="@+id/tvMaintainHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="养护难度"
+        app:layout_constraintEnd_toEndOf="@id/tvMaintain"
+        app:layout_constraintStart_toStartOf="@id/tvMaintain"
+        app:layout_constraintTop_toBottomOf="@id/tvMaintain" />
+
+    <View
+        android:id="@+id/viewLine2"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0_1"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="#C9C7C7"
+        app:layout_constraintEnd_toEndOf="@id/ivPicture"
+        app:layout_constraintStart_toStartOf="@id/ivPicture"
+        app:layout_constraintTop_toBottomOf="@id/tvSmellHint" />
+
+    <TextView
+        android:id="@+id/tvLanguage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/viewLine2"
+        app:layout_constraintStart_toStartOf="@id/viewLine2"
+        app:layout_constraintTop_toBottomOf="@id/viewLine2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

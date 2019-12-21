@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.R;
 import com.example.flower.base.BaseViewModel;
+import com.example.flower.constant.ARouterPath;
 import com.example.flower.constant.Constant;
 import com.example.flower.http.bean.PlantsTypeBean;
 import com.example.flower.mvvm.model.KnowPlantsModel;
+import com.example.flower.mvvm.view.activity.KnowPlantsDetailActivity;
 import com.example.flower.mvvm.view.adapter.PlantsTypeAdapter;
 
 import java.util.List;
@@ -28,11 +30,16 @@ public class KnowPlantsViewModel extends BaseViewModel<KnowPlantsModel> {
     public KnowPlantsViewModel(@NonNull Application application) {
         super(application, new KnowPlantsModel());
         mPlantsTypeAdapter = new PlantsTypeAdapter();
-        mPlantsTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        mPlantsTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
+            PlantsTypeBean.DataBean item = mPlantsTypeAdapter.getItem(position);
+            if (item == null) {
+                return;
             }
+            ARouter.getInstance()
+                    .build(ARouterPath.KNOW_PLANTS_DETAIL_PATH)
+                    .withString(KnowPlantsDetailActivity.TITLE, item.getTitle())
+                    .withString(KnowPlantsDetailActivity.TYPE_ID, item.getId())
+                    .navigation();
         });
         mPlantsTypeItemDecoration = new RecyclerView.ItemDecoration() {
             @Override

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.flower.http.bean.PlantsDetailBean.DataBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_160"
+        android:background="@drawable/round_white_bg">
+
+        <ImageView
+            android:id="@+id/ivPicture"
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{item.flowerImage}"
+            placeholderImageRes="@{@drawable/grey_bg}"
+            roundingRadius="@{(int)@dimen/dp_5}"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@{item.flowerName}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPicture" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

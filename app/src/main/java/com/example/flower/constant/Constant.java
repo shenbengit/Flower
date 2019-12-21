@@ -17,7 +17,10 @@ public class Constant {
      * 文件路径,基础路径
      */
     public static final String FILE_SAVE_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "Flower" + File.separator;
-
+    /**
+     * 图片保存路径
+     */
+    public static final String WALLPAPER_SAVE_PATH = FILE_SAVE_PATH + "wallpaper" + File.separator;
     public static final String ERROR_FILE_PATH = FILE_SAVE_PATH + "error" + File.separator;
     /**
      * 网络请求成功
@@ -57,5 +60,14 @@ public class Constant {
      * 重置没有更多数据的状态
      */
     public static final String RESET_NO_MORE_DATA = "RESET_NO_MORE_DATA";
+
+    /**
+     * 显示dialog
+     */
+    public static final String SHOW_DIALOG = "SHOW_DIALOG";
+    /**
+     * 隐藏dialog
+     */
+    public static final String DISMISS_DIALOG = "DISMISS_DIALOG";
 
 }

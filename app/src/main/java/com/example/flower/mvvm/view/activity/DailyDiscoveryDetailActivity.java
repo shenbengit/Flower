@@ -23,7 +23,7 @@ import com.example.flower.databinding.ActivityDailyDiscoveryDetailBinding;
 import com.example.flower.mvvm.viewmodel.DailyDiscoveryDetailViewModel;
 import com.gyf.immersionbar.ImmersionBar;
 
-@Route(path = ARouterPath.Daily_DISCOVERY_DETAIL_PATH)
+@Route(path = ARouterPath.DAILY_DISCOVERY_DETAIL_PATH)
 public class DailyDiscoveryDetailActivity extends BaseActivity<ActivityDailyDiscoveryDetailBinding, DailyDiscoveryDetailViewModel> {
 
     public static final String DISCOVERY_DETAIL = "DISCOVERY_DETAIL";
