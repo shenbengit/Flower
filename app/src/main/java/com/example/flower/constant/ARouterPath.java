@@ -30,4 +30,8 @@ public class ARouterPath {
      * 壁纸详情页
      */
     public static final String WALLPAPER_DETAIL_PATH = BASE_ACTIVITY_PATH + "WallpaperDetailActivity";
+    /**
+     * 登录页
+     */
+    public static final String LOGIN_PATH = BASE_ACTIVITY_PATH + "LoginActivity";
 }

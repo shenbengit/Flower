@@ -1,8 +1,8 @@
 package com.example.flower.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.widget.Toast;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * 封装Toast,避免重复显示
@@ -13,20 +13,24 @@ import android.widget.Toast;
  */
 
 public class ToastUtil {
-    private static Toast toast;
 
-    /**
-     * 静态toast
-     * @param context
-     * @param text
-     */
-    @SuppressLint("ShowToast")
-    public static void show(Context context, String text) {
-        // 1. 创建前 2.消失后toast为null
-        if (toast == null) {
-            toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-        }
-        toast.setText(text);
-        toast.show();
+    public static void error(Context context, String msg) {
+        Toasty.error(context, msg).show();
+    }
+
+    public static void success(Context context, String msg) {
+        Toasty.success(context, msg).show();
+    }
+
+    public static void info(Context context, String msg) {
+        Toasty.info(context, msg).show();
+    }
+
+    public static void warning(Context context, String msg) {
+        Toasty.warning(context, msg).show();
+    }
+
+    public static void normal(Context context, String msg) {
+        Toasty.normal(context, msg).show();
     }
 }

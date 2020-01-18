@@ -18,6 +18,7 @@ import com.squareup.leakcanary.RefWatcher;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import es.dmoral.toasty.Toasty;
 import me.yokeyword.fragmentation.Fragmentation;
 
 /**
@@ -39,6 +40,7 @@ public class App extends MultiDexApplication {
         initARouter();
         initBmob();
         SharedPreferencesUtil.getInstance().init(this);
+        initToasty();
     }
 
     /**
@@ -59,6 +61,7 @@ public class App extends MultiDexApplication {
      * 初始化Logger
      */
     private void initLogger() {
+        Logger.clearLogAdapters();
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)
                 .methodCount(2)
@@ -111,5 +114,12 @@ public class App extends MultiDexApplication {
                 .setFileExpiration(2500)
                 .build();
         Bmob.initialize(config);
+    }
+
+    private void initToasty() {
+        Toasty.Config
+                .getInstance()
+                .allowQueue(false)
+                .apply();
     }
 }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.flower.mvvm.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/denglu_icon_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".mvvm.view.activity.LoginActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/article_detail_toolbar" />
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:src="@drawable/denglu_icon_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+        <View
+            android:id="@+id/phoneView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/white_hollow_shape_radius_22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivIcon" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginStart="@dimen/dp_8"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:text="@={viewModel.phoneStr}"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/phoneView"
+            app:layout_constraintEnd_toStartOf="@id/ibDelete"
+            app:layout_constraintStart_toStartOf="@id/phoneView"
+            app:layout_constraintTop_toTopOf="@id/phoneView" />
+
+        <ImageButton
+            android:id="@+id/ibDelete"
+            android:layout_width="@dimen/dp_23"
+            android:layout_height="@dimen/dp_23"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@id/phoneView"
+            app:layout_constraintEnd_toEndOf="@id/phoneView"
+            app:layout_constraintStart_toEndOf="@id/etPhone"
+            app:layout_constraintTop_toTopOf="@id/phoneView" />
+
+        <View
+            android:id="@+id/codeView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/white_hollow_shape_radius_22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneView" />
+
+        <EditText
+            android:id="@+id/etCode"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginStart="@dimen/dp_8"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:text="@={viewModel.verificationCodeStr}"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/codeView"
+            app:layout_constraintEnd_toStartOf="@id/viewLine"
+            app:layout_constraintStart_toStartOf="@id/codeView"
+            app:layout_constraintTop_toTopOf="@id/codeView" />
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_30"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/codeView"
+            app:layout_constraintEnd_toStartOf="@id/tvCode"
+            app:layout_constraintStart_toEndOf="@id/etCode"
+            app:layout_constraintTop_toTopOf="@id/codeView" />
+
+        <TextView
+            android:id="@+id/tvCode"
+            isThrottleFirst="@{true}"
+            onClickCommand="@{viewModel.getCodeCommand}"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:gravity="center"
+            android:text="@{viewModel.countDownStr}"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="@id/codeView"
+            app:layout_constraintEnd_toEndOf="@id/codeView"
+            app:layout_constraintStart_toEndOf="@id/viewLine"
+            app:layout_constraintTop_toTopOf="@id/codeView" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            isThrottleFirst="@{true}"
+            onClickCommand="@{viewModel.loginCommand}"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/btn_login_bg"
+            android:text="登录"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/codeView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,5 +1,6 @@
 package com.example.flower.mvvm.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -8,7 +9,11 @@ import com.example.flower.BR;
 import com.example.flower.R;
 import com.example.flower.base.BaseFragment;
 import com.example.flower.databinding.FragmentMineBinding;
+import com.example.flower.http.bmob.UserBean;
 import com.example.flower.mvvm.viewmodel.MineViewModel;
+import com.example.flower.util.LogUtil;
+
+import cn.bmob.v3.BmobUser;
 
 /**
  * 我的Fragment
@@ -39,7 +44,21 @@ public class MineFragment extends BaseFragment<FragmentMineBinding, MineViewMode
     }
 
     @Override
-    protected void initData(@Nullable Bundle savedInstanceState) {
+    protected void initView() {
+        super.initView();
+    }
 
+    @Override
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        LogUtil.i("当前登录用户是否已经登录： " + BmobUser.isLogin());
+        UserBean currentUser = BmobUser.getCurrentUser(UserBean.class);
+        LogUtil.i("当前登录用户： " + currentUser);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.i("MineFragment - requestCode: " + requestCode);
     }
 }

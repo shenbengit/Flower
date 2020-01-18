@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-
     useLibrary 'org.apache.http.legacy'
 
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -41,7 +40,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {
@@ -83,6 +81,7 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["release-leakcanary"]
     implementation rootProject.ext.dependencies["EasyThread"]
     implementation rootProject.ext.dependencies["bmob-sdk"]
+//    implementation rootProject.ext.dependencies["http-legacy"]
     implementation rootProject.ext.dependencies["inflationx-calligraphy3"]
     implementation rootProject.ext.dependencies["inflationx-viewpump"]
     implementation rootProject.ext.dependencies["refresh-layout-kernel"]
@@ -92,4 +91,5 @@ dependencies {
     implementation rootProject.ext.dependencies["immersionbar-components"]
     implementation rootProject.ext.dependencies["gsyVideoPlayer-java"]
     implementation rootProject.ext.dependencies["GSYVideoPlayer-exo2"]
+    implementation rootProject.ext.dependencies["Toasty"]
 }

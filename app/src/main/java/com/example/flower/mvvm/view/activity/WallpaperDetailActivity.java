@@ -25,6 +25,7 @@ import java.io.InputStream;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
+import permissions.dispatcher.PermissionUtils;
 
 /**
  * 壁纸详情页
@@ -33,6 +34,8 @@ import okhttp3.ResponseBody;
 public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetailBinding, BaseViewModel> {
 
     public static final String DETAIL_URL = "DETAIL_URL";
+    private static final String[] PERMISSION_NEEDSSTORAGEPERMISSION = new String[]{"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+
 
     @Override
     protected int getLayoutId() {
@@ -59,6 +62,10 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
 
         String url = getIntent().getStringExtra(DETAIL_URL);
         mBinding.ibDownload.setOnClickListener(v -> {
+                    if (!PermissionUtils.hasSelfPermissions(this, PERMISSION_NEEDSSTORAGEPERMISSION)) {
+                        ToastUtil.warning(this, "未获取到读取SD卡权限，请手动授权");
+                        return;
+                    }
                     RetrofitClient.getInstance()
                             .getApiService()
                             .downloadFile(url)
@@ -91,7 +98,7 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
                                         while ((readLength = inputStream.read(bytes)) != -1) {
                                             outputStream.write(bytes, 0, readLength);
                                         }
-                                        runOnUiThread(() -> ToastUtil.show(WallpaperDetailActivity.this, "照片保存在" + file.getAbsolutePath()));
+                                        runOnUiThread(() -> ToastUtil.success(WallpaperDetailActivity.this, "照片保存在" + file.getAbsolutePath()));
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -100,7 +107,7 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    runOnUiThread(() -> ToastUtil.show(WallpaperDetailActivity.this, "文件下载失败，" + e.getMessage()));
+                                    runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "文件下载失败，" + e.getMessage()));
                                 }
 
                                 @Override

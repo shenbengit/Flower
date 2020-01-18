@@ -151,7 +151,7 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
     }
 
     private void initCommand() {
-        searchCommand = new BindingCommand(() -> ToastUtil.show(getApplication(), "此功能暂未开放"));
+        searchCommand = new BindingCommand(() -> ToastUtil.warning(getApplication(), "此功能暂未开放"));
         todayCommand = new BindingCommand(() -> ARouter.getInstance()
                 .build(ARouterPath.TODAY_ACTIVITY_PATH)
                 .navigation());
@@ -198,7 +198,7 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
                     //如果是下拉刷新
                     //则说明没有数据
                     mBaseLiveData.setValue(Constant.REFRESH_SUCCESS);
-                    ToastUtil.show(getApplication(), "没有数据");
+                    ToastUtil.warning(getApplication(), "没有数据");
                 }
                 //说明已经加载完所有数据
                 mBaseLiveData.setValue(Constant.LOAD_MORE_COMPLETE);

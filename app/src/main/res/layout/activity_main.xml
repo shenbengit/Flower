@@ -20,97 +20,129 @@
             android:id="@+id/flRoot"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintBottom_toTopOf="@id/rbBg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioGroup
-            android:id="@+id/rg"
+        <View
+            android:id="@+id/rbBg"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_60"
+            android:layout_height="@dimen/dp_50"
             android:gravity="center"
             android:orientation="horizontal"
-            android:weightSum="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <RadioButton
-                android:id="@+id/rb01"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:checked="true"
-                android:drawableTop="@drawable/bottom_menu_01"
-                android:drawablePadding="@dimen/dp_4"
-                android:gravity="center"
-                android:text="专题"
-                android:textColor="@drawable/bottom_menu_text"
-                android:textSize="@dimen/sp_12" />
+        <RadioButton
+            android:id="@+id/rb01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/bottom_menu_01"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center"
+            android:text="花间"
+            android:textColor="@drawable/bottom_menu_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/rbBg"
+            app:layout_constraintEnd_toStartOf="@id/rb02"
+            app:layout_constraintStart_toStartOf="@id/rbBg"
+            app:layout_constraintTop_toTopOf="@id/rbBg" />
 
-            <RadioButton
-                android:id="@+id/rb02"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableTop="@drawable/bottom_menu_02"
-                android:drawablePadding="@dimen/dp_4"
-                android:gravity="center"
-                android:text="发现"
-                android:textColor="@drawable/bottom_menu_text"
-                android:textSize="@dimen/sp_12" />
-
-            <RadioButton
-                android:id="@+id/rb03"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableTop="@drawable/bottom_menu_03"
-                android:drawablePadding="@dimen/dp_4"
-                android:gravity="center"
-                android:text="交流"
-                android:textColor="@drawable/bottom_menu_text"
-                android:textSize="@dimen/sp_12" />
-
-            <RadioButton
-                android:id="@+id/rb04"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableTop="@drawable/bottom_menu_04"
-                android:drawablePadding="@dimen/dp_4"
-                android:gravity="center"
-                android:text="学院"
-                android:textColor="@drawable/bottom_menu_text"
-                android:textSize="@dimen/sp_12" />
-
-            <RadioButton
-                android:id="@+id/rb05"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableTop="@drawable/bottom_menu_05"
-                android:drawablePadding="@dimen/dp_4"
-                android:gravity="center"
-                android:text="我的"
-                android:textColor="@drawable/bottom_menu_text"
-                android:textSize="@dimen/sp_12" />
-        </RadioGroup>
+        <RadioButton
+            android:id="@+id/rb02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/bottom_menu_02"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center"
+            android:text="发现"
+            android:textColor="@drawable/bottom_menu_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/rbBg"
+            app:layout_constraintEnd_toStartOf="@id/rb03"
+            app:layout_constraintStart_toEndOf="@id/rb01"
+            app:layout_constraintTop_toTopOf="@id/rbBg" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/rb03"
+            android:layout_width="@dimen/dp_68"
+            android:layout_height="@dimen/dp_68"
+            android:background="@drawable/ic_tab_camera_base"
+            android:button="@null"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center"
+            android:textColor="@drawable/bottom_menu_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/rbBg"
+            app:layout_constraintEnd_toStartOf="@id/rb04"
+            app:layout_constraintStart_toEndOf="@id/rb02" />
+
+        <RadioButton
+            android:id="@+id/rb04"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/bottom_menu_04"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center"
+            android:text="花展"
+            android:textColor="@drawable/bottom_menu_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/rbBg"
+            app:layout_constraintEnd_toStartOf="@id/rb05"
+            app:layout_constraintStart_toEndOf="@id/rb03"
+            app:layout_constraintTop_toTopOf="@id/rbBg" />
+
+        <RadioButton
+            android:id="@+id/rb05"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/bottom_menu_05"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@drawable/bottom_menu_text"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@id/rbBg"
+            app:layout_constraintEnd_toEndOf="@id/rbBg"
+            app:layout_constraintStart_toEndOf="@id/rb04"
+            app:layout_constraintTop_toTopOf="@id/rbBg" />
+
+        <View
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_0_1"
             android:background="@color/colorGrey"
-            app:layout_constraintBottom_toTopOf="@id/rg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/rbBg"
+            app:layout_constraintEnd_toStartOf="@id/rb03"
+            app:layout_constraintStart_toStartOf="@id/rbBg" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_0_1"
+            android:background="@color/colorGrey"
+            app:layout_constraintBottom_toTopOf="@id/rbBg"
+            app:layout_constraintEnd_toEndOf="@id/rbBg"
+            app:layout_constraintStart_toEndOf="@id/rb03" />
+
+        <ImageView
+            android:id="@+id/ivCameraIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_camera"
+            app:layout_constraintBottom_toBottomOf="@id/rb03"
+            app:layout_constraintEnd_toEndOf="@id/rb03"
+            app:layout_constraintStart_toStartOf="@id/rb03"
+            app:layout_constraintTop_toTopOf="@id/rb03" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

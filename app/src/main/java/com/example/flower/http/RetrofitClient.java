@@ -1,5 +1,7 @@
 package com.example.flower.http;
 
+import android.text.TextUtils;
+
 import com.example.flower.constant.Constant;
 import com.example.flower.util.LogUtil;
 import com.example.flower.util.RxUtil;
@@ -28,8 +30,7 @@ public class RetrofitClient {
     private static final long DEFAULT_MILLISECONDS = 60000;      //默认的超时时间
     private static long REFRESH_TIME = 300;                      //回调刷新时间（单位ms）
 
-    private OkHttpClient mClient;
-    private Retrofit.Builder mBuilder;
+    private Retrofit mRetrofit;
     private ApiService mService;
 
     private static final class Holder {
@@ -61,30 +62,28 @@ public class RetrofitClient {
         builder.readTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.connectTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
-        mClient = builder.build();
+        OkHttpClient client = builder.build();
 
         Gson gson = new GsonBuilder().serializeNulls().create();
-        mBuilder = new Retrofit.Builder()
-                .client(mClient)
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(Constant.BASE_URL);
-        Retrofit retrofit = mBuilder.build();
-        mService = retrofit.create(ApiService.class);
-    }
-
-    public OkHttpClient getOkHttpClient() {
-        return mClient;
-    }
-
-    public Retrofit.Builder getBuilder() {
-        return mBuilder;
+        mRetrofit = retrofitBuilder.build();
+        mService = mRetrofit.create(ApiService.class);
     }
 
     public ApiService getApiService() {
         return mService;
     }
 
+    public void setBaseUrl(String baseUrl) {
+        if (!TextUtils.isEmpty(baseUrl)) {
+            mRetrofit = mRetrofit.newBuilder().baseUrl(baseUrl).build();
+            mService = mRetrofit.create(ApiService.class);
+        }
+    }
     public void dowdloadPicture(String url, String path, String fileName) {
         getApiService().downloadFile(url)
                 .compose(RxUtil.io_io())
