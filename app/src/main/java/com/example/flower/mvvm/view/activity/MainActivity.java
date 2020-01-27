@@ -14,10 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.BR;
 import com.example.flower.R;
 import com.example.flower.base.BaseActivity;
 import com.example.flower.constant.ARouterPath;
+import com.example.flower.constant.Constant;
 import com.example.flower.databinding.ActivityMainBinding;
 import com.example.flower.mvvm.view.fragment.CollegeFragment;
 import com.example.flower.mvvm.view.fragment.FindFragment;
@@ -30,6 +32,8 @@ import com.shuyu.gsyvideoplayer.cache.CacheFactory;
 import com.shuyu.gsyvideoplayer.cache.ProxyCacheManager;
 import com.shuyu.gsyvideoplayer.player.PlayerFactory;
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
+
+import java.io.File;
 
 import me.yokeyword.fragmentation.ISupportFragment;
 import permissions.dispatcher.NeedsPermission;
@@ -88,7 +92,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 MainActivityPermissionsDispatcher.needsPermissionWithPermissionCheck(MainActivity.this);
                 return;
             }
-            LogUtil.i("点击事件");
+            ARouter.getInstance()
+                    .build(ARouterPath.KNOW_FLOWER_PATH)
+                    .navigation();
         });
 
 
@@ -140,18 +146,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     /**
      * 用户给予权限时执行此方法
      */
-    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
+    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void needsPermission() {
         LogUtil.i("获取到相关权限");
+        //先创建拍照文件保存目录文件夹
+        new File(Constant.PHOTO_SAVE_PATH).mkdirs();
+        //先创建压缩文件保存目录文件夹
+        new File(Constant.COMPRESS_SAVE_PATH).mkdirs();
     }
 
     /**
      * 解释为什么调用该权限，只有当第一次请求被拒绝，下次请求之前会调用
      */
-    @OnShowRationale({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
+    @OnShowRationale({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void permissionOnShowRationale(final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setMessage("申请获取读取SD卡、摄像机权限")
+                .setMessage("申请获取读取SD卡、摄像机、录像权限")
                 .setPositiveButton("确认", (dialog, which) -> {
                     dialog.dismiss();
                     request.proceed();
@@ -167,7 +177,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     /**
      * 拒绝权限请求调用
      */
-    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
+    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void permissionOnPermissionDenied() {
         ToastUtil.warning(this, "保存壁纸等功能将无法使用");
     }
@@ -175,7 +185,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     /**
      * 用户点击了不再询问调用
      */
-    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
+    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void permissionOnNeverAskAgain() {
         ToastUtil.warning(this, "保存壁纸等功能将无法使用，若想使用请到设置里手动授权");
     }

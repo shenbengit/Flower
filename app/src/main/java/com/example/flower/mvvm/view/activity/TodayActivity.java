@@ -42,15 +42,14 @@ public class TodayActivity extends BaseActivity<ActivityTodayBinding, TodayViewM
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-        mViewModel.mBaseLiveData.observe(this, s -> {
-            switch (s) {
-                case TodayViewModel.ACTIVITY_CLOSE:
-                    onBackPressedSupport();
-                    break;
-                default:
-                    break;
-            }
-        });
+
     }
 
+    @Override
+    protected void baseLiveDataObserver(String str) {
+        super.baseLiveDataObserver(str);
+        if (TodayViewModel.ACTIVITY_CLOSE.equals(str)) {
+            onBackPressedSupport();
+        }
+    }
 }

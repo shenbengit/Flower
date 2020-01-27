@@ -37,3 +37,10 @@
 -keep class tv.danmaku.ijk.media.player.** {*; }
 -dontwarn tv.danmaku.ijk.media.player.*
 -keep interface tv.danmaku.ijk.media.player.** { *; }
+
+#PictureSelector 2.0
+-keep class com.luck.picture.lib.** { *; }
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }

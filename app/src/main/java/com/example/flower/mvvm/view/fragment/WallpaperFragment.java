@@ -61,29 +61,32 @@ public class WallpaperFragment extends BaseFragment<FragmentWallpaperBinding, Wa
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         mViewModel.getWallpaper(false);
-        mViewModel.mBaseLiveData.observe(this, s -> {
-            switch (s) {
-                case Constant.REFRESH_SUCCESS:
-                    mBinding.srlRefresh.finishRefresh(true);
-                    break;
-                case Constant.REFRESH_FAIL:
-                    mBinding.srlRefresh.finishRefresh(false);
-                    break;
-                case Constant.LOAD_MORE_SUCCESS:
-                    mBinding.srlRefresh.finishLoadMore(true);
-                    break;
-                case Constant.LOAD_MORE_FAIL:
-                    mBinding.srlRefresh.finishLoadMore(false);
-                    break;
-                case Constant.LOAD_MORE_COMPLETE:
-                    mBinding.srlRefresh.finishLoadMoreWithNoMoreData();
-                    break;
-                case Constant.RESET_NO_MORE_DATA:
-                    mBinding.srlRefresh.resetNoMoreData();
-                    break;
-                default:
-                    break;
-            }
-        });
+    }
+
+    @Override
+    protected void baseLiveDataObserver(String str) {
+        super.baseLiveDataObserver(str);
+        switch (str) {
+            case Constant.REFRESH_SUCCESS:
+                mBinding.srlRefresh.finishRefresh(true);
+                break;
+            case Constant.REFRESH_FAIL:
+                mBinding.srlRefresh.finishRefresh(false);
+                break;
+            case Constant.LOAD_MORE_SUCCESS:
+                mBinding.srlRefresh.finishLoadMore(true);
+                break;
+            case Constant.LOAD_MORE_FAIL:
+                mBinding.srlRefresh.finishLoadMore(false);
+                break;
+            case Constant.LOAD_MORE_COMPLETE:
+                mBinding.srlRefresh.finishLoadMoreWithNoMoreData();
+                break;
+            case Constant.RESET_NO_MORE_DATA:
+                mBinding.srlRefresh.resetNoMoreData();
+                break;
+            default:
+                break;
+        }
     }
 }

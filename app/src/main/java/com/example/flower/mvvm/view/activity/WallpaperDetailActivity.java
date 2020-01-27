@@ -18,13 +18,12 @@ import com.example.flower.util.ToastUtil;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
+import okio.Okio;
 import permissions.dispatcher.PermissionUtils;
 
 /**
@@ -70,6 +69,7 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
                             .getApiService()
                             .downloadFile(url)
                             .compose(RxUtil.io_io())
+                            .compose(bindToLifecycle())
                             .subscribe(new Observer<ResponseBody>() {
                                 @Override
                                 public void onSubscribe(Disposable d) {
@@ -79,7 +79,7 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
                                 @Override
                                 public void onNext(ResponseBody responseBody) {
                                     //文件名，当前系统时间戳
-                                    String fileName = System.currentTimeMillis() + ".jpg";
+                                    String fileName = System.currentTimeMillis() + ".jpeg";
                                     File file = new File(Constant.WALLPAPER_SAVE_PATH, fileName);
                                     File parentFile = file.getParentFile();
                                     //父文件不存在，则先创建文件夹
@@ -91,23 +91,18 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
                                         file.delete();
                                     }
                                     try {
-                                        FileOutputStream outputStream = new FileOutputStream(file);
-                                        byte[] bytes = new byte[4096];
-                                        InputStream inputStream = responseBody.byteStream();
-                                        int readLength;
-                                        while ((readLength = inputStream.read(bytes)) != -1) {
-                                            outputStream.write(bytes, 0, readLength);
-                                        }
+                                        Okio.buffer(Okio.sink(file))
+                                                .write(responseBody.bytes())
+                                                .close();
                                         runOnUiThread(() -> ToastUtil.success(WallpaperDetailActivity.this, "照片保存在" + file.getAbsolutePath()));
                                     } catch (IOException e) {
-                                        e.printStackTrace();
+                                        runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "壁纸保存失败，" + e.getMessage()));
                                     }
-
                                 }
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "文件下载失败，" + e.getMessage()));
+                                    runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "壁纸保存失败，" + e.getMessage()));
                                 }
 
                                 @Override

@@ -34,4 +34,8 @@ public class ARouterPath {
      * 登录页
      */
     public static final String LOGIN_PATH = BASE_ACTIVITY_PATH + "LoginActivity";
+    /**
+     * 识花页面
+     */
+    public static final String KNOW_FLOWER_PATH = BASE_ACTIVITY_PATH + "KnowFlowerActivity";
 }

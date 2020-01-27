@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".App"
@@ -21,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.view.activity.LoginActivity"></activity>
+        <activity android:name=".mvvm.view.activity.KnowFlowerActivity" />
+        <activity android:name=".mvvm.view.activity.LoginActivity" />
         <activity android:name=".mvvm.view.activity.WallpaperDetailActivity" />
         <activity android:name=".mvvm.view.activity.KnowPlantsDetailActivity" />
         <activity android:name=".mvvm.view.activity.DailyDiscoveryDetailActivity" />

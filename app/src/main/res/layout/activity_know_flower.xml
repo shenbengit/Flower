@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.flower.mvvm.viewmodel.KnowFlowerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mvvm.view.activity.KnowFlowerActivity">
+
+
+        <com.otaliastudios.cameraview.CameraView
+            android:id="@+id/cameraView"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            app:cameraFrameProcessingExecutors="2"
+            app:captureMode="image"
+            app:flash="on"
+            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lensFacing="back">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/np_image_photo_taker_center"
+                app:layout_drawOnPictureSnapshot="false"
+                app:layout_drawOnPreview="true"
+                app:layout_drawOnVideoSnapshot="false" />
+        </com.otaliastudios.cameraview.CameraView>
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@null"
+            android:src="@drawable/iv_back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivPhotoLibraryPreview"
+            imageObject="@{viewModel.photoLibraryPreviewFile}"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:scaleType="fitXY"
+            android:visibility="@{viewModel.isPhotoLibraryPreviewShow ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/cameraView"
+            app:layout_constraintEnd_toEndOf="@id/cameraView"
+            app:layout_constraintStart_toStartOf="@id/cameraView"
+            app:layout_constraintTop_toTopOf="@id/cameraView" />
+
+        <ImageButton
+            android:id="@+id/ibCameraPhotoLibrary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/icon_camera_photo_library"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ibTakePhoto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cameraView" />
+
+
+        <ImageButton
+            android:id="@+id/ibTakePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/np_image_photo_taker_shutter_icon"
+            app:layout_constraintBottom_toBottomOf="@id/ibCameraPhotoLibrary"
+            app:layout_constraintEnd_toStartOf="@id/ibToggleCamera"
+            app:layout_constraintStart_toEndOf="@id/ibCameraPhotoLibrary"
+            app:layout_constraintTop_toTopOf="@id/ibCameraPhotoLibrary" />
+
+        <ImageButton
+            android:id="@+id/ibToggleCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/np_image_photo_taker_toggle_camera_sel_icon"
+            app:layout_constraintBottom_toBottomOf="@id/ibCameraPhotoLibrary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ibTakePhoto"
+            app:layout_constraintTop_toTopOf="@id/ibCameraPhotoLibrary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

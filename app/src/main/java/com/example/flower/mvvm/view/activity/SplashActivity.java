@@ -39,13 +39,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-        mViewModel.mBaseLiveData.observe(this, s -> {
-            if (TextUtils.equals(s, TO_MAIN)) {
-                ARouter.getInstance()
-                        .build(ARouterPath.MAIN_ACTIVITY_PATH)
-                        .navigation(SplashActivity.this, MAIN_REQUEST_CODE);
-            }
-        });
+
     }
 
     @Override
@@ -53,6 +47,16 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == MAIN_REQUEST_CODE && resultCode == RESULT_OK) {
             onBackPressed();
+        }
+    }
+
+    @Override
+    protected void baseLiveDataObserver(String str) {
+        super.baseLiveDataObserver(str);
+        if (TextUtils.equals(str, TO_MAIN)) {
+            ARouter.getInstance()
+                    .build(ARouterPath.MAIN_ACTIVITY_PATH)
+                    .navigation(SplashActivity.this, MAIN_REQUEST_CODE);
         }
     }
 }

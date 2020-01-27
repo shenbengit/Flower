@@ -5,6 +5,7 @@ import com.example.flower.http.bean.CoverPageBean;
 import com.example.flower.http.bean.DailyDiscoveryBean;
 import com.example.flower.http.bean.DailyDiscoveryDetailBean;
 import com.example.flower.http.bean.HomePageBean;
+import com.example.flower.http.bean.KnowFlowerResultBean;
 import com.example.flower.http.bean.NewestVideoRemindBean;
 import com.example.flower.http.bean.PaidArticleEveryDayNewsBean;
 import com.example.flower.http.bean.PlantsDetailBean;
@@ -166,4 +167,18 @@ public interface ApiService {
 
     @GET(value = "/cactus/flower/list")
     Observable<PlantsDetailBean> getPlantsDetail(@Query("cid") String cid, @Query("index") int index, @Query("customerId") String customerId, @Query("token") String token);
+
+    /**
+     * 识花接口
+     *
+     * @param url           接口url
+     * @param Authorization 请求头
+     * @param imageUrl      提交花的base64
+     * @return
+     */
+    @POST
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    Observable<KnowFlowerResultBean> knowFlower(@Url String url, @Header("Authorization") String Authorization, @Field("image_url") String imageUrl);
+
 }

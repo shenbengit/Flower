@@ -29,6 +29,7 @@
             android:id="@+id/rbBg"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_50"
+            android:background="@color/colorWhite"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"

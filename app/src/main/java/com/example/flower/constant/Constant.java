@@ -21,6 +21,15 @@ public class Constant {
      * 图片保存路径
      */
     public static final String WALLPAPER_SAVE_PATH = FILE_SAVE_PATH + "wallpaper" + File.separator;
+    /**
+     * 拍照图片保存路径
+     */
+    public static final String PHOTO_SAVE_PATH = FILE_SAVE_PATH + "photo" + File.separator;
+    /**
+     * 压缩文件保存路径
+     */
+    public static final String COMPRESS_SAVE_PATH = FILE_SAVE_PATH + "compress" + File.separator;
+
     public static final String ERROR_FILE_PATH = FILE_SAVE_PATH + "error" + File.separator;
     /**
      * 网络请求成功
@@ -69,5 +78,14 @@ public class Constant {
      * 隐藏dialog
      */
     public static final String DISMISS_DIALOG = "DISMISS_DIALOG";
+    /**
+     * 阿里云-形色Api使用的AppCode
+     */
+    public static final String XING_SE_APP_CODE = "7aa6fe8725f548239f4be10ffc3ae547";
+    /**
+     * 形色Api Url地址
+     */
+    public static final String XING_SE_API_URL = "http://plantapi.xingseapp.com/item/identification";
+
 
 }

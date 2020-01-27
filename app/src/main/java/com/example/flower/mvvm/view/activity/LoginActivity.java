@@ -1,6 +1,7 @@
 package com.example.flower.mvvm.view.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
@@ -41,10 +42,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-        mViewModel.mBaseLiveData.observe(this, o -> {
-            if (o == LoginViewModel.LOGIN_SUCCESS) {
-                onBackPressedSupport();
-            }
-        });
+
+    }
+
+    @Override
+    protected void baseLiveDataObserver(String str) {
+        super.baseLiveDataObserver(str);
+        if (TextUtils.equals(LoginViewModel.LOGIN_SUCCESS, str)) {
+            onBackPressedSupport();
+        }
     }
 }

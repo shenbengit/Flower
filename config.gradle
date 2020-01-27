@@ -75,6 +75,20 @@ ext {
             //gsyVideoPlayer 播放器
             "gsyVideoPlayer-java"            : "com.shuyu:gsyVideoPlayer-java:7.1.1",
             "GSYVideoPlayer-exo2"            : "com.shuyu:GSYVideoPlayer-exo2:7.1.1",
+            //吐司
             "Toasty"                         : "com.github.GrenderG:Toasty:1.4.2",
+            //相册
+            "PictureSelector"                : "com.github.LuckSiege.PictureSelector:picture_library:v2.4.6",
+            //摄像机封装
+            "cameraview"                     : "com.otaliastudios:cameraview:2.6.1",
+            //加载框dialog
+            "LoadingDialog"                  : "com.github.gittjy:LoadingDialog:1.0.2",
+            //PopupWindow
+            "BasePopup"                      : "com.github.razerdp:BasePopup:2.2.1",
+            "BasePopup-compat-androidx"      : "com.github.razerdp:BasePopup-compat-androidx:2.2.1",
+            //圆形ImageView
+            "circleimageview"                : "de.hdodenhof:circleimageview:3.0.2",
+            //图片压缩
+            "Luban"                          : "top.zibin:Luban:1.1.8",
     ]
 }

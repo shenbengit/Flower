@@ -105,7 +105,7 @@ public class LoginViewModel extends BaseViewModel {
         }
         isRequestSMSCode = true;
         mHandler.sendEmptyMessage(SMS_CODE);
-        BmobSMS.requestSMSCode(phone, "", new QueryListener<Integer>() {
+        BmobSMS.requestSMSCode(phone, "花田", new QueryListener<Integer>() {
             @Override
             public void done(Integer smsId, BmobException e) {
                 if (e == null) {
