@@ -21,13 +21,14 @@ import com.example.flower.base.BaseActivity;
 import com.example.flower.constant.ARouterPath;
 import com.example.flower.constant.Constant;
 import com.example.flower.databinding.ActivityMainBinding;
-import com.example.flower.mvvm.view.fragment.CollegeFragment;
 import com.example.flower.mvvm.view.fragment.FindFragment;
 import com.example.flower.mvvm.view.fragment.MineFragment;
+import com.example.flower.mvvm.view.fragment.SpaceFragment;
 import com.example.flower.mvvm.view.fragment.SpecialFragment;
 import com.example.flower.mvvm.viewmodel.MainViewModel;
 import com.example.flower.util.LogUtil;
 import com.example.flower.util.ToastUtil;
+import com.luck.picture.lib.tools.PictureFileUtils;
 import com.shuyu.gsyvideoplayer.cache.CacheFactory;
 import com.shuyu.gsyvideoplayer.cache.ProxyCacheManager;
 import com.shuyu.gsyvideoplayer.player.PlayerFactory;
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void initData(@Nullable Bundle savedInstanceState) {
         mFragmentArray.put(R.id.rb01, SpecialFragment.newInstance());
         mFragmentArray.put(R.id.rb02, FindFragment.newInstance());
-        mFragmentArray.put(R.id.rb04, CollegeFragment.newInstance());
+        mFragmentArray.put(R.id.rb04, SpaceFragment.newInstance());
         mFragmentArray.put(R.id.rb05, MineFragment.newInstance());
 
         ISupportFragment firstFragment = findFragment(SpecialFragment.class);
@@ -141,6 +142,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PictureFileUtils.deleteAllCacheDirFile(this);
     }
 
     /**

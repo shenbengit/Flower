@@ -8,31 +8,22 @@ import cn.bmob.v3.BmobObject;
  * @email 714081644@qq.com
  */
 public class ArticleBean extends BmobObject {
-    private int id;
+    private Integer id;
     private String enName;
     private String cnName;
     private String imgUrl;
-    private int type;
+    private Integer type;
     private String detailUrl;
 
     public ArticleBean() {
 
     }
 
-    public ArticleBean(int id, String enName, String cnName, String imgUrl, int type, String detailUrl) {
-        this.id = id;
-        this.enName = enName;
-        this.cnName = cnName;
-        this.imgUrl = imgUrl;
-        this.type = type;
-        this.detailUrl = detailUrl;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,11 +51,11 @@ public class ArticleBean extends BmobObject {
         this.imgUrl = imgUrl;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

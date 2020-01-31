@@ -22,6 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".mvvm.view.activity.PostActivity"></activity>
+        <activity android:name=".mvvm.view.activity.KnowFlowerDetailActivity" />
         <activity android:name=".mvvm.view.activity.KnowFlowerActivity" />
         <activity android:name=".mvvm.view.activity.LoginActivity" />
         <activity android:name=".mvvm.view.activity.WallpaperDetailActivity" />

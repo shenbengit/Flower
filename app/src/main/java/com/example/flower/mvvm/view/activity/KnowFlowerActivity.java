@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.flower.GlideEngine;
 import com.example.flower.R;
 import com.example.flower.base.BaseActivity;
@@ -64,11 +65,16 @@ public class KnowFlowerActivity extends BaseActivity<ActivityKnowFlowerBinding, 
     @Override
     protected void initView() {
         super.initView();
-        mBinding.ibBack.setOnClickListener(v -> onBackPressed());
+        mBinding.ibBack.setOnClickListener(v -> onBackPressedSupport());
         mPopupWindow = new KnowFlowerPopupWindow(this);
+        mPopupWindow.setOnCheckItemListener(bean -> ARouter.getInstance()
+                .build(ARouterPath.KNOW_FLOWER_DETAIL_PATH)
+                .withString(KnowFlowerDetailActivity.FLOWER_DETAIL_URL, bean.getDetailUrl())
+                .navigation());
         mPopupWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                flag = false;
                 mViewModel.isPhotoLibraryPreviewShow.set(false);
                 mBinding.cameraView.open();
 
@@ -84,6 +90,7 @@ public class KnowFlowerActivity extends BaseActivity<ActivityKnowFlowerBinding, 
 
             @Override
             public void onPictureTaken(@NonNull PictureResult result) {
+                flag = true;
                 mBinding.cameraView.close();
                 mLoadingDialog.show();
                 mPopupWindow.showPopupWindow();
@@ -162,8 +169,8 @@ public class KnowFlowerActivity extends BaseActivity<ActivityKnowFlowerBinding, 
         });
         mViewModel.mIdentifyResultsLiveData.observe(this, list -> {
             mLoadingDialog.dismiss();
-            if (list == null) {
-
+            if (list == null || list.isEmpty()) {
+                mPopupWindow.noData();
             } else {
                 mPopupWindow.setResultData(list);
             }
@@ -207,7 +214,6 @@ public class KnowFlowerActivity extends BaseActivity<ActivityKnowFlowerBinding, 
         if (!flag) {
             mBinding.cameraView.open();
         }
-        flag = false;
     }
 
     @Override

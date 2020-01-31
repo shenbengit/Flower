@@ -47,6 +47,8 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
         }
     };
 
+    private OnCheckItemListener mOnCheckItemListener;
+
     public KnowFlowerPopupWindow(Context context) {
         super(context, ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.dp_370));
         findViewById(R.id.ibBack).setOnClickListener(v -> dismiss());
@@ -67,6 +69,11 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
         rvResult.addOnScrollListener(new CenterScrollListener());
 
         mAdapter = new KnowFlowerAdapter();
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            if (mOnCheckItemListener != null) {
+                mOnCheckItemListener.onItemChecked(mAdapter.getItem(position));
+            }
+        });
         rvResult.setAdapter(mAdapter);
     }
 
@@ -85,9 +92,17 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
         return createTranslateAnimation(0f, 0f, 0f, 1f);
     }
 
+    public void setOnCheckItemListener(OnCheckItemListener listener) {
+        mOnCheckItemListener = listener;
+    }
+
     public void setResultData(List<KnowFlowerResultBean.ResponseBean.IdentifyResultsBean> list) {
         setStatus();
         mAdapter.setNewData(list);
+    }
+
+    public void noData() {
+        tvHint.setText("识别出错啦，请重试！");
     }
 
     @Override
@@ -136,6 +151,10 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
         animation.setDuration(360);
         animation.setInterpolator(new DecelerateInterpolator());
         return animation;
+    }
+
+    public interface OnCheckItemListener {
+        void onItemChecked(KnowFlowerResultBean.ResponseBean.IdentifyResultsBean bean);
     }
 
 }

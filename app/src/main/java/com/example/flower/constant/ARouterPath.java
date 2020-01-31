@@ -38,4 +38,13 @@ public class ARouterPath {
      * 识花页面
      */
     public static final String KNOW_FLOWER_PATH = BASE_ACTIVITY_PATH + "KnowFlowerActivity";
+    /**
+     * 识花详情页面
+     */
+    public static final String KNOW_FLOWER_DETAIL_PATH = BASE_ACTIVITY_PATH + "KnowFlowerDetailActivity";
+    /**
+     * 发帖页面
+     */
+    public static final String POST_PATH = BASE_ACTIVITY_PATH + "PostActivity";
+
 }

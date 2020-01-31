@@ -14,13 +14,28 @@
         android:layout_height="match_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            imageObject="@{item.reference_url}"
+            android:id="@+id/iv"
+            errorImageRes="@{@drawable/grey_bg}"
+            imageObject="@{item.referenceUrl}"
+            placeholderImageRes="@{@drawable/grey_bg}"
             android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_250"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:text="点击查看详情"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_11"
+            app:layout_constraintBottom_toBottomOf="@id/iv"
+            app:layout_constraintEnd_toEndOf="@id/iv"
+            app:layout_constraintStart_toStartOf="@id/iv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,9 +1,6 @@
 package com.example.flower.mvvm.view.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,22 +13,21 @@ import com.example.flower.R;
 import com.example.flower.base.BaseActivity;
 import com.example.flower.base.BaseViewModel;
 import com.example.flower.constant.ARouterPath;
-import com.example.flower.constant.Constant;
-import com.example.flower.databinding.ActivityArticleDetailWebBinding;
-import com.example.flower.http.bean.HomePageBean;
-import com.example.flower.util.LogUtil;
+import com.example.flower.databinding.ActivityKnowFlowerDetailBinding;
 
-@Route(path = ARouterPath.ARTICLE_DETAIL_WEB_ACTIVITY_PATH)
-public class ArticleDetailWebActivity extends BaseActivity<ActivityArticleDetailWebBinding, BaseViewModel> {
+/**
+ * 识花详情页面
+ * 加载长图
+ */
+@Route(path = ARouterPath.KNOW_FLOWER_DETAIL_PATH)
+public class KnowFlowerDetailActivity extends BaseActivity<ActivityKnowFlowerDetailBinding, BaseViewModel> {
 
-    public static final String ARTICLE_DETAIL = "ARTICLE_DETAIL";
-    private HomePageBean.DataBean.CommunityHomePageFirstPlateViewBean.ArticleForFirstPlateViewsBean mBean;
-
+    public static final String FLOWER_DETAIL_URL = "FLOWER_DETAIL_URL";
     private WebView webView;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_article_detail_web;
+        return R.layout.activity_know_flower_detail;
     }
 
     @Override
@@ -44,19 +40,13 @@ public class ArticleDetailWebActivity extends BaseActivity<ActivityArticleDetail
         return 0;
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void initView() {
         super.initView();
-        webView = mBinding.webView;
-        Intent intent = getIntent();
-        if (intent != null) {
-            mBean = intent.getParcelableExtra(ARTICLE_DETAIL);
-        }
-        if (mBean != null) {
-            mBinding.toolbar.setTitle(mBean.getCnName());
-        }
+        mBinding.toolbar.setTitle("识花详情");
         initToolbar(mBinding.toolbar);
+
+        webView = mBinding.webView;
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置自适应屏幕，两者合用
@@ -84,11 +74,11 @@ public class ArticleDetailWebActivity extends BaseActivity<ActivityArticleDetail
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-        if (mBean != null) {
-            webView.loadUrl(Constant.BASE_URL + mBean.getDetailUrl());
+        if (getIntent() != null) {
+            webView.loadUrl(getIntent().getStringExtra(FLOWER_DETAIL_URL));
+//            webView.loadUrl("http://api.xingseapp.com/item/detail?id=UnBzQ3RJdjhqR3Uyek50YjZXZ1pFMm9TR3JMbE02YmgzdFBiWERxelVUQXJSN2VJTVY1enJuWE1lZVRkU1JrWQ==");
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -104,23 +94,6 @@ public class ArticleDetailWebActivity extends BaseActivity<ActivityArticleDetail
         webView.pauseTimers();
     }
 
-    /**
-     * 点击返回 先判断webView是否可以后退，如果可以则后退，否者不处理
-     *
-     * @param keyCode
-     * @param event
-     * @return
-     */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
-            webView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-
     @Override
     protected void onDestroy() {
         if (webView != null) {
@@ -134,14 +107,5 @@ public class ArticleDetailWebActivity extends BaseActivity<ActivityArticleDetail
             webView = null;
         }
         super.onDestroy();
-    }
-
-    @Override
-    protected void onBackClick() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-            return;
-        }
-        super.onBackClick();
     }
 }

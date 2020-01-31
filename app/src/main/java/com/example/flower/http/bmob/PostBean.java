@@ -21,7 +21,7 @@ public class PostBean extends BmobObject {
     /**
      * 帖子作者
      */
-    private UserBean user;
+    private UserBean author;
     /**
      * 喜欢帖子的人
      */
@@ -30,9 +30,20 @@ public class PostBean extends BmobObject {
      * 帖子里面的图片
      */
     private List<BmobFile> pictures;
+    /**
+     * 帖子的类型
+     */
+    private PostTypeBean postType;
+    /**
+     * 喜欢这个帖子的数量
+     */
+    private Integer likesNumber = 0;
+    /**
+     * 评论这个帖子的数量
+     */
+    private Integer commentNumber = 0;
 
     public PostBean() {
-        super("Post");
     }
 
     public String getContent() {
@@ -43,12 +54,12 @@ public class PostBean extends BmobObject {
         this.content = content;
     }
 
-    public UserBean getUser() {
-        return user;
+    public UserBean getAuthor() {
+        return author;
     }
 
-    public void setUser(UserBean user) {
-        this.user = user;
+    public void setAuthor(UserBean author) {
+        this.author = author;
     }
 
     public BmobRelation getLikes() {
@@ -65,5 +76,29 @@ public class PostBean extends BmobObject {
 
     public void setPictures(List<BmobFile> pictures) {
         this.pictures = pictures;
+    }
+
+    public PostTypeBean getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostTypeBean postType) {
+        this.postType = postType;
+    }
+
+    public Integer getLikesNumber() {
+        return likesNumber;
+    }
+
+    public void setLikesNumber(Integer likesNumber) {
+        this.likesNumber = likesNumber;
+    }
+
+    public Integer getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(Integer commentNumber) {
+        this.commentNumber = commentNumber;
     }
 }

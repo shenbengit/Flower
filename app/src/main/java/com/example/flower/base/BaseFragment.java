@@ -2,6 +2,7 @@ package com.example.flower.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,6 +146,9 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
      * 默认处理了[SHOW_LOADING_DIALOG]和[DISMISS_LOADING_DIALOG]这两个事件
      */
     protected void baseLiveDataObserver(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return;
+        }
         switch (str) {
             case Constant.SHOW_DIALOG:
                 mLoadingDialog.show();

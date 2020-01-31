@@ -24,7 +24,6 @@ public class CommentBean extends BmobObject {
     private PostBean post;
 
     public CommentBean() {
-        super("Comment");
     }
 
     public String getContent() {

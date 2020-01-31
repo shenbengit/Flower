@@ -76,18 +76,20 @@ public class KnowFlowerResultBean {
              * detail_url : http://10.35.10.77/item/detail?id=WGtCRG5pRUQ4b1BQOWlVRDNlcnhMeDkxdFdQUTNVOFdvRjF3d052VVgya012RUd2UmJKeTJJR2dNTXcycGdBcg==
              */
 
-            private String reference_url;
+            @SerializedName("reference_url")
+            private String referenceUrl;
             private String name;
             private String desc;
             private double probability;
-            private String detail_url;
+            @SerializedName("detail_url")
+            private String detailUrl;
 
-            public String getReference_url() {
-                return reference_url;
+            public String getReferenceUrl() {
+                return referenceUrl;
             }
 
-            public void setReference_url(String reference_url) {
-                this.reference_url = reference_url;
+            public void setReferenceUrl(String referenceUrl) {
+                this.referenceUrl = referenceUrl;
             }
 
             public String getName() {
@@ -114,12 +116,12 @@ public class KnowFlowerResultBean {
                 this.probability = probability;
             }
 
-            public String getDetail_url() {
-                return detail_url;
+            public String getDetailUrl() {
+                return detailUrl;
             }
 
-            public void setDetail_url(String detail_url) {
-                this.detail_url = detail_url;
+            public void setDetail_url(String detailUrl) {
+                this.detailUrl = detailUrl;
             }
         }
     }

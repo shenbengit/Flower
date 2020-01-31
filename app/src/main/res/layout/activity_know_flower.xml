@@ -54,7 +54,9 @@
 
         <ImageView
             android:id="@+id/ivPhotoLibraryPreview"
+            errorImageRes="@{@drawable/grey_bg}"
             imageObject="@{viewModel.photoLibraryPreviewFile}"
+            placeholderImageRes="@{@drawable/grey_bg}"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
             android:scaleType="fitXY"
