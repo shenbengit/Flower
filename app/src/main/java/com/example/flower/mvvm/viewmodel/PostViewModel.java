@@ -1,226 +1,88 @@
 package com.example.flower.mvvm.viewmodel;
 
 import android.app.Application;
-import android.text.TextUtils;
+import android.graphics.Rect;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableField;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flower.R;
 import com.example.flower.base.BaseViewModel;
-import com.example.flower.binding.command.BindingCommand;
 import com.example.flower.constant.Constant;
-import com.example.flower.http.bean.AddPictureBean;
-import com.example.flower.http.bmob.PostTypeBean;
 import com.example.flower.mvvm.model.PostModel;
-import com.example.flower.mvvm.view.adapter.AddPictureAdapter;
-import com.example.flower.mvvm.view.adapter.PostTypeAdapter;
-import com.example.flower.util.LogUtil;
-import com.example.flower.util.ToastUtil;
-import com.luck.picture.lib.entity.LocalMedia;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.bmob.v3.datatype.BmobFile;
+import com.example.flower.mvvm.view.adapter.PostAdapter;
 
 /**
  * @author ShenBen
- * @date 2020/1/30 18:20
+ * @date 2020/2/1 15:35
  * @email 714081644@qq.com
  */
 public class PostViewModel extends BaseViewModel<PostModel> {
-    /**
-     * 选择照片
-     */
-    public static final String CHOOSE_IMAGE = "CHOOSE_IMAGE";
-    /**
-     * 可以选择的最大的图片数量
-     */
-    private static final int MAX_IMAGE_NUMBER = 9;
-    /**
-     * 发帖点击事件
-     */
-    public BindingCommand postCommand;
-    /**
-     * 帖子的内容
-     */
-    public ObservableField<String> contentStr = new ObservableField<>();
-    /**
-     * 已经选择的图片数量
-     */
-    public ObservableField<String> imageNumberStr = new ObservableField<>("(0/" + MAX_IMAGE_NUMBER + ")");
+    public PostAdapter mPostAdapter;
+    public RecyclerView.ItemDecoration mItemDecoration = new RecyclerView.ItemDecoration() {
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            outRect.bottom = (int) getApplication().getResources().getDimension(R.dimen.dp_5);
+            outRect.top = (int) getApplication().getResources().getDimension(R.dimen.dp_5);
+        }
+    };
 
-
-    public AddPictureAdapter mAddPictureAdapter;
-    public PostTypeAdapter mPostTypeAdapter;
-    /**
-     * 选择的帖子类型
-     */
-    private PostTypeBean mCheckedPostType;
-
-    /**
-     * 已经选择的图片集合
-     */
-    private List<AddPictureBean> mHaveChosenPictureList = new ArrayList<>();
+    private String mTypeObjectId;
 
     public PostViewModel(@NonNull Application application) {
         super(application, new PostModel());
-        postCommand = new BindingCommand(this::uploadBatch);
+        mPostAdapter = new PostAdapter();
+    }
 
-        mAddPictureAdapter = new AddPictureAdapter();
-        mAddPictureAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            switch (view.getId()) {
-                case R.id.ibAddPicture:
-                    mBaseLiveData.setValue(CHOOSE_IMAGE);
-                    break;
-                case R.id.ivPicture:
+    public void setPostTypeObjectId(String objectId) {
+        mTypeObjectId = objectId;
+    }
 
-                    break;
-                case R.id.ibDelete:
-                    mAddPictureAdapter.remove(position);
-                    if (mHaveChosenPictureList.size() == MAX_IMAGE_NUMBER) {
-                        //如果已经选择了最大数量，需要在最后再添加一个添加图片按钮
-                        //先添加一个添加照片的按钮
-                        mAddPictureAdapter.addData(new AddPictureBean(AddPictureAdapter.ADD_PICTURE));
-                    }
-                    mHaveChosenPictureList.remove(position);
-                    setHaveChosenPictureSize();
-                    break;
+    /**
+     * 根据帖子类型查询帖子
+     *
+     * @param isLoadMore true: 上拉加载 ,false: 下拉刷新
+     */
+    public void queryPost(boolean isLoadMore) {
+        mModel.queryPostByType(mTypeObjectId, isLoadMore, list -> {
+            if (list == null) {
+                if (isLoadMore) {
+                    mBaseLiveData.setValue(Constant.LOAD_MORE_FAIL);
+                } else {
+                    mBaseLiveData.setValue(Constant.REFRESH_FAIL);
+                }
+                return;
             }
-        });
-
-        mPostTypeAdapter = new PostTypeAdapter();
-
-        mPostTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mCheckedPostType = mPostTypeAdapter.getItem(position);
-            mPostTypeAdapter.singleElectionPosition(position);
-        });
-
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        //先添加一个添加照片的按钮
-        mAddPictureAdapter.addData(new AddPictureBean(AddPictureAdapter.ADD_PICTURE));
-
-        //获取帖子类型表
-        mModel.getPostType(postTypeBeans -> mPostTypeAdapter.setNewData(postTypeBeans), null);
-
-    }
-
-    /**
-     * @return 还可以选择的最大的图片数量
-     */
-    public int canChooseImageNumber() {
-        return MAX_IMAGE_NUMBER - mHaveChosenPictureList.size();
-    }
-
-    /**
-     * 添加照片
-     * 从相机拍照返回
-     *
-     * @param file
-     */
-    public void addPictureFromCamera(File file) {
-        if (file == null) {
-            return;
-        }
-        AddPictureBean bean = new AddPictureBean(AddPictureAdapter.NORMAL_PICTURE, file);
-        mHaveChosenPictureList.add(bean);
-        if (mHaveChosenPictureList.size() == MAX_IMAGE_NUMBER) {
-            //如果已经选择的数量等于最大值，则替换最后一个位置(添加图片的按钮)，之后则不可再添加数据
-            mAddPictureAdapter.setData(mAddPictureAdapter.getData().size() - 1, bean);
-        } else {
-            //如果已经选择的数量小于最大值，则在Adapter的data最后一个位置之前追加数据
-            mAddPictureAdapter.addData(mAddPictureAdapter.getData().size() - 1, bean);
-        }
-        setHaveChosenPictureSize();
-    }
-
-    /**
-     * 添加照片
-     * 从相册选取返回
-     *
-     * @param list
-     */
-    public void addPictureFromPhotoLibrary(List<LocalMedia> list) {
-        if (list == null) {
-            return;
-        }
-        List<AddPictureBean> pictures = new ArrayList<>();
-        String path;
-        for (LocalMedia media : list) {
-            if (media.isCompressed()) {
-                path = media.getCompressPath();
+            if (list.isEmpty()) {
+                if (!isLoadMore) {
+                    //RecyclerView设置空布局
+                    mPostAdapter.setEmptyView(R.layout.layout_no_data);
+                    //如果是下拉刷新
+                    //则说明没有数据
+                    mBaseLiveData.setValue(Constant.REFRESH_SUCCESS);
+                }
+                //说明已经加载完所有数据
+                mBaseLiveData.setValue(Constant.LOAD_MORE_COMPLETE);
+                return;
+            }
+            if (isLoadMore) {
+                mPostAdapter.addData(list);
+                mBaseLiveData.setValue(Constant.LOAD_MORE_SUCCESS);
             } else {
-                path = media.getPath();
+                mPostAdapter.setNewData(list);
+                mBaseLiveData.setValue(Constant.REFRESH_SUCCESS);
             }
-            pictures.add(new AddPictureBean(AddPictureAdapter.NORMAL_PICTURE, new File(path)));
-        }
-        mHaveChosenPictureList.addAll(pictures);
-        if (mHaveChosenPictureList.size() == MAX_IMAGE_NUMBER) {
-            //如果选择的数量正好，则删除最后一个添加图片的按钮
-            mAddPictureAdapter.remove(mAddPictureAdapter.getData().size() - 1);
-            mAddPictureAdapter.addData(pictures);
-        } else {
-            mAddPictureAdapter.addData(mAddPictureAdapter.getData().size() - 1, pictures);
-        }
-        setHaveChosenPictureSize();
-    }
-
-    /**
-     * 设置已经选择的图片数量
-     */
-    private void setHaveChosenPictureSize() {
-        imageNumberStr.set("(" + mHaveChosenPictureList.size() + "/" + MAX_IMAGE_NUMBER + ")");
-    }
-
-    /**
-     * 上传文件
-     */
-    private void uploadBatch() {
-        String content = contentStr.get();
-        if (TextUtils.isEmpty(content)) {
-            ToastUtil.warning(getApplication(), "请输入帖子内容");
-            return;
-        }
-        if (mHaveChosenPictureList.isEmpty()) {
-            ToastUtil.warning(getApplication(), "请添加帖子图片");
-            return;
-        }
-        String[] paths = new String[mHaveChosenPictureList.size()];
-        for (int i = 0; i < mHaveChosenPictureList.size(); i++) {
-            paths[i] = mHaveChosenPictureList.get(i).getImageFile().getAbsolutePath();
-        }
-
-        mBaseLiveData.postValue(Constant.SHOW_DIALOG);
-
-        mModel.uploadBatch(paths, bmobFiles -> post(content, bmobFiles),
-                e -> {
-                    mBaseLiveData.postValue(Constant.DISMISS_DIALOG);
-                    LogUtil.e("上传文件失败," + e.toString());
-                    ToastUtil.error(getApplication(), "上传文件失败," + e.toString());
-                });
-    }
-
-    /**
-     * 发帖
-     *
-     * @param content
-     * @param bmobFiles
-     */
-    private void post(String content, List<BmobFile> bmobFiles) {
-        mModel.post(content, bmobFiles, mCheckedPostType, objectId -> {
-            mBaseLiveData.postValue(Constant.DISMISS_DIALOG);
-            LogUtil.i("帖子发表成功，objectId: " + objectId);
-            ToastUtil.success(getApplication(), "发帖成功");
+            if (list.size() < PostModel.PAGE_SIZE) {
+                //查询到的数据小于分页查询一页的数据，说明已经加载完所有数据
+                mBaseLiveData.setValue(Constant.LOAD_MORE_COMPLETE);
+            }
         }, throwable -> {
-            mBaseLiveData.postValue(Constant.DISMISS_DIALOG);
-            LogUtil.i("帖子发表失败，" + throwable.toString());
-            ToastUtil.error(getApplication(), "帖子发表失败，" + throwable.toString());
+            if (isLoadMore) {
+                mBaseLiveData.setValue(Constant.LOAD_MORE_FAIL);
+            } else {
+                mBaseLiveData.setValue(Constant.REFRESH_FAIL);
+            }
         });
     }
 }

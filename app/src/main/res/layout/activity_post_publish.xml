@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.flower.mvvm.viewmodel.PostViewModel" />
+            type="com.example.flower.mvvm.viewmodel.PublishPostViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        tools:context=".mvvm.view.activity.PostActivity">
+        tools:context=".mvvm.view.activity.PublishPostActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

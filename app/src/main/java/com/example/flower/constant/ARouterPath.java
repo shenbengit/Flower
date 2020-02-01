@@ -45,6 +45,6 @@ public class ARouterPath {
     /**
      * 发帖页面
      */
-    public static final String POST_PATH = BASE_ACTIVITY_PATH + "PostActivity";
+    public static final String PUBLISH_POST_PATH = BASE_ACTIVITY_PATH + "PublishPostActivity";
 
 }

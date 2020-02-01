@@ -80,7 +80,7 @@ public class Constant {
     public static final String DISMISS_DIALOG = "DISMISS_DIALOG";
     /**
      * 阿里云-形色Api使用的AppCode
-     * 
+     * <p>
      * 8ab7575d3f0c4533b7bce28ff3eb7bb0
      */
     public static final String XING_SE_APP_CODE = "7aa6fe8725f548239f4be10ffc3ae547";
@@ -89,5 +89,8 @@ public class Constant {
      */
     public static final String XING_SE_API_URL = "http://plantapi.xingseapp.com/item/identification";
 
-
+    /**
+     * 所有帖子的类型的标志
+     */
+    public static final int ALL_POST_TYPE_ID = -1;
 }

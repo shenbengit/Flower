@@ -11,13 +11,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="热门"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:background="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabIndicatorHeight="@dimen/dp_0"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="#834005"
+            app:tabTextColor="@color/colorGrey" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0_1"
+            android:background="@color/colorGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/view" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -99,4 +99,5 @@ dependencies {
     implementation rootProject.ext.dependencies["BasePopup-compat-androidx"]
     implementation rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["Luban"]
+    implementation 'com.jaeger.ninegridimageview:library:1.1.1'
 }

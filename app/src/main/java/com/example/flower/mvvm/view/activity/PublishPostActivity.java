@@ -19,9 +19,10 @@ import com.example.flower.R;
 import com.example.flower.base.BaseActivity;
 import com.example.flower.constant.ARouterPath;
 import com.example.flower.constant.Constant;
-import com.example.flower.databinding.ActivityPostBinding;
+import com.example.flower.databinding.ActivityPostPublishBinding;
 import com.example.flower.mvvm.view.widget.ChooseImageDialog;
-import com.example.flower.mvvm.viewmodel.PostViewModel;
+import com.example.flower.mvvm.view.widget.EnlargePictureDialog;
+import com.example.flower.mvvm.viewmodel.PublishPostViewModel;
 import com.example.flower.util.LogUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -37,8 +38,8 @@ import top.zibin.luban.OnCompressListener;
 /**
  * 发帖页面
  */
-@Route(path = ARouterPath.POST_PATH)
-public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewModel> {
+@Route(path = ARouterPath.PUBLISH_POST_PATH)
+public class PublishPostActivity extends BaseActivity<ActivityPostPublishBinding, PublishPostViewModel> {
 
     private static final int CAMERA_REQUEST_CODE = 101;
     /**
@@ -46,20 +47,21 @@ public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewMode
      */
     private Uri uri;
     /**
-     * 拍照的文件地址
+     * 拍照保存的文件地址
      */
     private File file;
 
     private ChooseImageDialog mChooseImageDialog;
+    private EnlargePictureDialog mEnlargePictureDialog;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_post;
+        return R.layout.activity_post_publish;
     }
 
     @Override
-    protected Class<PostViewModel> getModelClass() {
-        return PostViewModel.class;
+    protected Class<PublishPostViewModel> getModelClass() {
+        return PublishPostViewModel.class;
     }
 
     @Override
@@ -82,7 +84,7 @@ public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewMode
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //兼容android7.0版本
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    uri = FileProvider.getUriForFile(PostActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    uri = FileProvider.getUriForFile(PublishPostActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 } else {
                     uri = Uri.fromFile(file);
@@ -95,10 +97,10 @@ public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewMode
             @Override
             public void fromPhotoLibrary() {
                 //相册
-                PictureSelector.create(PostActivity.this)
+                PictureSelector.create(PublishPostActivity.this)
                         .openGallery(PictureMimeType.ofImage())
                         .compress(true)//压缩
-                        .compressQuality(90)//压缩质量\
+                        .compressQuality(90)//压缩质量
                         .maxSelectNum(mViewModel.canChooseImageNumber())//可以选择图片的最大数量
                         .enableCrop(false)
                         .isWeChatStyle(true)
@@ -110,17 +112,25 @@ public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewMode
                         .forResult(PictureConfig.CHOOSE_REQUEST);
             }
         });
+        mEnlargePictureDialog = new EnlargePictureDialog(this);
+        mEnlargePictureDialog.isShowDeleteButton(true);
+        mEnlargePictureDialog.setOnDeletePictureListener(position -> mViewModel.deletePicture(position));
     }
 
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
-
+        mViewModel.mShowEnlargePictureLiveData.observe(this, integer -> {
+            if (integer != null) {
+                mEnlargePictureDialog.setImageList(mViewModel.getHaveChosenPictureList(), integer);
+                mEnlargePictureDialog.show();
+            }
+        });
     }
 
     @Override
     protected void baseLiveDataObserver(String str) {
         super.baseLiveDataObserver(str);
-        if (TextUtils.equals(str, PostViewModel.CHOOSE_IMAGE)) {
+        if (TextUtils.equals(str, PublishPostViewModel.CHOOSE_IMAGE)) {
             mChooseImageDialog.show();
         }
     }
@@ -166,9 +176,6 @@ public class PostActivity extends BaseActivity<ActivityPostBinding, PostViewMode
                 //相册选取返回
                 if (resultCode == RESULT_OK) {
                     List<LocalMedia> list = PictureSelector.obtainMultipleResult(data);
-                    if (list.isEmpty()) {
-                        return;
-                    }
                     mViewModel.addPictureFromPhotoLibrary(list);
                 }
                 break;

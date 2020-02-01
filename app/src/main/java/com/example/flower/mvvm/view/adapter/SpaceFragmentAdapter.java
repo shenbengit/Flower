@@ -57,7 +57,7 @@ public class SpaceFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if (TextUtils.equals(SpaceFragment.POPULAR, getItem(position))) {
-            //发现
+            //热门
             return PopularFragment.newInstance();
         } else if (TextUtils.equals(SpaceFragment.COLLECTION, getItem(position))) {
             //收藏

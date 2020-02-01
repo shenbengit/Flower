@@ -27,6 +27,12 @@ public class PostTypeBean extends BmobObject {
     public PostTypeBean() {
     }
 
+    public PostTypeBean(Integer typeId, String typeName, Boolean isEnable) {
+        this.typeId = typeId;
+        this.typeName = typeName;
+        this.isEnable = isEnable;
+    }
+
     public Integer getTypeId() {
         return typeId;
     }

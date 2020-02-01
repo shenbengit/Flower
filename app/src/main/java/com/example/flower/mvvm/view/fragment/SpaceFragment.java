@@ -49,6 +49,8 @@ public class SpaceFragment extends BaseFragment<FragmentSpaceBinding, SpaceViewM
         super.initView();
         SpaceFragmentAdapter adapter = new SpaceFragmentAdapter(this);
         mBinding.vpDetail.setAdapter(adapter);
+        //ViewPager2 设置为禁止滑动
+        mBinding.vpDetail.setUserInputEnabled(false);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mBinding.tabLayout,
                 mBinding.vpDetail, (tab, position) -> tab.setText(adapter.getItem(position)));
         tabLayoutMediator.attach();

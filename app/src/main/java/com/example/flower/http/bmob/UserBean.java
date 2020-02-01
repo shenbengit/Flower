@@ -27,6 +27,10 @@ public class UserBean extends BmobUser {
      * 头像
      */
     private BmobFile headImg;
+    /**
+     * 个性签名
+     */
+    private String signature;
 
     public UserBean() {
     }
@@ -63,4 +67,11 @@ public class UserBean extends BmobUser {
         this.headImg = headImg;
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 }

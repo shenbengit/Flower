@@ -87,7 +87,7 @@ public class PostBean extends BmobObject {
     }
 
     public Integer getLikesNumber() {
-        return likesNumber;
+        return likesNumber == null ? 0 : likesNumber;
     }
 
     public void setLikesNumber(Integer likesNumber) {
@@ -95,7 +95,7 @@ public class PostBean extends BmobObject {
     }
 
     public Integer getCommentNumber() {
-        return commentNumber;
+        return commentNumber == null ? 0 : commentNumber;
     }
 
     public void setCommentNumber(Integer commentNumber) {

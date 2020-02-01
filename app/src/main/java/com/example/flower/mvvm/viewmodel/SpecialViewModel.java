@@ -114,15 +114,6 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
         mDiscoveryAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.iv) {
                 DailyDiscoveryBean.DataBean item = mDiscoveryAdapter.getItem(position);
-//                if (view.getContext() instanceof Activity) {
-////                    Activity activity = (Activity) view.getContext();
-////                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, application.getResources().getString(R.string.image_transition)).toBundle();
-////                    if (bundle != null && item != null) {
-////                        bundle.putString(DailyDiscoveryDetailActivity.DISCOVERY_DETAIL, item.getId());
-////                        ActivityCompat.startActivity(activity, new Intent(activity, DailyDiscoveryDetailActivity.class), bundle);
-////
-////                    }
-////                }
                 if (item == null) {
                     return;
                 }
