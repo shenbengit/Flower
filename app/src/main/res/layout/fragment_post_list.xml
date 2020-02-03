@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.flower.mvvm.viewmodel.PostViewModel" />
+            type="com.example.flower.mvvm.viewmodel.PostListViewModel" />
     </data>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -23,8 +23,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetail"
-            addRecyclerViewItemDecoration="@{viewModel.mItemDecoration}"
-            bindRecyclerViewAdapter="@{viewModel.mPostAdapter}"
+            bindRecyclerViewAdapter="@{viewModel.mPostListAdapter}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

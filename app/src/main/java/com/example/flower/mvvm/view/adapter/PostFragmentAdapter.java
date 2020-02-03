@@ -8,7 +8,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.flower.http.bmob.PostTypeBean;
-import com.example.flower.mvvm.view.fragment.PostFragment;
+import com.example.flower.mvvm.view.fragment.PostListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class PostFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return PostFragment.newInstance(getItem(position).getObjectId());
+        return PostListFragment.newInstance(getItem(position).getObjectId());
     }
 
     @Override

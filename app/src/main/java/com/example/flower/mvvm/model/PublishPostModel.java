@@ -6,7 +6,6 @@ import com.example.flower.base.BaseModel;
 import com.example.flower.http.bmob.PostBean;
 import com.example.flower.http.bmob.PostTypeBean;
 import com.example.flower.http.bmob.UserBean;
-import com.example.flower.util.RxUtil;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class PublishPostModel extends BaseModel {
         //筛选状态为启用状态的
         query.addWhereEqualTo("isEnable", true);
         query.findObjectsObservable(PostTypeBean.class)
-                .compose(RxUtil.io_main())
                 .compose(mLifecycleProvider.bindToLifecycle())
                 .subscribe(new Observer<List<PostTypeBean>>() {
                     @Override
@@ -113,7 +111,6 @@ public class PublishPostModel extends BaseModel {
         postBean.setPictures(list);
         postBean.setPostType(typeBean);
         postBean.saveObservable()
-                .compose(RxUtil.io_main())
                 .compose(mLifecycleProvider.bindToLifecycle())
                 .subscribe(new Observer<String>() {
                     @Override

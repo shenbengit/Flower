@@ -1,5 +1,7 @@
 package com.example.flower.http.bmob;
 
+import android.text.TextUtils;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -68,7 +70,7 @@ public class UserBean extends BmobUser {
     }
 
     public String getSignature() {
-        return signature;
+        return TextUtils.isEmpty(signature) ? "这家伙很懒，什么也没留下" : signature;
     }
 
     public void setSignature(String signature) {

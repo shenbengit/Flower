@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
@@ -23,6 +22,8 @@ import com.example.flower.databinding.ActivityPostPublishBinding;
 import com.example.flower.mvvm.view.widget.ChooseImageDialog;
 import com.example.flower.mvvm.view.widget.EnlargePictureDialog;
 import com.example.flower.mvvm.viewmodel.PublishPostViewModel;
+import com.example.flower.rxbus.RxBus;
+import com.example.flower.rxbus.bean.CommandBean;
 import com.example.flower.util.LogUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -130,8 +131,14 @@ public class PublishPostActivity extends BaseActivity<ActivityPostPublishBinding
     @Override
     protected void baseLiveDataObserver(String str) {
         super.baseLiveDataObserver(str);
-        if (TextUtils.equals(str, PublishPostViewModel.CHOOSE_IMAGE)) {
-            mChooseImageDialog.show();
+        switch (str) {
+            case PublishPostViewModel.PUBLISH_POST_SUCCESS:
+                RxBus.getDefault().postSticky(new CommandBean(CommandBean.COMMAND_PUBLISH_POST_SUCCESS));
+                onBackPressedSupport();
+                break;
+            case PublishPostViewModel.CHOOSE_IMAGE:
+                mChooseImageDialog.show();
+                break;
         }
     }
 
@@ -158,7 +165,6 @@ public class PublishPostActivity extends BaseActivity<ActivityPostPublishBinding
                                     public void onSuccess(File file) {
                                         mLoadingDialog.dismiss();
                                         mViewModel.addPictureFromCamera(file);
-
                                     }
 
                                     @Override

@@ -46,5 +46,13 @@ public class ARouterPath {
      * 发帖页面
      */
     public static final String PUBLISH_POST_PATH = BASE_ACTIVITY_PATH + "PublishPostActivity";
+    /**
+     * 帖子详情页面
+     */
+    public static final String POST_DETAIL_PATH = BASE_ACTIVITY_PATH + "PostDetailActivity";
+    /**
+     * 评论帖子页面
+     */
+    public static final String COMMENT_PATH = BASE_ACTIVITY_PATH + "CommentActivity";
 
 }

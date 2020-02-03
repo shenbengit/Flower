@@ -9,8 +9,8 @@ import androidx.databinding.library.baseAdapters.BR;
 import com.example.flower.R;
 import com.example.flower.base.BaseFragment;
 import com.example.flower.constant.Constant;
-import com.example.flower.databinding.FragmentPostBinding;
-import com.example.flower.mvvm.viewmodel.PostViewModel;
+import com.example.flower.databinding.FragmentPostListBinding;
+import com.example.flower.mvvm.viewmodel.PostListViewModel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
@@ -21,12 +21,12 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
  * @date 2020/2/1 15:27
  * @email 714081644@qq.com
  */
-public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewModel> {
+public class PostListFragment extends BaseFragment<FragmentPostListBinding, PostListViewModel> {
 
     private static final String POST_TYPE_OBJECT_ID = "POST_TYPE_OBJECT_ID";
 
-    public static PostFragment newInstance(String objectId) {
-        PostFragment fragment = new PostFragment();
+    public static PostListFragment newInstance(String objectId) {
+        PostListFragment fragment = new PostListFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         bundle.putString(POST_TYPE_OBJECT_ID, objectId);
@@ -35,12 +35,12 @@ public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewMode
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_post;
+        return R.layout.fragment_post_list;
     }
 
     @Override
-    protected Class<PostViewModel> getModelClass() {
-        return PostViewModel.class;
+    protected Class<PostListViewModel> getModelClass() {
+        return PostListViewModel.class;
     }
 
     @Override
@@ -71,13 +71,16 @@ public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewMode
             String objectId = bundle.getString(POST_TYPE_OBJECT_ID);
             mViewModel.setPostTypeObjectId(objectId);
         }
-        mBinding.srlRefresh.autoRefresh();
+        mViewModel.queryPost(false);
     }
 
     @Override
     protected void baseLiveDataObserver(String str) {
         super.baseLiveDataObserver(str);
         switch (str) {
+            case Constant.AUTO_REFRESH:
+                mBinding.srlRefresh.autoRefresh();
+                break;
             case Constant.REFRESH_SUCCESS:
                 mBinding.srlRefresh.finishRefresh(true);
                 break;

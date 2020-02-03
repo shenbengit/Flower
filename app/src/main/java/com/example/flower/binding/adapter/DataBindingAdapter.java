@@ -22,6 +22,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.flower.GlideApp;
 import com.example.flower.binding.command.BindingCommand;
+import com.jaeger.ninegridimageview.NineGridImageView;
+import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.jakewharton.rxbinding3.widget.RxCompoundButton;
 import com.jakewharton.rxbinding3.widget.RxRadioGroup;
@@ -29,6 +31,7 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -264,6 +267,20 @@ public class DataBindingAdapter {
     public static void bindViewPager2(ViewPager2 viewPager2, RecyclerView.Adapter adapter) {
         if (adapter != null) {
             viewPager2.setAdapter(adapter);
+        }
+    }
+
+    @BindingAdapter(value = {"bindNineGridAdapter"})
+    public static void bindNineGridAdapter(NineGridImageView viewPager2, NineGridImageViewAdapter adapter) {
+        if (adapter != null) {
+            viewPager2.setAdapter(adapter);
+        }
+    }
+
+    @BindingAdapter(value = {"setNineGridImages"})
+    public static void setNineGridImages(NineGridImageView viewPager2, List<?> list) {
+        if (list != null) {
+            viewPager2.setImagesData(list);
         }
     }
 

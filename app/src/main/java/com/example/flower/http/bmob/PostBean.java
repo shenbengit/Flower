@@ -1,5 +1,6 @@
 package com.example.flower.http.bmob;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -35,13 +36,18 @@ public class PostBean extends BmobObject {
      */
     private PostTypeBean postType;
     /**
-     * 喜欢这个帖子的数量
+     * 喜欢这个帖子的用户的Id
      */
-    private Integer likesNumber = 0;
+    private List<String> likesUserIds;
     /**
-     * 评论这个帖子的数量
+     * 评论这个帖子的用户的Id
      */
-    private Integer commentNumber = 0;
+    private List<String> commentUserIds;
+    /**
+     * 该帖子评论的数量
+     * 不能用[commentUserIds.size()],因为同一用户可以评论多次
+     */
+    private Integer commentNumber;
 
     public PostBean() {
     }
@@ -55,7 +61,7 @@ public class PostBean extends BmobObject {
     }
 
     public UserBean getAuthor() {
-        return author;
+        return author == null ? new UserBean() : author;
     }
 
     public void setAuthor(UserBean author) {
@@ -86,12 +92,26 @@ public class PostBean extends BmobObject {
         this.postType = postType;
     }
 
-    public Integer getLikesNumber() {
-        return likesNumber == null ? 0 : likesNumber;
+    public List<String> getLikesUserIds() {
+        if (likesUserIds == null) {
+            setLikesUserIds(new ArrayList<>());
+        }
+        return likesUserIds;
     }
 
-    public void setLikesNumber(Integer likesNumber) {
-        this.likesNumber = likesNumber;
+    public void setLikesUserIds(List<String> likesUserIds) {
+        this.likesUserIds = likesUserIds;
+    }
+
+    public List<String> getCommentUserIds() {
+        if (commentUserIds == null) {
+            setCommentUserIds(new ArrayList<>());
+        }
+        return commentUserIds;
+    }
+
+    public void setCommentUserIds(List<String> commentUserIds) {
+        this.commentUserIds = commentUserIds;
     }
 
     public Integer getCommentNumber() {

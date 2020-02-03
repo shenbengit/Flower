@@ -37,6 +37,10 @@ public class PublishPostViewModel extends BaseViewModel<PublishPostModel> {
      */
     public static final String CHOOSE_IMAGE = "CHOOSE_IMAGE";
     /**
+     * 发表帖子成功
+     */
+    public static final String PUBLISH_POST_SUCCESS = "PUBLISH_POST_SUCCESS";
+    /**
      * 可以选择的最大的图片数量
      */
     private static final int MAX_IMAGE_NUMBER = 9;
@@ -52,7 +56,6 @@ public class PublishPostViewModel extends BaseViewModel<PublishPostModel> {
      * 已经选择的图片数量
      */
     public ObservableField<String> imageNumberStr = new ObservableField<>("(0/" + MAX_IMAGE_NUMBER + ")");
-
 
     public AddPictureAdapter mAddPictureAdapter;
     public PostTypeAdapter mPostTypeAdapter;
@@ -226,8 +229,8 @@ public class PublishPostViewModel extends BaseViewModel<PublishPostModel> {
     private void post(String content, List<BmobFile> bmobFiles) {
         mModel.post(content, bmobFiles, mCheckedPostType, objectId -> {
             mBaseLiveData.postValue(Constant.DISMISS_DIALOG);
-            LogUtil.i("帖子发表成功，objectId: " + objectId);
             ToastUtil.success(getApplication(), "发帖成功");
+            mBaseLiveData.postValue(PUBLISH_POST_SUCCESS);
         }, throwable -> {
             mBaseLiveData.postValue(Constant.DISMISS_DIALOG);
             LogUtil.i("帖子发表失败，" + throwable.toString());

@@ -26,6 +26,7 @@ import com.example.flower.mvvm.view.fragment.MineFragment;
 import com.example.flower.mvvm.view.fragment.SpaceFragment;
 import com.example.flower.mvvm.view.fragment.SpecialFragment;
 import com.example.flower.mvvm.viewmodel.MainViewModel;
+import com.example.flower.rxbus.RxSubscriptions;
 import com.example.flower.util.LogUtil;
 import com.example.flower.util.ToastUtil;
 import com.luck.picture.lib.tools.PictureFileUtils;
@@ -148,6 +149,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void onDestroy() {
         super.onDestroy();
         PictureFileUtils.deleteAllCacheDirFile(this);
+        RxSubscriptions.clear();
     }
 
     /**

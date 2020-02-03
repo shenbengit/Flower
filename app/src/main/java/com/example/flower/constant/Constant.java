@@ -35,6 +35,10 @@ public class Constant {
      * 网络请求成功
      */
     public static final String RESULT_OK = "000000";
+    /**
+     * Bmob云网络请求成功
+     */
+    public static final int BMOB_RESULT_OK = 0;
 
     /**
      * Bmob云Application ID
@@ -44,7 +48,10 @@ public class Constant {
      * 花田APP 用户id
      */
     public static final String USER_ID = "55977b26-8acd-494c-acf0-6f9b948e4095";
-
+    /**
+     * 自动刷新
+     */
+    public static final String AUTO_REFRESH = "AUTO_REFRESH";
     /**
      * 下拉刷新成功
      */

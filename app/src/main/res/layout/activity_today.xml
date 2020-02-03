@@ -17,7 +17,9 @@
 
         <ImageView
             android:id="@+id/ivBlur"
+            errorImageRes="@{@drawable/grey_bg}"
             imageObject="@{viewModel.blurImageUrl}"
+            placeholderImageRes="@{@drawable/grey_bg}"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
             android:scaleType="fitXY"
