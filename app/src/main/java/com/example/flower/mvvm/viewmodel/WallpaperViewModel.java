@@ -88,6 +88,7 @@ public class WallpaperViewModel extends BaseViewModel<WallpaperModel> {
                 //如果数据为空
                 if (data == null || data.isEmpty()) {
                     if (!isLoadMore) {
+                        mWallpaperAdapter.setNewData(null);
                         //RecyclerView设置空布局
                         mWallpaperAdapter.setEmptyView(R.layout.layout_no_data);
                         //如果是下拉刷新

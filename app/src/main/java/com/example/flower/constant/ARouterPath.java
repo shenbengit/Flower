@@ -54,5 +54,21 @@ public class ARouterPath {
      * 评论帖子页面
      */
     public static final String COMMENT_PATH = BASE_ACTIVITY_PATH + "CommentActivity";
+    /**
+     * 设置页面
+     */
+    public static final String SETTING_PATH = BASE_ACTIVITY_PATH + "SettingActivity";
+    /**
+     * 我的帖子页面
+     */
+    public static final String MY_POST_PATH = BASE_ACTIVITY_PATH + "MyPostActivity";
+    /**
+     * 收藏页面
+     */
+    public static final String COLLECTION_PATH = BASE_ACTIVITY_PATH + "CollectionActivity";
+    /**
+     * 识花结果页面
+     */
+    public static final String KNOW_FLOWER_RESULT_PATH = BASE_ACTIVITY_PATH + "KnowFlowerResultActivity";
 
 }

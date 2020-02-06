@@ -22,8 +22,8 @@ import java.util.Arrays;
  * @email 714081644@qq.com
  */
 public class SpaceFragment extends BaseFragment<FragmentSpaceBinding, SpaceViewModel> {
+    public static final String RECOMMEND = "推荐";
     public static final String POPULAR = "热门";
-    public static final String COLLECTION = "收藏";
 
     public static SpaceFragment newInstance() {
         return new SpaceFragment();
@@ -55,7 +55,7 @@ public class SpaceFragment extends BaseFragment<FragmentSpaceBinding, SpaceViewM
                 mBinding.vpDetail, (tab, position) -> tab.setText(adapter.getItem(position)));
         tabLayoutMediator.attach();
 
-        adapter.setNewData(Arrays.asList(POPULAR, COLLECTION));
+        adapter.setNewData(Arrays.asList(RECOMMEND, POPULAR));
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.example.flower.http.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -67,7 +70,7 @@ public class KnowFlowerResultBean {
             this.identifyResults = identifyResults;
         }
 
-        public static class IdentifyResultsBean {
+        public static class IdentifyResultsBean implements Parcelable {
             /**
              * reference_url : http://static.xingseapp.com/users/40468/flowers/1474186321.jpg?auth_key=1531276920-0-0-cd3ad230b30cc192c13014ed4ac37254
              * name : 鹅掌楸
@@ -123,6 +126,43 @@ public class KnowFlowerResultBean {
             public void setDetail_url(String detailUrl) {
                 this.detailUrl = detailUrl;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.referenceUrl);
+                dest.writeString(this.name);
+                dest.writeString(this.desc);
+                dest.writeDouble(this.probability);
+                dest.writeString(this.detailUrl);
+            }
+
+            public IdentifyResultsBean() {
+            }
+
+            protected IdentifyResultsBean(Parcel in) {
+                this.referenceUrl = in.readString();
+                this.name = in.readString();
+                this.desc = in.readString();
+                this.probability = in.readDouble();
+                this.detailUrl = in.readString();
+            }
+
+            public static final Parcelable.Creator<IdentifyResultsBean> CREATOR = new Parcelable.Creator<IdentifyResultsBean>() {
+                @Override
+                public IdentifyResultsBean createFromParcel(Parcel source) {
+                    return new IdentifyResultsBean(source);
+                }
+
+                @Override
+                public IdentifyResultsBean[] newArray(int size) {
+                    return new IdentifyResultsBean[size];
+                }
+            };
         }
     }
 }

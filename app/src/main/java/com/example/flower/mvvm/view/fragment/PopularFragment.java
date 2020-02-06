@@ -54,8 +54,6 @@ public class PopularFragment extends BaseFragment<FragmentPopularBinding, BaseVi
         super.initView();
         mPostFragmentAdapter = new PostFragmentAdapter(this);
         mBinding.vpDetail.setAdapter(mPostFragmentAdapter);
-        //ViewPager2 设置为禁止滑动
-//        mBinding.vpDetail.setUserInputEnabled(false);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mBinding.tabLayout,
                 mBinding.vpDetail, (tab, position) -> tab.setText(mPostFragmentAdapter.getItem(position).getTypeName()));
         tabLayoutMediator.attach();

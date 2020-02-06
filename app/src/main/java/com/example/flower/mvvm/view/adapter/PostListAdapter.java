@@ -40,10 +40,16 @@ public class PostListAdapter extends BaseQuickAdapter<PostBean, PostListAdapter.
         super(R.layout.item_post);
     }
 
+    private boolean isShowMore = false;
+
     @Override
     public void setNewData(@Nullable List<PostBean> data) {
         mCurrentUser = BmobUser.getCurrentUser(UserBean.class);
         super.setNewData(data);
+    }
+
+    public void setShowMore(boolean isShow) {
+        isShowMore = isShow;
     }
 
     /**
@@ -89,9 +95,9 @@ public class PostListAdapter extends BaseQuickAdapter<PostBean, PostListAdapter.
 
     @Override
     protected void convert(PostListAdapter.ViewHolder helper, PostBean item) {
-        helper.ivLikes.setBackgroundResource(R.drawable.community_item_collect);
-        //喜欢图片添加点击事件
-        helper.addOnClickListener(R.id.ivLikes);
+        helper.setVisible(R.id.ivMore, isShowMore)
+                .setBackgroundRes(R.id.ivLikes, R.drawable.community_item_collect)
+                .addOnClickListener(R.id.ivLikes, R.id.ivMore);
 
         //帖子的作者
         UserBean author = item.getAuthor();

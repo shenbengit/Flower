@@ -93,7 +93,7 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
         mBinding.setLifecycleOwner(this);
 
         //注意：子类不可再重新执行此方法，已防止崩溃，具体的回调请看[baseLiveDataObserver(String)]
-        mViewModel.mBaseLiveData.observe(this, (Observer<String>) this::baseLiveDataObserver);
+        mViewModel.mBaseLiveData.observe(getViewLifecycleOwner(), (Observer<String>) this::baseLiveDataObserver);
     }
 
     /**

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/dp_10"
+    android:paddingStart="@dimen/dp_0"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/flDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_comment_popup"
+        android:paddingStart="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingEnd="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_6">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_delete_picture"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center_vertical"
+            android:text="删除"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:src="@drawable/icon_black_popup" />
+</LinearLayout>

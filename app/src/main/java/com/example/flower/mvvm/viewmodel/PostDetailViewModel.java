@@ -185,6 +185,7 @@ public class PostDetailViewModel extends BaseViewModel<PostDetailModel> {
             commentNumber.set(String.valueOf(list.size()));
 
             if (list.isEmpty()) {
+                mCommentListAdapter.setNewData(null);
                 //RecyclerView设置空布局
                 mCommentListAdapter.setEmptyView(R.layout.layout_no_comment);
                 //如果是下拉刷新

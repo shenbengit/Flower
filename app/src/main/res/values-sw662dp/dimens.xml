@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<dimen name="common_margin">@dimen/dp_15</dimen>
+	<dimen name="dp_m_100">-183.8889dp</dimen>
 	<dimen name="dp_m_60">-110.3333dp</dimen>
 	<dimen name="dp_m_30">-55.1667dp</dimen>
 	<dimen name="dp_m_20">-36.7778dp</dimen>

@@ -20,6 +20,8 @@
             placeholderImageRes="@{@drawable/grey_bg}"
             android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_250"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="@dimen/dp_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

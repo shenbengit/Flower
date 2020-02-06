@@ -60,7 +60,7 @@ public class KnowFlowerViewModel extends BaseViewModel {
                 if (e == null) {
                     //开始识别
                     LogUtil.i("上传图片成功：" + bmobFile.getFileUrl());
-                    startDistinguish(bmobFile.getFileUrl());
+                    startDistinguish(bmobFile);
                 } else {
                     LogUtil.e("上传图片失败：" + e.toString());
                     mIdentifyResultsLiveData.setValue(null);
@@ -72,11 +72,11 @@ public class KnowFlowerViewModel extends BaseViewModel {
     /**
      * 开始识别
      *
-     * @param url
+     * @param file
      */
-    private void startDistinguish(String url) {
+    private void startDistinguish(BmobFile file) {
         RetrofitClient.getInstance().getApiService()
-                .knowFlower(Constant.XING_SE_API_URL, "APPCODE " + Constant.XING_SE_APP_CODE, url)
+                .knowFlower(Constant.XING_SE_API_URL, "APPCODE " + Constant.XING_SE_APP_CODE, file.getFileUrl())
                 .compose(RxUtil.io_main())
                 .compose(mLifecycleProvider.bindToLifecycle())
                 .subscribe(new Observer<KnowFlowerResultBean>() {
@@ -99,6 +99,7 @@ public class KnowFlowerViewModel extends BaseViewModel {
                             IdentifyResultBean resultBean = new IdentifyResultBean();
                             resultBean.setUser(currentUser);
                             resultBean.setResults(results);
+                            resultBean.setPicture(file);
                             resultBean.save(new SaveListener<String>() {
                                 @Override
                                 public void done(String objectId, BmobException e) {

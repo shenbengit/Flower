@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flower.R;
 import com.example.flower.http.bean.KnowFlowerResultBean;
-import com.example.flower.mvvm.view.adapter.KnowFlowerAdapter;
+import com.example.flower.mvvm.view.adapter.KnowFlowerResultAdapter;
 import com.example.flower.mvvm.view.widget.carousellayoutmanager.CarouselLayoutManager;
 import com.example.flower.mvvm.view.widget.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.example.flower.mvvm.view.widget.carousellayoutmanager.CenterScrollListener;
@@ -34,7 +34,7 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
     private TextView tvFlowerIntroduce;
     private RecyclerView rvResult;
 
-    private KnowFlowerAdapter mAdapter;
+    private KnowFlowerResultAdapter mAdapter;
     private CarouselLayoutManager mLayoutManager;
     private CarouselLayoutManager.OnCenterItemSelectionListener mListener = new CarouselLayoutManager.OnCenterItemSelectionListener() {
         @Override
@@ -68,7 +68,7 @@ public class KnowFlowerPopupWindow extends BasePopupWindow {
         rvResult.setHasFixedSize(true);
         rvResult.addOnScrollListener(new CenterScrollListener());
 
-        mAdapter = new KnowFlowerAdapter();
+        mAdapter = new KnowFlowerResultAdapter();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             if (mOnCheckItemListener != null) {
                 mOnCheckItemListener.onItemChecked(mAdapter.getItem(position));

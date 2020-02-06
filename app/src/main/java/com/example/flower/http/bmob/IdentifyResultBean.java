@@ -5,6 +5,7 @@ import com.example.flower.http.bean.KnowFlowerResultBean;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 用户识花结果表
@@ -15,6 +16,7 @@ import cn.bmob.v3.BmobObject;
  */
 public class IdentifyResultBean extends BmobObject {
     private UserBean user;
+    private BmobFile picture;
     private List<KnowFlowerResultBean.ResponseBean.IdentifyResultsBean> results;
 
     public IdentifyResultBean() {
@@ -26,6 +28,14 @@ public class IdentifyResultBean extends BmobObject {
 
     public void setUser(UserBean user) {
         this.user = user;
+    }
+
+    public BmobFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(BmobFile picture) {
+        this.picture = picture;
     }
 
     public List<KnowFlowerResultBean.ResponseBean.IdentifyResultsBean> getResults() {

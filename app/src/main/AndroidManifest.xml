@@ -22,15 +22,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.view.activity.CommentActivity" />
-        <activity android:name=".mvvm.view.activity.PostDetailActivity" />
-        <activity android:name=".mvvm.view.activity.PublishPostActivity" />
-        <activity android:name=".mvvm.view.activity.KnowFlowerDetailActivity" />
-        <activity android:name=".mvvm.view.activity.KnowFlowerActivity" />
-        <activity android:name=".mvvm.view.activity.LoginActivity" />
-        <activity android:name=".mvvm.view.activity.WallpaperDetailActivity" />
-        <activity android:name=".mvvm.view.activity.KnowPlantsDetailActivity" />
-        <activity android:name=".mvvm.view.activity.DailyDiscoveryDetailActivity" />
+        <activity
+            android:name=".mvvm.view.activity.KnowFlowerResultActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.MyPostActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.CollectionActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.SettingActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.CommentActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.PostDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.PublishPostActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.KnowFlowerDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.KnowFlowerActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.WallpaperDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.KnowPlantsDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".mvvm.view.activity.DailyDiscoveryDetailActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".mvvm.view.activity.VideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

@@ -86,6 +86,7 @@ public class SpecialListViewModel extends BaseViewModel<SpecialListModel> {
             //如果数据为空
             if (data == null || data.isEmpty()) {
                 if (!isLoadMore) {
+                    mSpecialDetailAdapter.setNewData(null);
                     //RecyclerView设置空布局
                     mSpecialDetailAdapter.setEmptyView(R.layout.layout_no_data);
                     //如果是下拉刷新

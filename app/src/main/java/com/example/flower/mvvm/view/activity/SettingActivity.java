@@ -1,28 +1,25 @@
-package com.example.flower.mvvm.view.fragment;
+package com.example.flower.mvvm.view.activity;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.flower.R;
-import com.example.flower.base.BaseFragment;
+import com.example.flower.base.BaseActivity;
 import com.example.flower.base.BaseViewModel;
-import com.example.flower.databinding.FragmentCollectionBinding;
+import com.example.flower.constant.ARouterPath;
+import com.example.flower.databinding.ActivitySettingBinding;
 
 /**
- * @author ShenBen
- * @date 2020/1/30 18:08
- * @email 714081644@qq.com
+ * 设置页面
  */
-public class CollectionFragment extends BaseFragment<FragmentCollectionBinding, BaseViewModel> {
-
-    public static CollectionFragment newInstance() {
-        return new CollectionFragment();
-    }
+@Route(path = ARouterPath.SETTING_PATH)
+public class SettingActivity extends BaseActivity<ActivitySettingBinding, BaseViewModel> {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_collection;
+        return R.layout.activity_setting;
     }
 
     @Override

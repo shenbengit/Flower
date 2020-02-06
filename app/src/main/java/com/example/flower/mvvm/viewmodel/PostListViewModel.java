@@ -113,6 +113,7 @@ public class PostListViewModel extends BaseViewModel<PostListModel> {
             }
             if (list.isEmpty()) {
                 if (!isLoadMore) {
+                    mPostListAdapter.setNewData(null);
                     //RecyclerView设置空布局
                     mPostListAdapter.setEmptyView(R.layout.layout_no_data);
                     //如果是下拉刷新
@@ -159,7 +160,7 @@ public class PostListViewModel extends BaseViewModel<PostListModel> {
         mModel.updateLikes(item, e -> {
             if (e == null || e.getErrorCode() == Constant.BMOB_RESULT_OK) {
                 //说明操作成功
-                mPostListAdapter.notifyItemChanged(position + mPostListAdapter.getHeaderLayoutCount(), PostListAdapter.UPDATE_ITEM_LIKES_COMMENT);
+                updatePostByPosition(position);
             } else {
                 ToastUtil.error(getApplication(), "操作失败，" + e.toString());
                 LogUtil.e("操作失败，" + e.toString());

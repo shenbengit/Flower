@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.flower.mvvm.view.fragment.CollectionFragment;
+import com.example.flower.mvvm.view.fragment.RecommendFragment;
 import com.example.flower.mvvm.view.fragment.PopularFragment;
 import com.example.flower.mvvm.view.fragment.SpaceFragment;
 
@@ -59,9 +59,9 @@ public class SpaceFragmentAdapter extends FragmentStateAdapter {
         if (TextUtils.equals(SpaceFragment.POPULAR, getItem(position))) {
             //热门
             return PopularFragment.newInstance();
-        } else if (TextUtils.equals(SpaceFragment.COLLECTION, getItem(position))) {
-            //收藏
-            return CollectionFragment.newInstance();
+        } else if (TextUtils.equals(SpaceFragment.RECOMMEND, getItem(position))) {
+            //推荐
+            return RecommendFragment.newInstance();
         }
         return new Fragment();
     }

@@ -47,4 +47,13 @@ public class MineFragment extends BaseFragment<FragmentMineBinding, MineViewMode
     protected void initData(@Nullable Bundle savedInstanceState) {
 
     }
+
+    /**
+     * 当前Fragment可见时调用
+     */
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        mViewModel.onFragmentVisible();
+    }
 }

@@ -90,5 +90,7 @@ ext {
             "circleimageview"                : "de.hdodenhof:circleimageview:3.0.2",
             //图片压缩
             "Luban"                          : "top.zibin:Luban:1.1.8",
+            //九宫格
+            "ninegridimageview"              : "com.jaeger.ninegridimageview:library:1.1.1",
     ]
 }

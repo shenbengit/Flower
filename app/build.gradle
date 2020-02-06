@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -81,7 +81,6 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["release-leakcanary"]
     implementation rootProject.ext.dependencies["EasyThread"]
     implementation rootProject.ext.dependencies["bmob-sdk"]
-//    implementation rootProject.ext.dependencies["http-legacy"]
     implementation rootProject.ext.dependencies["inflationx-calligraphy3"]
     implementation rootProject.ext.dependencies["inflationx-viewpump"]
     implementation rootProject.ext.dependencies["refresh-layout-kernel"]
@@ -99,5 +98,5 @@ dependencies {
     implementation rootProject.ext.dependencies["BasePopup-compat-androidx"]
     implementation rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["Luban"]
-    implementation 'com.jaeger.ninegridimageview:library:1.1.1'
+    implementation rootProject.ext.dependencies["ninegridimageview"]
 }

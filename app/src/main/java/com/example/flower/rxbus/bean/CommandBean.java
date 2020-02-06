@@ -22,6 +22,10 @@ public class CommandBean {
      * 帖子发表成功通知
      */
     public static final String COMMAND_PUBLISH_POST_SUCCESS = "COMMAND_PUBLISH_POST_SUCCESS";
+    /**
+     * 用户退出登录
+     */
+    public static final String COMMAND_USER_LOGIN_OUT = "COMMAND_USER_LOGIN_OUT";
 
 
     private String command;

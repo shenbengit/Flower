@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
-<!--        <item name="android:windowContentTransitions">true</item>-->
+        <!--        <item name="android:windowContentTransitions">true</item>-->
     </style>
 
     <style name="SwipeBack" parent="AppTheme">
@@ -43,4 +43,9 @@
         <!--弹窗背景是否变暗-->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <!--控制头部据appbar的样式-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--用于控制toolbar溢出菜单的样式-->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

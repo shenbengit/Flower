@@ -3,7 +3,7 @@ package com.example.flower.mvvm.view.activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.library.baseAdapters.BR;
+import com.example.flower.BR;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.flower.R;

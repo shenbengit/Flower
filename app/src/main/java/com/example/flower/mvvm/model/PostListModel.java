@@ -42,10 +42,12 @@ public class PostListModel extends BaseModel {
     /**
      * 分页查询，查询到的当前页最后一个数据的createdAt的时间
      */
-    private String lastTime;
+    private String queryTypeLastTime;
+    private String queryUserLastTime;
+    private String queryCollectionLastTime;
 
     public PostListModel() {
-        lastTime = sdf.format(new Date());
+        queryCollectionLastTime = queryUserLastTime = queryTypeLastTime = sdf.format(new Date());
     }
 
     /**
@@ -68,7 +70,80 @@ public class PostListModel extends BaseModel {
             //上拉加载
             Date date = null;
             try {
-                date = sdf.parse(lastTime);
+                date = sdf.parse(queryTypeLastTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            // 只查询小于等于最后一个item发表时间的数据
+            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            //跳过之前页数并去掉重复数据
+            query.setSkip(1);
+        } else {
+            //下拉刷新
+            query.setSkip(0);
+        }
+        query.setLimit(PAGE_SIZE);
+        //根据创建时间降序排序
+        query.order("-createdAt");
+        query.include("author,postType");
+        query.findObjectsObservable(PostBean.class)
+                .compose(mLifecycleProvider.bindToLifecycle())
+                .subscribe(new Observer<List<PostBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<PostBean> list) {
+                        if (onNext != null) {
+                            try {
+                                onNext.accept(list);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (list != null && !list.isEmpty()) {
+                            queryTypeLastTime = list.get(list.size() - 1).getCreatedAt();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (onError != null) {
+                            try {
+                                onError.accept(e);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 查找用户发过的帖子
+     *
+     * @param user
+     * @param isLoadMore
+     * @param onNext
+     * @param onError
+     */
+    public void queryPostByUser(UserBean user, boolean isLoadMore,
+                                @Nullable Consumer<List<PostBean>> onNext,
+                                @Nullable Consumer<Throwable> onError) {
+        BmobQuery<PostBean> query = new BmobQuery<>();
+        query.addWhereEqualTo("author", user);
+        if (isLoadMore) {
+            //上拉加载
+            Date date = null;
+            try {
+                date = sdf.parse(queryUserLastTime);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -103,7 +178,7 @@ public class PostListModel extends BaseModel {
                             }
                         }
                         if (list != null && !list.isEmpty()) {
-                            lastTime = list.get(list.size() - 1).getCreatedAt();
+                            queryUserLastTime = list.get(list.size() - 1).getCreatedAt();
                         }
                     }
 
@@ -123,7 +198,6 @@ public class PostListModel extends BaseModel {
 
                     }
                 });
-
     }
 
     /**
@@ -135,6 +209,7 @@ public class PostListModel extends BaseModel {
         PostBean postBean = new PostBean();
         UserBean currentUser = BmobUser.getCurrentUser(UserBean.class);
         BmobRelation relation = new BmobRelation();
+        //是否已经喜欢过
         boolean isLiked = item.getLikesUserIds().contains(currentUser.getObjectId());
         if (isLiked) {
             //删除多对多关联
@@ -161,11 +236,6 @@ public class PostListModel extends BaseModel {
 
                     @Override
                     public void onNext(BmobException exception) {
-                        if (isLiked) {
-                            item.getLikesUserIds().remove(currentUser.getObjectId());
-                        } else {
-                            item.getLikesUserIds().add(currentUser.getObjectId());
-                        }
                         if (onResult != null) {
                             try {
                                 onResult.accept(exception);
@@ -230,6 +300,121 @@ public class PostListModel extends BaseModel {
                                 onError.accept(throwable);
                             } catch (Exception e) {
                                 e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 删除某个帖子
+     *
+     * @param objectId 帖子的id
+     * @param onResult 删除的结果
+     */
+    public void deletePostById(String objectId, @Nullable Consumer<BmobException> onResult) {
+        PostBean bean = new PostBean();
+        bean.deleteObservable(objectId)
+                .compose(mLifecycleProvider.bindToLifecycle())
+                .subscribe(new Observer<BmobException>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(BmobException exception) {
+                        if (onResult != null) {
+                            try {
+                                onResult.accept(exception);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable exception) {
+                        if (onResult != null) {
+                            try {
+                                onResult.accept(new BmobException(exception));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 查询某个用户收藏列表
+     *
+     * @param userId
+     */
+    public void queryUserCollectionPost(String userId, boolean isLoadMore,
+                                        @Nullable Consumer<List<PostBean>> onNext,
+                                        @Nullable Consumer<Throwable> onError) {
+        BmobQuery<PostBean> query = new BmobQuery<>();
+        query.addWhereContainsAll("likesUserIds", Collections.singletonList(userId));
+        if (isLoadMore) {
+            //上拉加载
+            Date date = null;
+            try {
+                date = sdf.parse(queryCollectionLastTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            // 只查询小于等于最后一个item发表时间的数据
+            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            //跳过之前页数并去掉重复数据
+            query.setSkip(1);
+        } else {
+            //下拉刷新
+            query.setSkip(0);
+        }
+        query.setLimit(PAGE_SIZE);
+        //根据创建时间降序排序
+        query.order("-createdAt");
+        query.include("author,postType");
+        query.findObjectsObservable(PostBean.class)
+                .compose(mLifecycleProvider.bindToLifecycle())
+                .subscribe(new Observer<List<PostBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<PostBean> list) {
+                        if (onNext != null) {
+                            try {
+                                onNext.accept(list);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (list != null && !list.isEmpty()) {
+                            queryCollectionLastTime = list.get(list.size() - 1).getCreatedAt();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (onError != null) {
+                            try {
+                                onError.accept(e);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
                         }
                     }

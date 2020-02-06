@@ -5,4 +5,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sofa">空无一人，快去抢沙发吧!</string>
+    <string name="post">发帖&#8194;</string>
+    <string name="collection">收藏&#8194;</string>
+    <string name="woman">女</string>
+    <string name="man">男</string>
+    <string name="blank_character">&#32;</string>
 </resources>

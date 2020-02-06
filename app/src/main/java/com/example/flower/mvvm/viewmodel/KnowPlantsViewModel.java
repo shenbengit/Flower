@@ -86,6 +86,7 @@ public class KnowPlantsViewModel extends BaseViewModel<KnowPlantsModel> {
                 //如果数据为空
                 if (data == null || data.isEmpty()) {
                     if (!isLoadMore) {
+                        mPlantsTypeAdapter.setNewData(null);
                         //RecyclerView设置空布局
                         mPlantsTypeAdapter.setEmptyView(R.layout.layout_no_data);
                         //如果是下拉刷新

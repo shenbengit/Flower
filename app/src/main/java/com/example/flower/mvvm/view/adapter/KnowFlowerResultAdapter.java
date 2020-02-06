@@ -11,9 +11,9 @@ import com.example.flower.mvvm.view.adapter.base.BaseBindingViewHolder;
  * @date 2020/1/26 17:29
  * @email 714081644@qq.com
  */
-public class KnowFlowerAdapter extends BaseBindingAdapter<KnowFlowerResultBean.ResponseBean.IdentifyResultsBean> {
+public class KnowFlowerResultAdapter extends BaseBindingAdapter<KnowFlowerResultBean.ResponseBean.IdentifyResultsBean> {
 
-    public KnowFlowerAdapter() {
+    public KnowFlowerResultAdapter() {
         super(R.layout.item_know_flower);
     }
 
