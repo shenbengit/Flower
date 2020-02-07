@@ -99,4 +99,5 @@ dependencies {
     implementation rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["Luban"]
     implementation rootProject.ext.dependencies["ninegridimageview"]
+    implementation rootProject.ext.dependencies["PickerView"]
 }

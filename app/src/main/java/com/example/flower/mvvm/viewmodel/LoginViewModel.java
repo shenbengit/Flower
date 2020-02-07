@@ -11,6 +11,7 @@ import androidx.databinding.ObservableField;
 
 import com.example.flower.base.BaseViewModel;
 import com.example.flower.binding.command.BindingCommand;
+import com.example.flower.constant.Constant;
 import com.example.flower.http.bmob.UserBean;
 import com.example.flower.util.LogUtil;
 import com.example.flower.util.ToastUtil;
@@ -20,6 +21,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * @author ShenBen
@@ -141,8 +143,15 @@ public class LoginViewModel extends BaseViewModel {
             @Override
             public void done(UserBean user, BmobException e) {
                 if (e == null) {
-                    ToastUtil.success(getApplication(), "登录成功");
-                    mHandler.postDelayed(() -> mBaseLiveData.setValue(LOGIN_SUCCESS), 1000);
+                    //设置默认登录密码
+                    user.setPassword(Constant.DEFAULT_PASSWORD);
+                    user.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            ToastUtil.success(getApplication(), "登录成功");
+                            mHandler.postDelayed(() -> mBaseLiveData.setValue(LOGIN_SUCCESS), 1000);
+                        }
+                    });
                 } else {
                     ToastUtil.error(getApplication(), "登录失败：" + e.getErrorCode() + "-" + e.getMessage());
                 }

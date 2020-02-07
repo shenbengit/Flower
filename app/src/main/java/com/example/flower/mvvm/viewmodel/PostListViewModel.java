@@ -80,6 +80,7 @@ public class PostListViewModel extends BaseViewModel<PostListModel> {
                             updatePostByPosition(mCheckDetailPosition);
                             break;
                         case CommandBean.COMMAND_USER_LOGIN_SUCCESS:
+                        case CommandBean.COMMAND_USER_UPDATE_INFO:
                             mPostListAdapter.updateCurrentUser();
                             break;
                         case CommandBean.COMMAND_PUBLISH_POST_SUCCESS:

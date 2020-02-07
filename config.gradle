@@ -44,7 +44,7 @@ ext {
             "logging-interceptor"            : "com.squareup.okhttp3:logging-interceptor:3.12.0",
             //rxlifecycle
             "rxlifecycle-components"         : "com.trello.rxlifecycle3:rxlifecycle-components:3.0.0",
-//            //Google AAC
+            //Google AAC
             "lifecycle-extensions"           : "android.arch.lifecycle:extensions:1.1.1",
             "lifecycle-compiler"             : "android.arch.lifecycle:compiler:1.1.1",
             //rxbinding
@@ -92,5 +92,7 @@ ext {
             "Luban"                          : "top.zibin:Luban:1.1.8",
             //九宫格
             "ninegridimageview"              : "com.jaeger.ninegridimageview:library:1.1.1",
+            //PickerView
+            "PickerView"                     : "com.contrarywind:Android-PickerView:4.1.9",
     ]
 }

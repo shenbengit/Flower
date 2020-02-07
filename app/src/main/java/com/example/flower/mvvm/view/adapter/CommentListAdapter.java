@@ -52,7 +52,7 @@ public class CommentListAdapter extends BaseBindingAdapter<CommentBean> {
         if (mCurrentUser != null && TextUtils.equals(mCurrentUser.getObjectId(), user.getObjectId())) {
             binding.tvNickName.setText("我");
         } else {
-            binding.tvNickName.setText(TextUtils.isEmpty(user.getNickName()) ? user.getUsername() : user.getNickName());
+            binding.tvNickName.setText(user.getNickName());
         }
     }
 }

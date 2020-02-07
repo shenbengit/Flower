@@ -2,6 +2,8 @@ package com.example.flower.http.bmob;
 
 import android.text.TextUtils;
 
+import com.example.flower.constant.Constant;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -38,6 +40,10 @@ public class UserBean extends BmobUser {
     }
 
     public String getNickName() {
+        return TextUtils.isEmpty(nickName) ? "用户" + ((getObjectId().length() > 6) ? getObjectId().substring(1, 5) : "") : nickName;
+    }
+
+    public String getTrueNickName() {
         return nickName;
     }
 
@@ -70,7 +76,11 @@ public class UserBean extends BmobUser {
     }
 
     public String getSignature() {
-        return TextUtils.isEmpty(signature) ? "这家伙很懒，什么也没留下" : signature;
+        return TextUtils.isEmpty(signature) ? Constant.DEFAULT_SIGNATURE : signature;
+    }
+
+    public String getTrueSignature() {
+        return signature;
     }
 
     public void setSignature(String signature) {

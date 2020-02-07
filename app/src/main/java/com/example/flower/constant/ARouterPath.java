@@ -70,5 +70,9 @@ public class ARouterPath {
      * 识花结果页面
      */
     public static final String KNOW_FLOWER_RESULT_PATH = BASE_ACTIVITY_PATH + "KnowFlowerResultActivity";
+    /**
+     * 用户信息页面
+     */
+    public static final String USER_INFO_PATH = BASE_ACTIVITY_PATH + "UserInfoActivity";
 
 }

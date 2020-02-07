@@ -100,4 +100,12 @@ public class Constant {
      * 所有帖子的类型的标志
      */
     public static final int ALL_POST_TYPE_ID = -1;
+    /**
+     * 默认个性签名
+     */
+    public static final String DEFAULT_SIGNATURE = "这家伙很懒，什么也没留下";
+    /**
+     * Bmob用户默认登录密码
+     */
+    public static final String DEFAULT_PASSWORD = "AaQqZz";
 }

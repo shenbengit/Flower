@@ -138,7 +138,9 @@ public class MineViewModel extends BaseViewModel<MineModel> {
             if (mCurrentUser == null) {
                 toLoginActivity();
             } else {
-
+                ARouter.getInstance()
+                        .build(ARouterPath.USER_INFO_PATH)
+                        .navigation();
             }
         });
         userPostCommand = new BindingCommand(() -> {
@@ -174,6 +176,7 @@ public class MineViewModel extends BaseViewModel<MineModel> {
                     switch (bean.getCommand()) {
                         case CommandBean.COMMAND_USER_LOGIN_SUCCESS://用户登录成功
                         case CommandBean.COMMAND_USER_LOGIN_OUT://用户退出登录
+                        case CommandBean.COMMAND_USER_UPDATE_INFO://用户信息更新
                             updateCurrentUser();
                             break;
                     }
@@ -209,8 +212,8 @@ public class MineViewModel extends BaseViewModel<MineModel> {
             return;
         }
         userAvatarField.set(mCurrentUser.getHeadImg() == null ? R.drawable.icon_profile_default_portrait : mCurrentUser.getHeadImg().getFileUrl());
-        userSexField.set(TextUtils.equals(mCurrentUser.getSex(), getApplication().getString(R.string.woman)) ? R.drawable.ic_user_woman : R.drawable.ic_user_man);
-        userNameField.set(TextUtils.isEmpty(mCurrentUser.getNickName()) ? mCurrentUser.getUsername() : mCurrentUser.getNickName());
+        userSexField.set(TextUtils.isEmpty(mCurrentUser.getSex()) ? 0 : TextUtils.equals(mCurrentUser.getSex(), getApplication().getString(R.string.woman)) ? R.drawable.ic_user_woman : R.drawable.ic_user_man);
+        userNameField.set(mCurrentUser.getNickName());
         userSignatureField.set(mCurrentUser.getSignature());
     }
 

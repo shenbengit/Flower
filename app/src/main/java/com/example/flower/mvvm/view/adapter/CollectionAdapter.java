@@ -1,6 +1,5 @@
 package com.example.flower.mvvm.view.adapter;
 
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,7 +23,7 @@ public class CollectionAdapter extends BaseQuickAdapter<PostBean, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, PostBean item) {
-        helper.setText(R.id.tvName, TextUtils.isEmpty(item.getAuthor().getNickName()) ? item.getAuthor().getUsername() : item.getAuthor().getNickName())
+        helper.setText(R.id.tvName, item.getAuthor().getNickName())
                 .setText(R.id.tvTime, item.getCreatedAt())
                 .setText(R.id.tvContent, item.getContent());
         CircleImageView civAvatar = helper.getView(R.id.civAvatar);

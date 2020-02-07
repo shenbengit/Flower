@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.flower.mvvm.viewmodel.RecommendViewModel" />
@@ -22,6 +23,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetail"
+            bindRecyclerViewAdapter="@{viewModel.mPostListAdapter}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

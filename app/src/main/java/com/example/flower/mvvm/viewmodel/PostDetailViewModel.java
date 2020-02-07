@@ -230,7 +230,7 @@ public class PostDetailViewModel extends BaseViewModel<PostDetailModel> {
                 }
             }
         } else {
-            mNickNameField.set(TextUtils.isEmpty(author.getNickName()) ? author.getUsername() : author.getNickName());
+            mNickNameField.set(author.getNickName());
         }
 
         //喜欢的数量

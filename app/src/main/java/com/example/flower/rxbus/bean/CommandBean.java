@@ -26,6 +26,10 @@ public class CommandBean {
      * 用户退出登录
      */
     public static final String COMMAND_USER_LOGIN_OUT = "COMMAND_USER_LOGIN_OUT";
+    /**
+     * 用户信息更新
+     */
+    public static final String COMMAND_USER_UPDATE_INFO = "COMMAND_USER_UPDATE_INFO";
 
 
     private String command;

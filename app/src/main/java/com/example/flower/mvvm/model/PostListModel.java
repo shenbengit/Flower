@@ -45,9 +45,10 @@ public class PostListModel extends BaseModel {
     private String queryTypeLastTime;
     private String queryUserLastTime;
     private String queryCollectionLastTime;
+    private String queryRecommendLastTime;
 
     public PostListModel() {
-        queryCollectionLastTime = queryUserLastTime = queryTypeLastTime = sdf.format(new Date());
+        queryRecommendLastTime = queryCollectionLastTime = queryUserLastTime = queryTypeLastTime = sdf.format(new Date());
     }
 
     /**
@@ -405,6 +406,72 @@ public class PostListModel extends BaseModel {
                         }
                         if (list != null && !list.isEmpty()) {
                             queryCollectionLastTime = list.get(list.size() - 1).getCreatedAt();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (onError != null) {
+                            try {
+                                onError.accept(e);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 查询推荐帖子
+     */
+    public void queryRecommendPost(boolean isLoadMore,
+                                   @Nullable Consumer<List<PostBean>> onNext,
+                                   @Nullable Consumer<Throwable> onError) {
+        BmobQuery<PostBean> query = new BmobQuery<>();
+        if (isLoadMore) {
+            //上拉加载
+            Date date = null;
+            try {
+                date = sdf.parse(queryRecommendLastTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            // 只查询小于等于最后一个item发表时间的数据
+            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            //跳过之前页数并去掉重复数据
+            query.setSkip(1);
+        } else {
+            //下拉刷新
+            query.setSkip(0);
+        }
+        query.setLimit(PAGE_SIZE);
+        query.order("-likesUserIds,-createdAt");
+        query.include("author,postType");
+        query.findObjectsObservable(PostBean.class)
+                .compose(mLifecycleProvider.bindToLifecycle())
+                .subscribe(new Observer<List<PostBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<PostBean> list) {
+                        if (onNext != null) {
+                            try {
+                                onNext.accept(list);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (list != null && !list.isEmpty()) {
+                            queryRecommendLastTime = list.get(list.size() - 1).getCreatedAt();
                         }
                     }
 

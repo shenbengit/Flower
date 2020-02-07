@@ -101,27 +101,44 @@ public class PostListAdapter extends BaseQuickAdapter<PostBean, PostListAdapter.
 
         //帖子的作者
         UserBean author = item.getAuthor();
-        if (author.getHeadImg() != null) {
-            //有头像
-            GlideApp.with(helper.civHead)
-                    .load(author.getHeadImg().getFileUrl())
-                    .placeholder(R.drawable.icon_profile_default_portrait)
-                    .error(R.drawable.icon_profile_default_portrait)
-                    .into(helper.civHead);
-        } else {
-            //无头像
-            GlideApp.with(helper.civHead)
-                    .load(R.drawable.icon_profile_default_portrait)
-                    .placeholder(R.drawable.icon_profile_default_portrait)
-                    .error(R.drawable.icon_profile_default_portrait)
-                    .into(helper.civHead);
-        }
+
         if (mCurrentUser != null && TextUtils.equals(mCurrentUser.getObjectId(), author.getObjectId())) {
             helper.tvNick.setText("我");
+            if (mCurrentUser.getHeadImg() != null) {
+                //有头像
+                GlideApp.with(helper.civHead)
+                        .load(mCurrentUser.getHeadImg().getFileUrl())
+                        .placeholder(R.drawable.icon_profile_default_portrait)
+                        .error(R.drawable.icon_profile_default_portrait)
+                        .into(helper.civHead);
+            } else {
+                //无头像
+                GlideApp.with(helper.civHead)
+                        .load(R.drawable.icon_profile_default_portrait)
+                        .placeholder(R.drawable.icon_profile_default_portrait)
+                        .error(R.drawable.icon_profile_default_portrait)
+                        .into(helper.civHead);
+            }
+            helper.tvSignature.setText(mCurrentUser.getSignature());
         } else {
-            helper.tvNick.setText(TextUtils.isEmpty(author.getNickName()) ? author.getUsername() : author.getNickName());
+            helper.tvNick.setText(author.getNickName());
+            helper.tvSignature.setText(author.getSignature());
+            if (author.getHeadImg() != null) {
+                //有头像
+                GlideApp.with(helper.civHead)
+                        .load(author.getHeadImg().getFileUrl())
+                        .placeholder(R.drawable.icon_profile_default_portrait)
+                        .error(R.drawable.icon_profile_default_portrait)
+                        .into(helper.civHead);
+            } else {
+                //无头像
+                GlideApp.with(helper.civHead)
+                        .load(R.drawable.icon_profile_default_portrait)
+                        .placeholder(R.drawable.icon_profile_default_portrait)
+                        .error(R.drawable.icon_profile_default_portrait)
+                        .into(helper.civHead);
+            }
         }
-        helper.tvSignature.setText(author.getSignature());
         helper.tvTime.setText(item.getCreatedAt());
         helper.tvContent.setText(item.getContent());
         helper.bind(item.getPictures());

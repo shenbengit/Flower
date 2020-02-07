@@ -123,8 +123,8 @@ public class MyPostViewModel extends BaseViewModel<PostListModel> {
         super.onCreate();
         if (mCurrentUser != null) {
             userAvatarField.set(mCurrentUser.getHeadImg() == null ? R.drawable.icon_profile_default_portrait : mCurrentUser.getHeadImg().getFileUrl());
-            userSexField.set(TextUtils.equals(mCurrentUser.getSex(), getApplication().getString(R.string.woman)) ? R.drawable.ic_user_woman : R.drawable.ic_user_man);
-            userNameField.set(TextUtils.isEmpty(mCurrentUser.getNickName()) ? mCurrentUser.getUsername() : mCurrentUser.getNickName());
+            userSexField.set(TextUtils.isEmpty(mCurrentUser.getSex()) ? 0 : TextUtils.equals(mCurrentUser.getSex(), getApplication().getString(R.string.woman)) ? R.drawable.ic_user_woman : R.drawable.ic_user_man);
+            userNameField.set(mCurrentUser.getNickName());
             userSignatureField.set(mCurrentUser.getSignature());
         }
     }
