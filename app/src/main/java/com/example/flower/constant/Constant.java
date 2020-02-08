@@ -100,7 +100,10 @@ public class Constant {
      * 形色Api Url地址
      */
     public static final String XING_SE_API_URL = "http://plantapi.xingseapp.com/item/identification";
-
+    /**
+     * 腾讯Bugly  App_Id
+     */
+    public static final String BUGLY_APP_ID = "0c16f5b012";
     /**
      * 所有帖子的类型的标志
      */

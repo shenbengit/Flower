@@ -20,6 +20,11 @@ android {
             }
         }
 
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
         multiDexEnabled true
     }
     buildTypes {
@@ -100,4 +105,6 @@ dependencies {
     implementation rootProject.ext.dependencies["Luban"]
     implementation rootProject.ext.dependencies["ninegridimageview"]
     implementation rootProject.ext.dependencies["PickerView"]
+    implementation rootProject.ext.dependencies["bugly-crashreport"]
+    implementation rootProject.ext.dependencies["bugly-nativecrashreport"]
 }

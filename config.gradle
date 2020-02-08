@@ -94,5 +94,8 @@ ext {
             "ninegridimageview"              : "com.jaeger.ninegridimageview:library:1.1.1",
             //PickerView
             "PickerView"                     : "com.contrarywind:Android-PickerView:4.1.9",
+            //腾讯bugly，崩溃日志抓取
+            "bugly-crashreport"              : "com.tencent.bugly:crashreport:latest.release",
+            "bugly-nativecrashreport"        : "com.tencent.bugly:nativecrashreport:latest.release",
     ]
 }

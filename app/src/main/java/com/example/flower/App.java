@@ -15,6 +15,7 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
@@ -41,6 +42,7 @@ public class App extends MultiDexApplication {
         initBmob();
         SharedPreferencesUtil.getInstance().init(this);
         initToasty();
+        initBugly();
     }
 
     /**
@@ -121,5 +123,12 @@ public class App extends MultiDexApplication {
                 .getInstance()
                 .allowQueue(false)
                 .apply();
+    }
+
+    private void initBugly() {
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
+        strategy.setAppPackageName(BuildConfig.APPLICATION_ID);
+        strategy.setAppVersion(BuildConfig.VERSION_NAME);
+        CrashReport.initCrashReport(this, Constant.BUGLY_APP_ID, BuildConfig.DEBUG, strategy);
     }
 }
