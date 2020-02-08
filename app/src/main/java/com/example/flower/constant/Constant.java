@@ -86,6 +86,11 @@ public class Constant {
      */
     public static final String DISMISS_DIALOG = "DISMISS_DIALOG";
     /**
+     * 当前Activity移出栈
+     */
+    public static final String BACK_PRESSED = "BACK_PRESSED";
+
+    /**
      * 阿里云-形色Api使用的AppCode
      * <p>
      * 8ab7575d3f0c4533b7bce28ff3eb7bb0

@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.view.activity.UserInfoActivity"></activity>
+        <activity android:name=".mvvm.view.activity.FeedbackActivity"></activity>
+        <activity android:name=".mvvm.view.activity.UserInfoActivity" />
         <activity
             android:name=".mvvm.view.activity.KnowFlowerResultActivity"
             android:launchMode="singleTop" />

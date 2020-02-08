@@ -74,5 +74,9 @@ public class ARouterPath {
      * 用户信息页面
      */
     public static final String USER_INFO_PATH = BASE_ACTIVITY_PATH + "UserInfoActivity";
+    /**
+     * 意见反馈页面
+     */
+    public static final String FEEDBACK_PATH = BASE_ACTIVITY_PATH + "FeedbackActivity";
 
 }

@@ -77,7 +77,7 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
     @Override
     protected void initView() {
         super.initView();
-        mBinding.toolbar.setTitle("用户信息");
+        mBinding.toolbar.setTitle("个人中心");
         initToolbar(mBinding.toolbar);
         mInputDialog = new InputDialog(this);
         mInputDialog.setContentCallback(content -> {

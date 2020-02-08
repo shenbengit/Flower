@@ -147,6 +147,9 @@ public abstract class BaseActivity<VDB extends ViewDataBinding, VM extends BaseV
             case Constant.DISMISS_DIALOG:
                 mLoadingDialog.dismiss();
                 break;
+            case Constant.BACK_PRESSED:
+                onBackPressedSupport();
+                break;
         }
     }
 
