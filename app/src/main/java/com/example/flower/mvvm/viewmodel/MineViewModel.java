@@ -204,7 +204,7 @@ public class MineViewModel extends BaseViewModel<MineModel> {
         if (mCurrentUser == null) {
             userAvatarField.set(R.drawable.icon_profile_login_button);
             userSexField.set(0);
-            userNameField.set("登录");
+            userNameField.set("");
             userSignatureField.set("");
             userPostNumberField.set(0);
             userCollectionNumberField.set(0);
