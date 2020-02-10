@@ -51,6 +51,7 @@ public abstract class BaseFragment<VDB extends ViewDataBinding, VM extends BaseV
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
+        mLoadingDialog = initLoadingDialog();
         initView();
     }
 
