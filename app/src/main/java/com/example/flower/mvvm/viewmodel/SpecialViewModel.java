@@ -7,7 +7,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -47,21 +46,18 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
     /**
      * 推荐相关RecyclerView配置
      */
-    public LinearLayoutManager mArticleLayoutManager;
     public ArticleAdapter mArticleAdapter;
     public RecyclerView.ItemDecoration mArticleItemDecoration;
 
     /**
      * 专题RecyclerView配置
      */
-    public LinearLayoutManager mSpecialLayoutManager;
     public SpecialAdapter mSpecialAdapter;
     public RecyclerView.ItemDecoration mSpecialItemDecoration;
 
     /**
      * 每日发现RecyclerView配置
      */
-    public LinearLayoutManager mDiscoveryLayoutManager;
     public DailyDiscoveryAdapter mDiscoveryAdapter;
     public RecyclerView.ItemDecoration mDiscoveryDecoration;
 
@@ -71,9 +67,9 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
         super(application, new SpecialModel());
         initCommand();
 
+        //获取当前系统时间日期  几号
         calendarString.set(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
-        mArticleLayoutManager = new LinearLayoutManager(application, LinearLayoutManager.HORIZONTAL, false);
         mArticleAdapter = new ArticleAdapter();
         mArticleAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomePageBean.DataBean.CommunityHomePageFirstPlateViewBean.ArticleForFirstPlateViewsBean bean = mArticleAdapter.getItem(position);
@@ -90,7 +86,6 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
             }
         };
 
-        mSpecialLayoutManager = new LinearLayoutManager(application, LinearLayoutManager.HORIZONTAL, false);
         mSpecialAdapter = new SpecialAdapter();
         mSpecialAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomePageBean.DataBean.CommunityHomePageSecondPlateViewBean.CategoryForSecondPlateViewsBean item = mSpecialAdapter.getItem(position);
@@ -109,7 +104,6 @@ public class SpecialViewModel extends BaseViewModel<SpecialModel> {
             }
         };
 
-        mDiscoveryLayoutManager = new LinearLayoutManager(getApplication());
         mDiscoveryAdapter = new DailyDiscoveryAdapter();
         mDiscoveryAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.iv) {

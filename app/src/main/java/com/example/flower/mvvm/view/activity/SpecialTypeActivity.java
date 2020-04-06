@@ -55,6 +55,7 @@ public class SpecialTypeActivity extends BaseActivity<ActivitySpecialTypeBinding
         mVpAdapter = new SpecialTypeAdapter(this);
         mBinding.vpDetail.setAdapter(mVpAdapter);
 
+        //将TabLayout和ViewPager2 事件绑定  TabLayout点击事件和ViewPager2的滑动事件
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mBinding.tabLayout,
                 mBinding.vpDetail, (tab, position) -> tab.setText(mVpAdapter.getData().get(position).getName()));
         tabLayoutMediator.attach();

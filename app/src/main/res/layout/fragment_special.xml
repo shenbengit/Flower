@@ -87,11 +87,12 @@
                         android:id="@+id/rvArticle"
                         addRecyclerViewItemDecoration="@{viewModel.mArticleItemDecoration}"
                         bindRecyclerViewAdapter="@{viewModel.mArticleAdapter}"
-                        bindRecyclerViewLayoutManager="@{viewModel.mArticleLayoutManager}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_200"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:scrollbars="none" />
+                        android:orientation="horizontal"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     <View
                         android:layout_width="match_parent"
@@ -115,11 +116,12 @@
                     <androidx.recyclerview.widget.RecyclerView
                         addRecyclerViewItemDecoration="@{viewModel.mSpecialItemDecoration}"
                         bindRecyclerViewAdapter="@{viewModel.mSpecialAdapter}"
-                        bindRecyclerViewLayoutManager="@{viewModel.mSpecialLayoutManager}"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_90"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:scrollbars="none" />
+                        android:orientation="horizontal"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -135,10 +137,11 @@
                         android:id="@+id/rvRecommended"
                         addRecyclerViewItemDecoration="@{viewModel.mDiscoveryDecoration}"
                         bindRecyclerViewAdapter="@{viewModel.mDiscoveryAdapter}"
-                        bindRecyclerViewLayoutManager="@{viewModel.mDiscoveryLayoutManager}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingTop="@dimen/dp_10" />
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_10"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

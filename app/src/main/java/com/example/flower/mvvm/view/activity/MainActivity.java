@@ -51,7 +51,13 @@ import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
 @Route(path = ARouterPath.MAIN_ACTIVITY_PATH)
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements CompoundButton.OnCheckedChangeListener {
     private ScaleAnimation animation;
-    private final SparseArray<ISupportFragment> mFragmentArray = new SparseArray<>(5);
+    /**
+     * Fragment 集合
+     */
+    private final SparseArray<ISupportFragment> mFragmentArray = new SparseArray<>(4);
+    /**
+     * 上一次点击的item  Id
+     */
     private int mLastCheckId;
 
     @Override
@@ -81,6 +87,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         super.initView();
         //SplashActivity移出回退栈
         setResult(RESULT_OK);
+        //默认第一个
         mLastCheckId = R.id.rb01;
 
         //底部按钮添加选中事件监听
