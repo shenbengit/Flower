@@ -204,7 +204,7 @@ public class PostListModel extends BaseModel {
     /**
      * 更改喜欢状态
      *
-     * @param item
+     * @param item 评论
      */
     public void updateLikes(PostBean item, @Nullable Consumer<BmobException> onResult) {
         PostBean postBean = new PostBean();
@@ -451,6 +451,7 @@ public class PostListModel extends BaseModel {
             query.setSkip(0);
         }
         query.setLimit(PAGE_SIZE);
+        //喜欢数量和创建时间降序
         query.order("-likesUserIds,-createdAt");
         query.include("author,postType");
         query.findObjectsObservable(PostBean.class)

@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.Nullable;
+
 import com.example.flower.BR;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -56,7 +57,7 @@ public class DetailWebActivity extends BaseActivity<ActivityDetailWebBinding, De
             mBinding.toolbar.setTitle(mBean.getName());
         }
         initToolbar(mBinding.toolbar);
-        webView=mBinding.webView;
+        webView = mBinding.webView;
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置自适应屏幕，两者合用
