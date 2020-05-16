@@ -253,7 +253,7 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
                 if (e == null) {
                     updateUserAvatar(bmobFile);
                 } else {
-                    ToastUtil.success(UserInfoActivity.this.getApplication(), "头像修改失败，" + e.toString());
+                    ToastUtil.success(getApplication(), "头像修改失败，" + e.toString());
                 }
             }
         });
@@ -267,9 +267,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
             public void done(BmobException e) {
                 if (e == null) {
                     isNeedUpdate = true;
-                    ToastUtil.success(UserInfoActivity.this.getApplication(), "头像修改成功！");
+                    ToastUtil.success(getApplication(), "头像修改成功！");
                 } else {
-                    ToastUtil.error(UserInfoActivity.this.getApplication(), "头像修改失败，" + e.toString());
+                    ToastUtil.error(getApplication(), "头像修改失败，" + e.toString());
                 }
             }
         });
@@ -283,9 +283,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
             public void done(BmobException e) {
                 if (e == null) {
                     isNeedUpdate = true;
-                    ToastUtil.success(UserInfoActivity.this.getApplication(), "昵称修改成功！");
+                    ToastUtil.success(getApplication(), "昵称修改成功！");
                 } else {
-                    ToastUtil.error(UserInfoActivity.this.getApplication(), "昵称修改失败，" + e.toString());
+                    ToastUtil.error(getApplication(), "昵称修改失败，" + e.toString());
                 }
             }
         });
@@ -299,9 +299,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
             public void done(BmobException e) {
                 if (e == null) {
                     isNeedUpdate = true;
-                    ToastUtil.success(UserInfoActivity.this.getApplication(), "性别修改成功！");
+                    ToastUtil.success(getApplication(), "性别修改成功！");
                 } else {
-                    ToastUtil.error(UserInfoActivity.this.getApplication(), "性别修改失败，" + e.toString());
+                    ToastUtil.error(getApplication(), "性别修改失败，" + e.toString());
                 }
             }
         });
@@ -315,9 +315,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding, Base
             public void done(BmobException e) {
                 if (e == null) {
                     isNeedUpdate = true;
-                    ToastUtil.success(UserInfoActivity.this.getApplication(), "签名修改成功！");
+                    ToastUtil.success(getApplication(), "签名修改成功！");
                 } else {
-                    ToastUtil.error(UserInfoActivity.this.getApplication(), "签名修改失败，" + e.toString());
+                    ToastUtil.error(getApplication(), "签名修改失败，" + e.toString());
                 }
             }
         });

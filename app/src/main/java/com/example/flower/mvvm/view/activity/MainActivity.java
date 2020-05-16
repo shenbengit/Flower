@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
      */
     @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void permissionOnPermissionDenied() {
-        ToastUtil.warning(this, "保存壁纸等功能将无法使用");
+        ToastUtil.warning(getApplication(), "保存壁纸等功能将无法使用");
     }
 
     /**
@@ -203,7 +203,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
      */
     @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void permissionOnNeverAskAgain() {
-        ToastUtil.warning(this, "保存壁纸等功能将无法使用，若想使用请到设置里手动授权");
+        ToastUtil.warning(getApplication(), "保存壁纸等功能将无法使用，若想使用请到设置里手动授权");
     }
 
     /**

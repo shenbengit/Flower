@@ -78,17 +78,17 @@ public class CommentActivity extends BaseActivity<ActivityCommentBinding, BaseVi
      */
     private void sendComment() {
         if (TextUtils.isEmpty(mObjectId)) {
-            ToastUtil.warning(this, "出错啦");
+            ToastUtil.warning(getApplication(), "出错啦");
             return;
         }
         String content = mBinding.etContent.getText().toString().trim();
         if (TextUtils.isEmpty(content)) {
-            ToastUtil.warning(this, "请输入评论内容");
+            ToastUtil.warning(getApplication(), "请输入评论内容");
             return;
         }
         UserBean userBean = BmobUser.getCurrentUser(UserBean.class);
         if (userBean == null) {
-            ToastUtil.warning(this, "请先登录！");
+            ToastUtil.warning(getApplication(), "请先登录！");
             return;
         }
         CommentBean commentBean = new CommentBean();
@@ -107,7 +107,7 @@ public class CommentActivity extends BaseActivity<ActivityCommentBinding, BaseVi
 
                     @Override
                     public void onNext(String objectId) {
-                        ToastUtil.success(CommentActivity.this.getApplication(), "添加评论成功！");
+                        ToastUtil.success(getApplication(), "添加评论成功！");
                         mLoadingDialog.dismiss();
                         RxBus.getDefault().postSticky(new CommandBean(CommandBean.COMMAND_UPDATE_COMMENT));
                         onBackPressedSupport();
@@ -116,7 +116,7 @@ public class CommentActivity extends BaseActivity<ActivityCommentBinding, BaseVi
                     @Override
                     public void onError(Throwable e) {
                         mLoadingDialog.dismiss();
-                        ToastUtil.warning(CommentActivity.this.getApplication(), "添加评论出错啦，请稍后重试！");
+                        ToastUtil.warning(getApplication(), "添加评论出错啦，请稍后重试！");
                         LogUtil.e("添加评论失败，" + e.getMessage());
                     }
 

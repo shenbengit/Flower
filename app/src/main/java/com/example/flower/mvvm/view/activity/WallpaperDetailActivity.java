@@ -62,7 +62,7 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
         String url = getIntent().getStringExtra(DETAIL_URL);
         mBinding.ibDownload.setOnClickListener(v -> {
                     if (!PermissionUtils.hasSelfPermissions(this, PERMISSION_NEEDSSTORAGEPERMISSION)) {
-                        ToastUtil.warning(this, "未获取到读取SD卡权限，请手动授权");
+                        ToastUtil.warning(getApplication(), "未获取到读取SD卡权限，请手动授权");
                         return;
                     }
                     RetrofitClient.getInstance()
@@ -94,15 +94,15 @@ public class WallpaperDetailActivity extends BaseActivity<ActivityWallpaperDetai
                                         Okio.buffer(Okio.sink(file))
                                                 .write(responseBody.bytes())
                                                 .close();
-                                        runOnUiThread(() -> ToastUtil.success(WallpaperDetailActivity.this, "照片保存在" + file.getAbsolutePath()));
+                                        runOnUiThread(() -> ToastUtil.success(getApplication(), "照片保存在" + file.getAbsolutePath()));
                                     } catch (IOException e) {
-                                        runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "壁纸保存失败，" + e.getMessage()));
+                                        runOnUiThread(() -> ToastUtil.error(getApplication(), "壁纸保存失败，" + e.getMessage()));
                                     }
                                 }
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    runOnUiThread(() -> ToastUtil.error(WallpaperDetailActivity.this, "壁纸保存失败，" + e.getMessage()));
+                                    runOnUiThread(() -> ToastUtil.error(getApplication(), "壁纸保存失败，" + e.getMessage()));
                                 }
 
                                 @Override
