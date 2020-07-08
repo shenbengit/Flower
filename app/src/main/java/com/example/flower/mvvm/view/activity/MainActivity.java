@@ -133,6 +133,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                     mFragmentArray.get(R.id.rb02),
                     mFragmentArray.get(R.id.rb04),
                     mFragmentArray.get(R.id.rb05));
+        } else {
+            mFragmentArray.put(R.id.rb01, firstFragment);
+            mFragmentArray.put(R.id.rb02, findFragment(FindFragment.class));
+            mFragmentArray.put(R.id.rb04, findFragment(SpaceFragment.class));
+            mFragmentArray.put(R.id.rb05, findFragment(MineFragment.class));
         }
 
         //EXOPlayer内核，支持格式更多

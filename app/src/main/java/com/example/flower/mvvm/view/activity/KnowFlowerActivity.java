@@ -131,7 +131,6 @@ public class KnowFlowerActivity extends BaseActivity<ActivityKnowFlowerBinding, 
                 });
             }
         });
-
         //相册点击事件
         RxView.clicks(mBinding.ibCameraPhotoLibrary)
                 .throttleFirst(1, TimeUnit.SECONDS)
