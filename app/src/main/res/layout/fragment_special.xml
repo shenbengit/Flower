@@ -91,6 +91,7 @@
                         android:layout_height="@dimen/dp_200"
                         android:layout_marginTop="@dimen/dp_10"
                         android:orientation="horizontal"
+                        android:overScrollMode="never"
                         android:scrollbars="none"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -120,6 +121,7 @@
                         android:layout_height="@dimen/dp_90"
                         android:layout_marginTop="@dimen/dp_10"
                         android:orientation="horizontal"
+                        android:overScrollMode="never"
                         android:scrollbars="none"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -140,7 +142,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:overScrollMode="never"
                         android:paddingTop="@dimen/dp_10"
+                        android:scrollbars="none"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

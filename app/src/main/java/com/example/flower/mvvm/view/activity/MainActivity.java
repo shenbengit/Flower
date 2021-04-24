@@ -169,7 +169,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
      */
     @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void needsPermission() {
-        LogUtil.i("获取到相关权限");
         //先创建拍照文件保存目录文件夹
         new File(Constant.PHOTO_SAVE_PATH).mkdirs();
         //先创建压缩文件保存目录文件夹

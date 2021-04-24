@@ -42,7 +42,7 @@ public class EnlargePictureDialog extends Dialog {
     private List<?> mList;
 
     private int mCurrentIndex = 0;
-    private OnDeletePictureListener mOnDeletePicutreListener;
+    private OnDeletePictureListener mOnDeletePictureListener;
 
     private final ViewPager2.OnPageChangeCallback mOnPageChangeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
@@ -72,8 +72,8 @@ public class EnlargePictureDialog extends Dialog {
         ibDelete = findViewById(R.id.ibDelete);
         ibDelete.setOnClickListener(v -> {
             dismiss();
-            if (mOnDeletePicutreListener != null) {
-                mOnDeletePicutreListener.delete(mCurrentIndex);
+            if (mOnDeletePictureListener != null) {
+                mOnDeletePictureListener.delete(mCurrentIndex);
             }
         });
         tvCurrentIndex = findViewById(R.id.tvCurrentIndex);
@@ -94,7 +94,7 @@ public class EnlargePictureDialog extends Dialog {
     }
 
     public void setOnDeletePictureListener(OnDeletePictureListener listener) {
-        mOnDeletePicutreListener = listener;
+        mOnDeletePictureListener = listener;
     }
 
     public void setImageList(List<?> list, int index) {
