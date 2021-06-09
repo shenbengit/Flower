@@ -4,21 +4,21 @@
 ## 效果展示
 * 花间
 
-![花间](https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%8A%B1%E9%97%B4.gif)
+<img src="https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%8A%B1%E9%97%B4.gif" alt="花间" width="250px">
 
 * 发现
 
-![发现](https://github.com/shenbengit/Flower/blob/master/screenshots/%E5%8F%91%E7%8E%B0.gif)
+<img src="https://github.com/shenbengit/Flower/blob/master/screenshots/%E5%8F%91%E7%8E%B0.gif" alt="发现" width="250px">
 
 * 识花
 
-![识花](https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%AF%86%E8%8A%B1.gif)
+<img src="https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%AF%86%E8%8A%B1.gif" alt="识花" width="250px">
 
 * 花展
 
-![花展](https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%8A%B1%E5%B1%95.gif)
+<img src="https://github.com/shenbengit/Flower/blob/master/screenshots/%E8%8A%B1%E5%B1%95.gif" alt="花展" width="250px">
 
 * 我的
 
-![我的](https://github.com/shenbengit/Flower/blob/master/screenshots/%E6%88%91%E7%9A%84.gif)
+<img src="https://github.com/shenbengit/Flower/blob/master/screenshots/%E6%88%91%E7%9A%84.gif" alt="我的" width="250px">
 
